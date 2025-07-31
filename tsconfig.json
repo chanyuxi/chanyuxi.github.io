@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "strict": true,
     "target": "esnext",
+    "jsx": "react-jsx",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-    "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "allowImportingTsExtensions": true,
+    "strict": true,
+    "noEmit": true
   },
   "include": ["src"]
 }

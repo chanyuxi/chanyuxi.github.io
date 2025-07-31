@@ -1,12 +1,16 @@
 {
   "name": "introduction",
+  "type": "module",
   "version": "1.0.0-alpha.0",
   "private": true,
-  "description": "",
-  "keywords": [],
+  "packageManager": "pnpm@10.13.1",
+  "description": "emm, just introduct myself to you...",
+  "author": "chanyuxi <2438149743@qq.com> (https://github.com/chanyuxi)",
   "license": "ISC",
-  "author": "",
-  "type": "module",
+  "keywords": [
+    "chanyuxi",
+    "blog"
+  ],
   "scripts": {
     "build": "vite build",
     "lint": "eslint",
@@ -20,6 +24,7 @@
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@chanyuxi/eslint-waltz": "0.0.0-alpha.1",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@commitlint/types": "^19.8.1",
@@ -35,6 +40,5 @@
     "husky": "^9.1.7",
     "typescript-eslint": "^8.38.0",
     "vite": "^7.0.6"
-  },
-  "packageManager": "pnpm@10.13.1"
+  }
 }
