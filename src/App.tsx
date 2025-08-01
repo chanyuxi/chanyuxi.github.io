@@ -1,7 +1,11 @@
+import { RouterProvider } from 'react-router'
+
+import router from './routes'
+
+import '@/styles/global.scss'
+
 export default function App() {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <RouterProvider router={router} />
   )
 }
