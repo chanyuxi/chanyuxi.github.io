@@ -1,10 +1,10 @@
 {
   "name": "introduction",
   "type": "module",
-  "version": "1.0.0-alpha.0",
+  "version": "0.0.0-alpha.1",
   "private": true,
   "packageManager": "pnpm@10.13.1",
-  "description": "emm, just introduct myself to you...",
+  "description": "Emm, just introduct myself to you...",
   "author": "chanyuxi <2438149743@qq.com> (https://github.com/chanyuxi)",
   "license": "ISC",
   "keywords": [
