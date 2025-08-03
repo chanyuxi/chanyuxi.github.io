@@ -1,7 +1,4 @@
-@import 'reset-css';
-@import "./variables.scss";
-
 body {
-    background-color: $backgroud-color;
-    color: $text-color;
+    background-color: vars.$backgroud-color;
+    color: vars.$text-color;
 }

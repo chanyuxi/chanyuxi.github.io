@@ -1,5 +1,5 @@
 .header {
-    background-color: $header-backgroud-color;
+    background-color: vars.$header-backgroud-color;
     height: 60px;
     padding: 0 200px;
     display: flex;

@@ -17,7 +17,7 @@
     "lint:fix": "eslint --fix",
     "prepare": "husky",
     "preview": "vite preview",
-    "start": "vite"
+    "dev": "vite dev --port=3000"
   },
   "dependencies": {
     "react": "^19.1.1",
@@ -36,6 +36,8 @@
     "husky": "^9.1.7",
     "reset-css": "^5.0.2",
     "sass": "^1.89.2",
+    "stylelint": "^16.23.0",
+    "stylelint-config-standard-scss": "^15.0.1",
     "vite": "^7.0.6"
   }
 }
