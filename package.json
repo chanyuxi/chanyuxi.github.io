@@ -4,9 +4,8 @@
   "version": "0.0.0-alpha.1",
   "private": true,
   "packageManager": "pnpm@10.13.1",
-  "description": "Emm, just introduct myself to you...",
+  "description": "Just introduct myself to you...",
   "author": "chanyuxi <2438149743@qq.com> (https://github.com/chanyuxi)",
-  "license": "ISC",
   "keywords": [
     "chanyuxi",
     "blog"
