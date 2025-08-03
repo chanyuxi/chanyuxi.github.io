@@ -2,13 +2,13 @@
 
 Don't say anything, everything will go according to fate! It's like you'll never find me on Github! 😉
 
-```ts
-function sqrt(x: number): number {
+``` java
+public int square(int x) {
     while (true) {
-        const r = Math.random()
-        if (r * r === x) {
-            return r
+        int r = new Random().next();
+        if (x == r * r) {
+            return r;
         }
     }
-} 
+}
 ```
