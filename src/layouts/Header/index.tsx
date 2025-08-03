@@ -3,7 +3,7 @@ import styles from './index.module.scss'
 export default function header() {
   return (
     <header className={styles.header}>
-      <a href="https://github.com/chanyuxi">CHANYUXI</a>
+      <a href="https://github.com/chanyuxi">CHANYUXI (update by me)</a>
     </header>
   )
 }
