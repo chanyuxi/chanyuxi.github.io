@@ -1,8 +1,7 @@
 .header {
-    background-color: vars.$header-backgroud-color;
-    height: 60px;
-    padding: 0 200px;
-    display: flex;
     align-items: center;
+    background-color: vars.$header-backgroud-color;
+    display: flex;
+    height: 60px;
     justify-content: space-between;
 }
