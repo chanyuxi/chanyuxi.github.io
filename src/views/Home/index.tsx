@@ -1,4 +1,4 @@
-import { Github, Send } from 'lucide-react'
+import { CircleCheck, Github, Send } from 'lucide-react'
 import { HeroImageCard } from './components/HeroImageCard'
 import { motion } from 'motion/react'
 
@@ -88,8 +88,111 @@ export default function Home() {
         </section>
       </div>
 
-      <div className="bg-white px-6 dark:bg-zinc-800">
-        <div className="size-40"></div>
+      <div className="bg-white px-6 py-8 dark:bg-zinc-800">
+        <h3 className="mb-6 text-center text-lg tracking-wider uppercase">
+          What to use for work
+        </h3>
+
+        <div className="flex flex-col gap-6">
+          <div className="rounded bg-linear-to-br from-sky-50 to-zinc-50 p-4 shadow dark:from-zinc-900 dark:to-zinc-700 dark:shadow-none">
+            <div className="mb-4 flex items-center justify-center gap-4">
+              <img className="w-6" src="/images/vue-logo.svg" />
+              <div>Vuejs</div>
+            </div>
+            <ul className="space-y-2 text-sm opacity-80">
+              <li className="flex items-center gap-2">
+                <CircleCheck size={16} /> Accumulated completion of over 30
+                projects
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={16} /> Research on source code
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={16} /> 3 years of experience
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={16} /> Use it to work for the longest time
+              </li>
+            </ul>
+          </div>
+
+          <div className="rounded bg-linear-to-br from-sky-50 to-zinc-50 p-4 shadow dark:from-zinc-900 dark:to-zinc-700 dark:shadow-none">
+            <div className="mb-4 flex items-center justify-center gap-2">
+              <img className="w-6" src="/images/react-logo.svg" />
+              <div>React</div>
+            </div>
+            <ul className="space-y-2 text-sm opacity-80">
+              <li className="flex items-center gap-2">
+                <CircleCheck size={16} /> Accumulated completion of over 10
+                projects
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={16} /> Research on source code
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={16} /> 3 years of experience
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={16} /> My favorite framework
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-6 py-8">
+        <h3 className="mb-6 text-center text-lg tracking-wider uppercase">
+          Commonly used tools
+        </h3>
+
+        <div className="mb-4">
+          <div className="mb-4 text-center">engineering</div>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
+              <img className="w-5" src="/images/webpack-logo.svg" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
+              <img className="w-5" src="/images/vite-logo.svg" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
+              <img className="w-5" src="/images/esbuild-logo.svg" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
+              <img className="w-5" src="/images/rollup-logo.svg" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
+              <img className="w-5" src="/images/babeljs-logo.png" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
+              <img className="w-5" src="/images/gulp-logo.png" />
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <div className="mb-2 text-center">style</div>
+
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
+              <img className="w-5" src="/images/ant-design-logo.svg" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
+              <img className="w-5" src="/images/element-plus-logo.svg" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
+              <img className="w-5" src="/images/sass-logo.svg" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
+              <img className="w-5" src="/images/bootstrap-logo.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white px-6 py-8 dark:bg-zinc-800">
+        <h3 className="mb-6 text-center text-lg tracking-wider uppercase">
+          Work Experience
+        </h3>
       </div>
     </div>
   )
