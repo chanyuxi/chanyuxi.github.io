@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+    src: url('/fonts/Bitter-VariableFont_wght.ttf') format('truetype');
+    font-family: 'bitter';
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    --font-bitter: 'bitter', sans-serif;
+}
+
+@layer components { 
+}

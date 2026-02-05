@@ -1,13 +1,15 @@
-import { RouterProvider } from 'react-router'
-
-import router from './routes'
-
-import 'reset-css/reset.css'
-
-import '@/styles/global.scss'
+import Header from '@/components/Header'
+import Layout from '@/components/Layout'
+import RouterRender from '@/router'
+import { ThemeProvider } from '@/contexts/theme'
 
 export default function App() {
   return (
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <Layout>
+        <Header />
+        <RouterRender />
+      </Layout>
+    </ThemeProvider>
   )
 }
