@@ -18,7 +18,6 @@ const ThemeContext = createContext<ThemeContextType>({
 
 function getInitialTheme() {
   const saved = localStorage.getItem('theme')
-  console.log(saved)
   if (saved === 'light' || saved === 'dark') {
     return saved
   }

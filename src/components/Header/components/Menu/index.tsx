@@ -34,10 +34,21 @@ export default function Menu(props: MenuProps) {
   return (
     <nav className="relative">
       <div className="flex gap-4">
+        <div className="hidden gap-4 lg:flex">
+          {items.map(item => (
+            <div
+              className="cursor-pointer capitalize underline-offset-6 hover:underline"
+              key={item.path}
+            >
+              {item.name}
+            </div>
+          ))}
+        </div>
+
         <div onClick={toggleTheme}>
           {theme === 'light' ? <Moon /> : <Sun />}
         </div>
-        <div onClick={toggleMenu} data-menu-button>
+        <div className="lg:hidden" onClick={toggleMenu} data-menu-button>
           <MenuIcon />
         </div>
       </div>
@@ -46,14 +57,14 @@ export default function Menu(props: MenuProps) {
         {isOpen && (
           <motion.div
             data-menu
-            className="absolute right-0 origin-top-right"
+            className="absolute right-0 origin-top-right lg:hidden"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
           >
             <ul className="mt-2 w-40 divide-y divide-slate-100/20 rounded-lg border border-slate-100/20 bg-white/80 shadow dark:bg-black/80 dark:shadow-none">
               {items.map(item => (
-                <li key={item.path} className="p-4 hover:font-bold">
+                <li key={item.path} className="p-4 capitalize">
                   {item.name}
                 </li>
               ))}

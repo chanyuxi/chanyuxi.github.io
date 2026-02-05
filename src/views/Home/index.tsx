@@ -1,6 +1,9 @@
-import { CircleCheck, Github, Send } from 'lucide-react'
+import { Github, Send } from 'lucide-react'
 import { HeroImageCard } from './components/HeroImageCard'
+import { FrameworkCard } from './components/FrameworkCard'
+import { ToolCard } from './components/ToolCard'
 import { motion } from 'motion/react'
+import { SectionTitle } from './components/SectionTitle'
 
 const heroImages = [
   {
@@ -20,180 +23,162 @@ const heroImages = [
   },
 ]
 
+const frameworks = [
+  {
+    name: 'Vue',
+    icon: '/images/vue-logo.svg',
+    achievements: [
+      'Accumulated completion of 30+ projects',
+      'Research on source code',
+      '3 years of experience',
+      'Use it to work for the longest time',
+    ],
+  },
+  {
+    name: 'React',
+    icon: '/images/react-logo.svg',
+    achievements: [
+      'Accumulated completion of 10+ projects',
+      'Research on source code',
+      '3 years of experience',
+      'My favorite framework',
+    ],
+  },
+  {
+    name: 'Angular',
+    icon: '/images/angular-logo.ico',
+    achievements: [
+      'Almost no one uses it domestically',
+      'Just hang it up and take a look',
+      "I don't know either.",
+      'Preparing to make a friend',
+    ],
+  },
+]
+
+const commonlyUsedTools = [
+  {
+    title: 'engineering',
+    tools: [
+      { src: '/images/webpack-logo.svg' },
+      { src: '/images/vite-logo.svg' },
+      { src: '/images/esbuild-logo.svg' },
+      { src: '/images/rollup-logo.svg' },
+      { src: '/images/babeljs-logo.png' },
+      { src: '/images/gulp-logo.png' },
+    ],
+  },
+  {
+    title: 'style',
+    tools: [
+      { src: '/images/ant-design-logo.svg' },
+      { src: '/images/element-plus-logo.svg' },
+      { src: '/images/sass-logo.svg' },
+      { src: '/images/bootstrap-logo.png' },
+    ],
+  },
+]
+
 export default function Home() {
   return (
     <div>
-      <div className="relative my-8 space-y-8 px-6">
-        <section className="flex justify-center">
-          <div className="size-40">
-            {heroImages.map(image => (
-              <div key={image.id} className="absolute size-40">
-                <HeroImageCard src={image.src} animate={image.animate} />
+      <section className="py-8 sm:py-10 md:py-12 lg:py-20">
+        <div className="content-constraint relative flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
+          <div className="flex flex-1 flex-col gap-8 xl:order-2">
+            <div className="mx-auto size-40">
+              {heroImages.map(image => (
+                <div key={image.id} className="absolute size-40">
+                  <HeroImageCard src={image.src} animate={image.animate} />
+                </div>
+              ))}
+            </div>
+
+            <div>
+              <h1 className="font-mogra text-center text-4xl font-bold select-none xl:text-5xl">
+                Forever{' '}
+                <span className="bg-linear-to-r from-pink-500 to-violet-500 bg-clip-text text-2xl font-extrabold text-transparent xl:text-3xl">
+                  Leslie
+                </span>
+              </h1>
+            </div>
+
+            <div className="flex items-center justify-end gap-4 xl:justify-center">
+              <button
+                type="button"
+                className="inline-flex items-center gap-2 rounded-full border border-blue-500/50 bg-blue-500/10 px-4 py-2"
+              >
+                <Send size={16} />
+                <span>Contact me</span>
+              </button>
+              <button
+                type="button"
+                className="inline-flex items-center gap-2 rounded-full bg-blue-500/50 px-4 py-2"
+              >
+                <Github size={16} />
+                <span>Github</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="leading-xl space-y-8 tracking-wide opacity-90 xl:order-1 xl:w-1/2 xl:text-lg">
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              Hello there! I'm not just a <strong>frontend engineer</strong>—I'm
+              a digital wizard who turns caffeine into responsive, pixel-perfect
+              interfaces. When I'm not wrestling with CSS or convincing
+              JavaScript to behave, you'll find me deep in the browser DevTools,
+              hunting down rogue bugs like a detective in a digital noir film.
+            </motion.p>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              I'm a man with salt in my veins and code in my soul—originally
+              from <strong>Zhanjiang</strong>, <strong>Guangdong</strong>, where
+              the sea taught me patience and how to ride the waves of
+              ever-changing web trends. 😉
+            </motion.p>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-blue-100 py-8 sm:py-10 md:py-12 lg:py-20 dark:bg-zinc-800">
+        <div className="content-constraint">
+          <SectionTitle title=" What to use for work" />
+
+          <div className="flex flex-col justify-center gap-6 lg:flex-row">
+            {frameworks.map(framework => (
+              <div key={framework.name} className="flex-1">
+                <FrameworkCard
+                  name={framework.name}
+                  icon={framework.icon}
+                  achievements={framework.achievements}
+                />
               </div>
             ))}
           </div>
-        </section>
-
-        <section>
-          <h1 className="text-center text-4xl font-bold">
-            Forever{' '}
-            <span className="bg-linear-to-r from-pink-500 to-violet-500 bg-clip-text text-2xl font-extrabold text-transparent">
-              Leslie
-            </span>
-          </h1>
-        </section>
-
-        <section className="flex items-center justify-end gap-4 text-right">
-          <button
-            type="button"
-            className="inline-flex items-center gap-1 rounded-full border border-blue-500/50 bg-blue-500/10 px-4 py-2"
-          >
-            <Send size={16} />
-            <span>Contact me</span>
-          </button>
-          <button
-            type="button"
-            className="inline-flex items-center gap-1 rounded-full bg-blue-500/50 px-4 py-2"
-          >
-            <Github size={16} />
-            <span>Github</span>
-          </button>
-        </section>
-
-        <section>
-          <motion.p
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="tracking-wide opacity-80"
-          >
-            Hello there! I'm not just a <strong>frontend engineer</strong>—I'm a
-            digital wizard who turns caffeine into responsive, pixel-perfect
-            interfaces. When I'm not wrestling with CSS or convincing JavaScript
-            to behave, you'll find me deep in the browser DevTools, hunting down
-            rogue bugs like a detective in a digital noir film.
-          </motion.p>
-        </section>
-
-        <section>
-          <motion.p
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="tracking-wide opacity-80"
-          >
-            I'm a man with salt in my veins and code in my soul—originally from{' '}
-            <strong>Zhanjiang</strong>, <strong>Guangdong</strong>, where the
-            sea taught me patience and how to ride the waves of ever-changing
-            web trends. 😉
-          </motion.p>
-        </section>
-      </div>
-
-      <div className="bg-white px-6 py-8 dark:bg-zinc-800">
-        <h3 className="mb-6 text-center text-lg tracking-wider uppercase">
-          What to use for work
-        </h3>
-
-        <div className="flex flex-col gap-6">
-          <div className="rounded bg-linear-to-br from-sky-50 to-zinc-50 p-4 shadow dark:from-zinc-900 dark:to-zinc-700 dark:shadow-none">
-            <div className="mb-4 flex items-center justify-center gap-4">
-              <img className="w-6" src="/images/vue-logo.svg" />
-              <div>Vuejs</div>
-            </div>
-            <ul className="space-y-2 text-sm opacity-80">
-              <li className="flex items-center gap-2">
-                <CircleCheck size={16} /> Accumulated completion of over 30
-                projects
-              </li>
-              <li className="flex items-center gap-2">
-                <CircleCheck size={16} /> Research on source code
-              </li>
-              <li className="flex items-center gap-2">
-                <CircleCheck size={16} /> 3 years of experience
-              </li>
-              <li className="flex items-center gap-2">
-                <CircleCheck size={16} /> Use it to work for the longest time
-              </li>
-            </ul>
-          </div>
-
-          <div className="rounded bg-linear-to-br from-sky-50 to-zinc-50 p-4 shadow dark:from-zinc-900 dark:to-zinc-700 dark:shadow-none">
-            <div className="mb-4 flex items-center justify-center gap-2">
-              <img className="w-6" src="/images/react-logo.svg" />
-              <div>React</div>
-            </div>
-            <ul className="space-y-2 text-sm opacity-80">
-              <li className="flex items-center gap-2">
-                <CircleCheck size={16} /> Accumulated completion of over 10
-                projects
-              </li>
-              <li className="flex items-center gap-2">
-                <CircleCheck size={16} /> Research on source code
-              </li>
-              <li className="flex items-center gap-2">
-                <CircleCheck size={16} /> 3 years of experience
-              </li>
-              <li className="flex items-center gap-2">
-                <CircleCheck size={16} /> My favorite framework
-              </li>
-            </ul>
-          </div>
         </div>
-      </div>
+      </section>
 
-      <div className="px-6 py-8">
-        <h3 className="mb-6 text-center text-lg tracking-wider uppercase">
-          Commonly used tools
-        </h3>
+      <section className="py-8 sm:py-10 md:py-12 lg:py-20">
+        <div className="content-constraint">
+          <SectionTitle title="Commonly used tools" />
 
-        <div className="mb-4">
-          <div className="mb-4 text-center">engineering</div>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
-              <img className="w-5" src="/images/webpack-logo.svg" />
+          {commonlyUsedTools.map(block => (
+            <div key={block.title} className="mb-4">
+              <div className="mb-4 text-center xl:text-lg">{block.title}</div>
+
+              <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+                {block.tools.map(tool => (
+                  <ToolCard key={tool.src} src={tool.src} />
+                ))}
+              </div>
             </div>
-            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
-              <img className="w-5" src="/images/vite-logo.svg" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
-              <img className="w-5" src="/images/esbuild-logo.svg" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
-              <img className="w-5" src="/images/rollup-logo.svg" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
-              <img className="w-5" src="/images/babeljs-logo.png" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
-              <img className="w-5" src="/images/gulp-logo.png" />
-            </div>
-          </div>
+          ))}
         </div>
+      </section>
 
-        <div className="mb-8">
-          <div className="mb-2 text-center">style</div>
-
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
-              <img className="w-5" src="/images/ant-design-logo.svg" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
-              <img className="w-5" src="/images/element-plus-logo.svg" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
-              <img className="w-5" src="/images/sass-logo.svg" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full bg-white dark:bg-zinc-800">
-              <img className="w-5" src="/images/bootstrap-logo.png" />
-            </div>
-          </div>
+      <section className="bg-blue-100 py-8 sm:py-10 md:py-12 lg:py-20 dark:bg-zinc-800">
+        <div className="content-constraint">
+          <SectionTitle title="Work Experience" />
         </div>
-      </div>
-
-      <div className="bg-white px-6 py-8 dark:bg-zinc-800">
-        <h3 className="mb-6 text-center text-lg tracking-wider uppercase">
-          Work Experience
-        </h3>
-      </div>
+      </section>
     </div>
   )
 }

@@ -10,8 +10,24 @@
     font-display: swap;
 }
 
+@font-face {
+    src: url('/fonts/Mogra-Regular.ttf') format('truetype');
+    font-family: 'mogra';
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 @theme {
     --font-bitter: 'bitter', sans-serif;
+    --font-mogra: 'mogra', snans-serif;
+}
+
+@layer utilities {
+    .content-constraint {
+        @apply w-full md:w-150 lg:w-200 xl:w-260 mx-auto px-6
+    } 
 }
 
 @layer components { 
