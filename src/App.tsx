@@ -1,15 +1,10 @@
-import Header from '@/components/Header'
-import Layout from '@/components/Layout'
-import RouterRender from '@/router'
 import { ThemeProvider } from '@/contexts/theme'
+import RouterRender from '@/router'
 
 export default function App() {
   return (
     <ThemeProvider>
-      <Layout>
-        <Header />
-        <RouterRender />
-      </Layout>
+      <RouterRender />
     </ThemeProvider>
   )
 }

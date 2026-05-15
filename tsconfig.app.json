@@ -11,11 +11,15 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@res/*": [
+        "./res/*"
       ]
     },
   },
   "include": [
     "src",
-    "node_modules/vite/client.d.ts"
+    "node_modules/vite/client.d.ts",
+    "vite.env.d.ts"
   ]
 }

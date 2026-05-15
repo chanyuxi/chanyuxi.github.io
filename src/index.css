@@ -18,14 +18,22 @@
     font-display: swap;
 }
 
+@font-face {
+    src: url('/fonts/MaShanZheng-Regular.ttf') format('truetype');
+    font-family: 'mashanzheng';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 
 @theme {
     --font-bitter: 'bitter', sans-serif;
-    --font-mogra: 'mogra', snans-serif;
+    --font-mogra: 'mogra', sans-serif;
+    --font-mashanzheng: 'mashanzheng', sans-serif;
 }
 
 @layer utilities {
-    .content-constraint {
+    .base-container {
         @apply w-full md:w-150 lg:w-200 xl:w-260 mx-auto px-6
     } 
 }

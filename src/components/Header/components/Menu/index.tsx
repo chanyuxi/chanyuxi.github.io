@@ -1,20 +1,28 @@
-import { useTheme } from '@/contexts/theme'
-import { Menu as MenuIcon, Sun, Moon } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { Menu as MenuIcon, Moon, Sun } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
+
+import { useTheme } from '@/contexts/theme'
 
 interface MenuProps {
   items: { name: string; path: string }[]
 }
 
 export default function Menu(props: MenuProps) {
-  const { items } = props
+  const nav = useNavigate()
 
+  const { items } = props
   const { theme, toggleTheme } = useTheme()
+
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
+  }
+
+  const handleMenuItemClick = (path: string) => {
+    nav(path)
   }
 
   useEffect(() => {
@@ -64,7 +72,11 @@ export default function Menu(props: MenuProps) {
           >
             <ul className="mt-2 w-40 divide-y divide-slate-100/20 rounded-lg border border-slate-100/20 bg-white/80 shadow dark:bg-black/80 dark:shadow-none">
               {items.map(item => (
-                <li key={item.path} className="p-4 capitalize">
+                <li
+                  key={item.path}
+                  className="p-4 capitalize select-none"
+                  onClick={() => handleMenuItemClick(item.path)}
+                >
                   {item.name}
                 </li>
               ))}

@@ -12,7 +12,6 @@
     "noUnusedParameters": true,
     "emitDeclarationOnly": true,
     "noEmit": false,
-    "erasableSyntaxOnly": true,
     "skipLibCheck": true,
     "noUncheckedSideEffectImports": true
   }

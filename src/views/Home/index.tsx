@@ -1,9 +1,12 @@
 import { Github, Send } from 'lucide-react'
-import { HeroImageCard } from './components/HeroImageCard'
-import { FrameworkCard } from './components/FrameworkCard'
-import { ToolCard } from './components/ToolCard'
 import { motion } from 'motion/react'
-import { SectionTitle } from './components/SectionTitle'
+
+import { GITHUB_LINK } from '@/constants'
+
+import { FrameworkCard } from './components/frame-work-card'
+import { HeroImageCard } from './components/hero-image-card'
+import { SectionTitle } from './components/section-title'
+import { ToolCard } from './components/tool-card'
 
 const heroImages = [
   {
@@ -80,10 +83,14 @@ const commonlyUsedTools = [
 ]
 
 export default function Home() {
+  const handleGithubClick = () => {
+    window.location.href = GITHUB_LINK
+  }
+
   return (
     <div>
       <section className="py-8 sm:py-10 md:py-12 lg:py-20">
-        <div className="content-constraint relative flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
+        <div className="base-container relative flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
           <div className="flex flex-1 flex-col gap-8 xl:order-2">
             <div className="mx-auto size-40">
               {heroImages.map(image => (
@@ -111,6 +118,7 @@ export default function Home() {
                 <span>Contact me</span>
               </button>
               <button
+                onClick={handleGithubClick}
                 type="button"
                 className="inline-flex items-center gap-2 rounded-full bg-blue-500/50 px-4 py-2"
               >
@@ -139,7 +147,7 @@ export default function Home() {
       </section>
 
       <section className="bg-blue-100 py-8 sm:py-10 md:py-12 lg:py-20 dark:bg-zinc-800">
-        <div className="content-constraint">
+        <div className="base-container">
           <SectionTitle title=" What to use for work" />
 
           <div className="flex flex-col justify-center gap-6 lg:flex-row">
@@ -157,7 +165,7 @@ export default function Home() {
       </section>
 
       <section className="py-8 sm:py-10 md:py-12 lg:py-20">
-        <div className="content-constraint">
+        <div className="base-container">
           <SectionTitle title="Commonly used tools" />
 
           {commonlyUsedTools.map(block => (
@@ -175,7 +183,7 @@ export default function Home() {
       </section>
 
       <section className="bg-blue-100 py-8 sm:py-10 md:py-12 lg:py-20 dark:bg-zinc-800">
-        <div className="content-constraint">
+        <div className="base-container">
           <SectionTitle title="Work Experience" />
         </div>
       </section>
