@@ -1,0 +1,11 @@
+@font-face {
+  src: url('/fonts/MaShanZheng-Regular.ttf') format('truetype');
+  font-family: 'mashanzheng';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.post-entrance-title {
+  font-family: 'mashanzheng', sans-serif;
+}

@@ -1,0 +1,11 @@
+@font-face {
+  src: url('/fonts/Mogra-Regular.ttf') format('truetype');
+  font-family: 'mogra';
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.home-hero-title {
+  font-family: 'mogra', sans-serif;
+}

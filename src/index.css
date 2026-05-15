@@ -1,42 +1,24 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
-    src: url('/fonts/Bitter-VariableFont_wght.ttf') format('truetype');
-    font-family: 'bitter';
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    src: url('/fonts/Mogra-Regular.ttf') format('truetype');
-    font-family: 'mogra';
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    src: url('/fonts/MaShanZheng-Regular.ttf') format('truetype');
-    font-family: 'mashanzheng';
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  src: url('/fonts/Bitter-VariableFont_wght.ttf') format('truetype');
+  font-family: 'bitter';
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @theme {
-    --font-bitter: 'bitter', sans-serif;
-    --font-mogra: 'mogra', sans-serif;
-    --font-mashanzheng: 'mashanzheng', sans-serif;
+  --font-bitter: 'bitter', sans-serif;
 }
 
 @layer utilities {
-    .base-container {
-        @apply w-full md:w-150 lg:w-200 xl:w-260 mx-auto px-6
-    } 
+  .base-container {
+    @apply mx-auto w-full px-6 md:w-150 lg:w-200 xl:w-260;
+  }
 }
 
-@layer components { 
+@layer components {
 }

@@ -1,7 +1,7 @@
 {
   "name": "introduction",
   "type": "module",
-  "version": "0.0.0-alpha.1",
+  "version": "0.1.30-alpha.1",
   "private": true,
   "packageManager": "pnpm@10.28.1",
   "description": "Just introduct myself to you...",

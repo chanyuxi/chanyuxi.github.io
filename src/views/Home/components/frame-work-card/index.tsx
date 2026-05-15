@@ -10,7 +10,13 @@ export function FrameworkCard(props: FrameworkCardProps) {
   return (
     <div className="h-full rounded-lg bg-linear-to-br from-zinc-100 to-blue-100 p-4 shadow-md md:p-6 dark:from-zinc-900/80 dark:to-neutral-800 dark:shadow-none">
       <div className="mb-4 flex items-center justify-center gap-4">
-        <img className="w-6 xl:w-7" src={icon} />
+        <img
+          className="w-6 xl:w-7"
+          src={icon}
+          alt={`${name} logo`}
+          loading="lazy"
+          decoding="async"
+        />
         <div>{name}</div>
       </div>
       <ul className="space-y-2 text-sm opacity-80">

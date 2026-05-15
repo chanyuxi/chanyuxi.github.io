@@ -14,7 +14,13 @@ export function HeroImageCard(props: HeroImageCardProps) {
       transition={{ duration: 0.5, delay: 0.25 }}
       className="inline-block size-40 rounded-lg bg-white p-2 shadow-lg transition-shadow dark:shadow-none"
     >
-      <img src={src} />
+      <img
+        src={src}
+        alt="Profile illustration"
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+      />
     </motion.div>
   )
 }
