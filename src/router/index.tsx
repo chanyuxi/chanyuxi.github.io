@@ -1,43 +1,8 @@
-import { useEffect } from 'react'
-import {
-  createBrowserRouter,
-  Navigate,
-  Outlet,
-  RouterProvider,
-  useLocation,
-} from 'react-router'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router'
 
-import Footer from '@/components/footer'
-import Header from '@/components/header'
-import Layout from '@/components/layout'
 import Home from '@/views/home'
 
-function ScrollToTop() {
-  const { hash, pathname, search } = useLocation()
-
-  useEffect(() => {
-    if (hash) {
-      return
-    }
-
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-  }, [hash, pathname, search])
-
-  return null
-}
-
-function RootLayout() {
-  return (
-    <Layout>
-      <ScrollToTop />
-      <Header />
-      <div className="flex-1">
-        <Outlet />
-      </div>
-      <Footer />
-    </Layout>
-  )
-}
+import { RootLayout } from './components/root-layout'
 
 const router = createBrowserRouter([
   {
@@ -57,13 +22,36 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: 'post',
+        path: 'poetry',
+        lazy: async () => {
+          const { default: Component } = await import('@/views/poetry')
+
+          return { Component }
+        },
         children: [
           {
             path: 'entrance',
             lazy: async () => {
               const { default: Component } =
-                await import('@/views/post/entrance')
+                await import('@/views/poetry/entrance')
+
+              return { Component }
+            },
+          },
+          {
+            path: ':category/:slug',
+            lazy: async () => {
+              const { default: Component } =
+                await import('@/views/poetry/detail')
+
+              return { Component }
+            },
+          },
+          {
+            path: ':category',
+            lazy: async () => {
+              const { default: Component } =
+                await import('@/views/poetry/category')
 
               return { Component }
             },

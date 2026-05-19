@@ -63,12 +63,6 @@ export default function Skill() {
     <div>
       <section className="py-8 sm:py-10 md:py-12 lg:py-20">
         <div className="base-container">
-          <h1 className="text-3xl">Skill</h1>
-        </div>
-      </section>
-
-      <section className="bg-blue-100 py-8 sm:py-10 md:py-12 lg:py-20 dark:bg-zinc-800">
-        <div className="base-container">
           <SectionTitle title=" What to use for work" />
 
           <div className="flex flex-col justify-center gap-6 lg:flex-row">

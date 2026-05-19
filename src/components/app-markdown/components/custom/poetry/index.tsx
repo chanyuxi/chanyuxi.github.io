@@ -9,9 +9,9 @@ export default function Poetry({
   children,
 }: PropsWithChildren<PoetryProps>) {
   return (
-    <div className="flex flex-col items-center">
-      <div className="mb-4">{title}</div>
-      <div>{children}</div>
+    <div className="flex flex-col items-center select-none">
+      <div className="mb-8 text-4xl">{title}</div>
+      <div className="flex flex-col gap-1 text-2xl">{children}</div>
     </div>
   )
 }

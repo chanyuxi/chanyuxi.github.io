@@ -47,6 +47,7 @@ export default function Menu(props: MenuProps) {
             <div
               className="cursor-pointer capitalize underline-offset-6 hover:underline"
               key={item.path}
+              onClick={() => handleMenuItemClick(item.path)}
             >
               {item.name}
             </div>
