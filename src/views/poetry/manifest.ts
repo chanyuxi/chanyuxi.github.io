@@ -10,18 +10,25 @@ type PoetryPostRecord = PoetryPost & {
   frontmatter: PoetryFrontmatter
 }
 
-const rawPosts = import.meta.glob<string>('./assets/mds/**/*.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
-})
+type PoetryMarkdownModule = {
+  frontmatter: PoetryFrontmatter
+  content: string
+}
+
+const rawPosts = import.meta.glob<PoetryMarkdownModule>(
+  './assets/mds/**/*.md',
+  {
+    eager: true,
+    import: 'default',
+  }
+)
 
 const categoryMap = new Map(
   POETRY_CATEGORIES.map(category => [category.slug, category])
 )
 
 const poetryPostRecords = Object.entries(rawPosts)
-  .map(([path, raw]) => createPost(path, raw))
+  .map(([path, module]) => createPost(path, module))
   .filter(post => !post.frontmatter.draft)
   .sort(sortPosts)
 
@@ -42,8 +49,10 @@ export function getPoetryPost(category: string, slug: string) {
   )
 }
 
-function createPost(path: string, raw: string) {
-  const { frontmatter, content } = parseFrontmatter(raw)
+function createPost(
+  path: string,
+  { frontmatter, content }: PoetryMarkdownModule
+) {
   const { category, slug } = parsePath(path)
   const categoryConfig = categoryMap.get(category)
 
@@ -74,76 +83,6 @@ function parsePath(path: string) {
   const [, category, slug] = match
 
   return { category, slug }
-}
-
-function parseFrontmatter(raw: string): {
-  frontmatter: PoetryFrontmatter
-  content: string
-} {
-  const normalized = raw.replace(/\r\n/g, '\n')
-  const match = normalized.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
-
-  if (!match) {
-    return { frontmatter: {}, content: normalized.trim() }
-  }
-
-  const [, frontmatterRaw, content] = match
-
-  return {
-    frontmatter: parseFrontmatterBlock(frontmatterRaw),
-    content: content.trim(),
-  }
-}
-
-function parseFrontmatterBlock(frontmatterRaw: string): PoetryFrontmatter {
-  return frontmatterRaw
-    .split('\n')
-    .map(line => line.trim())
-    .filter(Boolean)
-    .reduce<PoetryFrontmatter>((frontmatter, line) => {
-      const separatorIndex = line.indexOf(':')
-
-      if (separatorIndex === -1) {
-        return frontmatter
-      }
-
-      const key = line.slice(0, separatorIndex).trim()
-      const value = line.slice(separatorIndex + 1).trim()
-
-      return {
-        ...frontmatter,
-        [key]: parseFrontmatterValue(value),
-      }
-    }, {})
-}
-
-function parseFrontmatterValue(value: string) {
-  if (value === 'true') {
-    return true
-  }
-
-  if (value === 'false') {
-    return false
-  }
-
-  if (/^-?\d+(\.\d+)?$/.test(value)) {
-    return Number(value)
-  }
-
-  if (value.startsWith('[') && value.endsWith(']')) {
-    return value
-      .slice(1, -1)
-      .split(',')
-      .map(item => item.trim())
-      .filter(Boolean)
-      .map(stripQuotes)
-  }
-
-  return stripQuotes(value)
-}
-
-function stripQuotes(value: string) {
-  return value.replace(/^['"]|['"]$/g, '')
 }
 
 function getHeadingTitle(content: string) {

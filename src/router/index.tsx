@@ -1,8 +1,19 @@
+import type { ComponentType } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router'
 
 import Home from '@/views/home'
 
 import { RootLayout } from './components/root-layout'
+
+type RouteModule = {
+  default: ComponentType
+}
+
+const lazyRoute = (load: () => Promise<RouteModule>) => async () => {
+  const { default: Component } = await load()
+
+  return { Component }
+}
 
 const router = createBrowserRouter([
   {
@@ -15,46 +26,23 @@ const router = createBrowserRouter([
       },
       {
         path: 'skills',
-        lazy: async () => {
-          const { default: Component } = await import('@/views/skill')
-
-          return { Component }
-        },
+        lazy: lazyRoute(() => import('@/views/skill')),
       },
       {
         path: 'poetry',
-        lazy: async () => {
-          const { default: Component } = await import('@/views/poetry')
-
-          return { Component }
-        },
+        lazy: lazyRoute(() => import('@/views/poetry')),
         children: [
           {
             path: 'entrance',
-            lazy: async () => {
-              const { default: Component } =
-                await import('@/views/poetry/entrance')
-
-              return { Component }
-            },
+            lazy: lazyRoute(() => import('@/views/poetry/entrance')),
           },
           {
             path: ':category/:slug',
-            lazy: async () => {
-              const { default: Component } =
-                await import('@/views/poetry/detail')
-
-              return { Component }
-            },
+            lazy: lazyRoute(() => import('@/views/poetry/detail')),
           },
           {
             path: ':category',
-            lazy: async () => {
-              const { default: Component } =
-                await import('@/views/poetry/category')
-
-              return { Component }
-            },
+            lazy: lazyRoute(() => import('@/views/poetry/category')),
           },
         ],
       },

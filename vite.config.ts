@@ -2,12 +2,13 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
+import { markdownMatterPlugin } from './build/plugins/markdown-matter'
+
 export default defineConfig(({ mode }) => ({
-  plugins: [react(), tailwindcss()],
+  plugins: [markdownMatterPlugin(), react(), tailwindcss()],
   resolve: {
     alias: {
       '@': '/src',
-      '@res': '/res',
     },
   },
   build: {
