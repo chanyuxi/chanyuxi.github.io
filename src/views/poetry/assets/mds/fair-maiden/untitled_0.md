@@ -1,12 +1,8 @@
 ---
 title: 无题
-subtitle: Untitled
-description: A short sample poem in the fair maiden collection.
-date: 2026-05-19
+description: 惟有相思而已
 order: 1
 ---
-
-# 无题
 
 :::poetry{title=无题}
 <p>十月近莹湖，若时秋意微。</p>

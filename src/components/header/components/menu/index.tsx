@@ -1,9 +1,9 @@
-import { Menu as MenuIcon, Moon, Sun } from 'lucide-react'
+import { Menu as MenuIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 
-import { useTheme } from '@/contexts/theme'
+import ThemeToggle from '@/components/theme-toggle'
 
 interface MenuProps {
   items: { name: string; path: string }[]
@@ -13,7 +13,6 @@ export default function Menu(props: MenuProps) {
   const nav = useNavigate()
 
   const { items } = props
-  const { theme, toggleTheme } = useTheme()
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -54,9 +53,7 @@ export default function Menu(props: MenuProps) {
           ))}
         </div>
 
-        <div onClick={toggleTheme}>
-          {theme === 'light' ? <Moon /> : <Sun />}
-        </div>
+        <ThemeToggle />
         <div className="lg:hidden" onClick={toggleMenu} data-menu-button>
           <MenuIcon />
         </div>
@@ -71,7 +68,7 @@ export default function Menu(props: MenuProps) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
           >
-            <ul className="mt-2 w-40 divide-y divide-slate-100/20 rounded-lg border border-slate-100/20 bg-white/80 shadow dark:bg-black/80 dark:shadow-none">
+            <ul className="mt-2 w-40 divide-y divide-slate-200 rounded-lg border border-transparent bg-white shadow dark:divide-slate-800 dark:bg-black dark:shadow-none">
               {items.map(item => (
                 <li
                   key={item.path}

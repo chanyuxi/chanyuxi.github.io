@@ -14,6 +14,21 @@
   --font-bitter: 'bitter', sans-serif;
 }
 
+@layer base {
+  * {
+    color: var(--color-black);
+    @variant dark {
+      color: var(--color-slate-50);
+    }
+  }
+  body {
+    background: var(--color-stone-50);
+    @variant dark {
+      background: var(--color-neutral-800);
+    }
+  }
+}
+
 @layer utilities {
   .base-container {
     @apply mx-auto w-full px-6 md:w-150 lg:w-200 xl:w-260;

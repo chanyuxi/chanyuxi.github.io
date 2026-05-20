@@ -11,16 +11,12 @@ export default function PoetryCategory() {
   }
 
   return (
-    // TODO: share "py-8 sm:py-10 md:py-12 lg:py-16" to an utility class
-    <section className="py-8 sm:py-10 md:py-12 lg:py-16">
+    <section className="py-10 md:py-12 lg:py-16">
       <div className="base-container">
-        <header className="my-8 border-b border-black/10 pb-8 text-center dark:border-white/10">
-          <h1 className="font-mashanzheng text-4xl tracking-wide sm:text-5xl">
+        <header className="my-8 pb-8 text-center dark:border-white/10">
+          <h1 className="font-mashanzheng text-3xl tracking-wide sm:text-4xl">
             {poetryCategory.title}
           </h1>
-          <p className="mt-3 text-sm tracking-wide text-zinc-500 uppercase dark:text-zinc-400">
-            {poetryCategory.subtitle}
-          </p>
         </header>
 
         {poetryCategory.posts.length > 0 ? (
@@ -29,13 +25,13 @@ export default function PoetryCategory() {
               <Link
                 key={post.id}
                 to={post.routePath}
-                className="group flex items-center justify-between p-5 transition-colors hover:border-blue-500/50 hover:bg-blue-500/10 dark:border-white/10"
+                className="font-mashanzheng group p-4 sm:p-6"
               >
-                <div className="font-mashanzheng text-2xl font-medium transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-300">
+                <div className="text-2xl font-medium transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-300">
                   {post.title}
                 </div>
-                <div className="font-mashanzheng text-xl text-black/50 dark:text-white/50">
-                  随缘
+                <div className="text-black/50 dark:text-white/50">
+                  {post.description}
                 </div>
               </Link>
             ))}

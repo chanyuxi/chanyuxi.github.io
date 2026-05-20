@@ -10,10 +10,7 @@ export interface PoetryCategory {
 
 export interface PoetryFrontmatter {
   title?: string
-  subtitle?: string
   description?: string
-  date?: string
-  tags?: string[]
   order?: number
   draft?: boolean
 }
@@ -23,10 +20,7 @@ export interface PoetryPost {
   slug: string
   category: string
   title: string
-  subtitle?: string
-  description?: string
-  date?: string
-  tags: string[]
+  description: string | null
   order: number
   content: string
   routePath: string

@@ -15,9 +15,9 @@ export default function PoetryDetail() {
   return (
     <section className="py-8 sm:py-10 md:py-12 lg:py-16">
       <div className="base-container">
-        <div className="">
+        <div className="my-18 sm:my-24 lg:my-28">
           <article className="font-mashanzheng min-w-0">
-            <div className="prose dark:prose-invert max-w-none">
+            <div className="max-w-none">
               <AppMarkdown content={post.content} />
             </div>
           </article>
@@ -26,6 +26,3 @@ export default function PoetryDetail() {
     </section>
   )
 }
-
-//
-//

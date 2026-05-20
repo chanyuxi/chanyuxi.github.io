@@ -1,9 +1,10 @@
-import { POETRY_CATEGORIES } from '@/constants/poetry'
 import type {
   PoetryCategoryWithPosts,
   PoetryFrontmatter,
   PoetryPost,
-} from '@/types'
+} from './type'
+
+import { POETRY_CATEGORIES } from './constants'
 
 type PoetryPostRecord = PoetryPost & {
   categoryOrder: number
@@ -61,10 +62,7 @@ function createPost(
     slug,
     category,
     title: frontmatter.title ?? getHeadingTitle(content) ?? formatSlug(slug),
-    subtitle: frontmatter.subtitle,
-    description: frontmatter.description,
-    date: frontmatter.date,
-    tags: frontmatter.tags ?? [],
+    description: frontmatter.description ?? null,
     order: frontmatter.order ?? 0,
     content,
     routePath: `/poetry/${category}/${slug}`,
@@ -117,10 +115,7 @@ function toPoetryPost(post: PoetryPostRecord): PoetryPost {
     slug: post.slug,
     category: post.category,
     title: post.title,
-    subtitle: post.subtitle,
     description: post.description,
-    date: post.date,
-    tags: post.tags,
     order: post.order,
     content: post.content,
     routePath: post.routePath,

@@ -18,7 +18,7 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-10 w-full bg-blue-200/50 backdrop-blur-xs dark:bg-black/50">
+    <header className="sticky top-0 z-10 w-full bg-slate-200/60 backdrop-blur-xs transition-colors duration-300 dark:bg-neutral-900/60">
       <div className="base-container">
         <div className="flex items-center py-6">
           <span className="select-none" onClick={handleLogoClick}>
