@@ -1,10 +1,9 @@
+import { POETRY_CATEGORIES } from './constants'
 import type {
   PoetryCategoryWithPosts,
   PoetryFrontmatter,
   PoetryPost,
 } from './type'
-
-import { POETRY_CATEGORIES } from './constants'
 
 type PoetryPostRecord = PoetryPost & {
   categoryOrder: number
