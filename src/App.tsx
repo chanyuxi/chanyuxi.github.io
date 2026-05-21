@@ -1,10 +1,16 @@
+import { Analytics } from '@vercel/analytics/react'
+
 import { ThemeProvider } from '@/contexts/theme'
 import RouterRender from '@/router'
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <RouterRender />
-    </ThemeProvider>
+    <>
+      <ThemeProvider>
+        <RouterRender />
+      </ThemeProvider>
+
+      <Analytics />
+    </>
   )
 }

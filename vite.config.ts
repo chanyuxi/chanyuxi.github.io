@@ -6,6 +6,9 @@ import { markdownMatterPlugin } from './build/plugins/markdown-matter'
 
 export default defineConfig(({ mode }) => ({
   plugins: [markdownMatterPlugin(), react(), tailwindcss()],
+  server: {
+    port: 3987,
+  },
   resolve: {
     alias: {
       '@': '/src',
