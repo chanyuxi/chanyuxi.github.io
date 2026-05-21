@@ -1,4 +1,4 @@
-export interface PoetryCategory {
+export interface PoetryCatalog {
   slug: string
   title: string
   subtitle: string
@@ -18,7 +18,7 @@ export interface PoetryFrontmatter {
 export interface PoetryPost {
   id: string
   slug: string
-  category: string
+  catalog: string
   title: string
   description: string | null
   order: number
@@ -26,6 +26,6 @@ export interface PoetryPost {
   routePath: string
 }
 
-export interface PoetryCategoryWithPosts extends PoetryCategory {
+export interface PoetryCatalogWithPosts extends PoetryCatalog {
   posts: PoetryPost[]
 }

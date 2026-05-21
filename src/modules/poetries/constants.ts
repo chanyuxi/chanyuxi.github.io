@@ -6,7 +6,7 @@ import magnificentLandImageSmall from './assets/images/bg-magnificent-land-800.w
 import magnificentLandImage from './assets/images/bg-magnificent-land-1200.webp'
 import mortalWorldImageSmall from './assets/images/bg-mortal-world-800.webp'
 import mortalWorldImage from './assets/images/bg-mortal-world-1200.webp'
-import type { PoetryCategory } from './type'
+import type { PoetryCatalog } from './type'
 
 export const POETRY_CATEGORIES = [
   {
@@ -15,7 +15,7 @@ export const POETRY_CATEGORIES = [
     subtitle: 'Magnificent Land',
     image: magnificentLandImage,
     imageSrcSet: `${magnificentLandImageSmall} 800w, ${magnificentLandImage} 1200w`,
-    alt: 'Magnificent Land category cover',
+    alt: 'Magnificent Land catalog cover',
     order: 1,
   },
   {
@@ -24,7 +24,7 @@ export const POETRY_CATEGORIES = [
     subtitle: 'Fair Maiden',
     image: fairMaidenImage,
     imageSrcSet: `${fairMaidenImageSmall} 800w, ${fairMaidenImage} 1200w`,
-    alt: 'Fair Maiden category cover',
+    alt: 'Fair Maiden catalog cover',
     order: 2,
   },
   {
@@ -33,7 +33,7 @@ export const POETRY_CATEGORIES = [
     subtitle: 'Literati',
     image: literatiImage,
     imageSrcSet: `${literatiImageSmall} 800w, ${literatiImage} 1200w`,
-    alt: 'Literati category cover',
+    alt: 'Literati catalog cover',
     order: 3,
   },
   {
@@ -42,7 +42,7 @@ export const POETRY_CATEGORIES = [
     subtitle: 'Mortal World',
     image: mortalWorldImage,
     imageSrcSet: `${mortalWorldImageSmall} 800w, ${mortalWorldImage} 1200w`,
-    alt: 'Mortal World category cover',
+    alt: 'Mortal World catalog cover',
     order: 4,
   },
-] satisfies PoetryCategory[]
+] satisfies PoetryCatalog[]

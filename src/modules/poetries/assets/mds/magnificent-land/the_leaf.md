@@ -1,6 +1,6 @@
 ---
 title: 芭蕉
-description: 倦意
+description: 山雨欲来将欲眠
 order: 1
 ---
 

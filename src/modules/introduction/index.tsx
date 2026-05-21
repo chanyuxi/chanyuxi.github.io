@@ -1,6 +1,6 @@
-import { FrameworkCard } from '@/views/home/components/frame-work-card'
-import { SectionTitle } from '@/views/home/components/section-title'
-import { ToolCard } from '@/views/home/components/tool-card'
+import { FrameworkCard } from '@/modules/home/components/frame-work-card'
+import { SectionTitle } from '@/modules/home/components/section-title'
+import { ToolCard } from '@/modules/home/components/tool-card'
 
 const frameworks = [
   {
@@ -58,7 +58,7 @@ const commonlyUsedTools = [
   },
 ]
 
-export default function Skill() {
+export default function Introduction() {
   return (
     <div>
       <section className="py-8 sm:py-10 md:py-12 lg:py-20">

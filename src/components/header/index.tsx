@@ -6,7 +6,7 @@ export default function Header() {
   const navigate = useNavigate()
 
   const items = [
-    { name: 'skill', path: '/skills' },
+    { name: 'Introduction', path: '/introduction' },
     { name: 'product', path: '/product' },
     { name: 'Post', path: '/post/entrance' },
     { name: 'experience', path: '/experience' },

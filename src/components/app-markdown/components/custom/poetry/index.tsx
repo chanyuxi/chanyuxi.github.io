@@ -1,5 +1,3 @@
-import '@/views/poetry/index.css'
-
 import type { PropsWithChildren } from 'react'
 import { cn } from 'tailwind-variants'
 
@@ -14,7 +12,7 @@ export default function Poetry({
   children,
 }: PropsWithChildren<PoetryProps>) {
   return (
-    <div className="mx-auto flex max-w-2xl flex-col items-center px-2 text-center select-none">
+    <div className="mx-auto flex max-w-2xl flex-col items-center text-center select-none">
       <div className="mb-8 text-2xl sm:mb-10 sm:text-3xl">{title}</div>
       <div
         className={cn(

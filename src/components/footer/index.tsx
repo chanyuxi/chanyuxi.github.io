@@ -34,7 +34,7 @@ const footerGroups: FooterGroup[] = [
   {
     title: 'CREATION',
     items: [
-      { label: 'Poetries', link: '/poetry/entrance' },
+      { label: 'Poetries', link: '/poetries/entrance' },
       { label: 'Articles' },
       { label: 'Blog' },
       { label: 'Showcase' },
@@ -66,8 +66,8 @@ const footerGroups: FooterGroup[] = [
         link: '/',
       },
       {
-        label: 'Skills',
-        link: '/skills',
+        label: 'Introduction',
+        link: '/introduction',
       },
       {
         label: 'Posts',
