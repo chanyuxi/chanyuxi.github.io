@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router'
 
-import Home from '@/views/home'
+import Home from '@/modules/home'
 
 import { RootLayout } from './components/root-layout'
 
@@ -25,24 +25,24 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: 'skills',
-        lazy: lazyRoute(() => import('@/views/skill')),
+        path: 'introduction',
+        lazy: lazyRoute(() => import('@/modules/introduction')),
       },
       {
-        path: 'poetry',
-        lazy: lazyRoute(() => import('@/views/poetry')),
+        path: 'poetries',
+        lazy: lazyRoute(() => import('../modules/poetries')),
         children: [
           {
             path: 'entrance',
-            lazy: lazyRoute(() => import('@/views/poetry/entrance')),
+            lazy: lazyRoute(() => import('../modules/poetries/entrance')),
           },
           {
-            path: ':category/:slug',
-            lazy: lazyRoute(() => import('@/views/poetry/detail')),
+            path: ':catalog/:slug',
+            lazy: lazyRoute(() => import('../modules/poetries/detail')),
           },
           {
-            path: ':category',
-            lazy: lazyRoute(() => import('@/views/poetry/category')),
+            path: ':catalog',
+            lazy: lazyRoute(() => import('../modules/poetries/catalog')),
           },
         ],
       },

@@ -7,24 +7,7 @@ import Button from '@/components/button'
 import { GITHUB_LINK } from '@/constants'
 
 import { HeroImageCard } from './components/hero-image-card'
-
-const heroImages = [
-  {
-    id: 1,
-    src: '/images/bc603030dabf48723ece562bc43ad844.png',
-    animate: { translateX: -16, rotate: -8 },
-  },
-  {
-    id: 2,
-    src: '/images/bc603030dabf48723ece562bc43ad844.png',
-    animate: { translateX: 0, rotate: -0 },
-  },
-  {
-    id: 3,
-    src: '/images/bc603030dabf48723ece562bc43ad844.png',
-    animate: { translateX: 16, rotate: 8 },
-  },
-]
+import { heroImages } from './constants'
 
 export default function Home() {
   const handleGithubClick = () => {
