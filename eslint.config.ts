@@ -23,6 +23,7 @@ export default defineConfig([
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    rules: {},
   },
   {
     plugins: {

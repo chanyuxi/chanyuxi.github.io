@@ -118,6 +118,7 @@ function renderLink(item: FooterItem, group: FooterGroup) {
 }
 
 export default function Footer() {
+  // eslint-disable-next-line @eslint-react/purity
   const currentYear = new Date().getFullYear()
 
   return (

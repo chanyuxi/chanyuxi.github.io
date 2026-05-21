@@ -15,8 +15,9 @@ export default function AppMarkdown({ content }: AppMarkdownProps) {
     <Markdown
       remarkPlugins={[remarkGfm, remarkDirective, remarkDirectiveComponents]}
       rehypePlugins={[rehypeRaw]}
-      children={content}
       components={components}
-    />
+    >
+      {content}
+    </Markdown>
   )
 }

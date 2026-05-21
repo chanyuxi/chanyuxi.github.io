@@ -1,5 +1,3 @@
-import type { PoetryCategory } from './type'
-
 import fairMaidenImageSmall from './assets/images/bg-fair-maiden-800.webp'
 import fairMaidenImage from './assets/images/bg-fair-maiden-1200.webp'
 import literatiImageSmall from './assets/images/bg-literati-800.webp'
@@ -8,6 +6,7 @@ import magnificentLandImageSmall from './assets/images/bg-magnificent-land-800.w
 import magnificentLandImage from './assets/images/bg-magnificent-land-1200.webp'
 import mortalWorldImageSmall from './assets/images/bg-mortal-world-800.webp'
 import mortalWorldImage from './assets/images/bg-mortal-world-1200.webp'
+import type { PoetryCategory } from './type'
 
 export const POETRY_CATEGORIES = [
   {
