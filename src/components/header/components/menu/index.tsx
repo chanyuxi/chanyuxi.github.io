@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router'
 import ThemeToggle from '@/components/theme-toggle'
 
 interface MenuProps {
-  items: { name: string; path: string }[]
+  items: { name: string, path: string }[]
 }
 
 export default function Menu(props: MenuProps) {
@@ -54,7 +54,7 @@ export default function Menu(props: MenuProps) {
         </div>
 
         <ThemeToggle />
-        <div className="lg:hidden" onClick={toggleMenu} data-menu-button>
+        <div className="lg:hidden" data-menu-button onClick={toggleMenu}>
           <MenuIcon />
         </div>
       </div>
@@ -62,17 +62,17 @@ export default function Menu(props: MenuProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            data-menu
+            animate={{ opacity: 1, scale: 1 }}
             className="absolute right-0 origin-top-right lg:hidden"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
+            data-menu
+            exit={{ opacity: 0, scale: 0 }}
+            initial={{ opacity: 0, scale: 0 }}
           >
             <ul className="mt-2 w-40 divide-y divide-slate-200 rounded-lg border border-transparent bg-white shadow dark:divide-slate-800 dark:bg-black dark:shadow-none">
               {items.map(item => (
                 <li
-                  key={item.path}
                   className="p-4 capitalize select-none"
+                  key={item.path}
                   onClick={() => handleMenuItemClick(item.path)}
                 >
                   {item.name}

@@ -12,41 +12,41 @@ export const directiveTagMap: Record<string, MarkdownDirective> = {
   poetry: MarkdownDirective.Poetry,
 }
 
-type ReactMarkdownComponent<Tag extends keyof Components> = Extract<
-  NonNullable<Components[Tag]>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ComponentType<any>
->
-
-type ReactMarkdownComponentProps<Tag extends keyof Components> =
-  ReactMarkdownComponent<Tag> extends ComponentType<infer Props> ? Props : never
-
-type MarkdownDirectiveRuntimeProps = Pick<
-  ReactMarkdownComponentProps<'div'>,
-  'children' | 'node'
->
-
 type MarkdownDirectiveInjectedProps = {
   children?: MarkdownDirectiveRuntimeProps['children']
 }
 
 type MarkdownDirectiveRenderer = ComponentType<MarkdownDirectiveRuntimeProps>
 
+type MarkdownDirectiveRuntimeProps = Pick<
+  ReactMarkdownComponentProps<'div'>,
+  'children' | 'node'
+>
+
+type ReactMarkdownComponent<Tag extends keyof Components> = Extract<
+  NonNullable<Components[Tag]>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ComponentType<any>
+>
+
+type ReactMarkdownComponentProps<Tag extends keyof Components>
+  = ReactMarkdownComponent<Tag> extends ComponentType<infer Props> ? Props : never
+
 export const markdownDirectiveCompMap = {
   [MarkdownDirective.Poetry]: withMarkdownProps(Poetry),
 } satisfies Record<MarkdownDirective, MarkdownDirectiveRenderer>
 
 function withMarkdownProps<Props extends object>(
-  Component: ComponentType<Props & MarkdownDirectiveInjectedProps>
+  Component: ComponentType<MarkdownDirectiveInjectedProps & Props>,
 ): MarkdownDirectiveRenderer {
   return function MarkdownDirectiveComponent({
-    node,
     children,
+    node,
   }: MarkdownDirectiveRuntimeProps) {
     const props = {
       ...node?.properties,
       children,
-    } as Props & MarkdownDirectiveInjectedProps
+    } as MarkdownDirectiveInjectedProps & Props
 
     return <Component {...props} />
   }

@@ -2,19 +2,18 @@ import { Link } from 'react-router'
 
 import { APP_VERSION, GITHUB_LINK } from '@/constants'
 
-interface FooterItem {
-  label: string
-  link?: string | { account: string }
+interface FooterGroup {
+  items: FooterItem[]
+  title: string
 }
 
-interface FooterGroup {
-  title: string
-  items: FooterItem[]
+interface FooterItem {
+  label: string
+  link?: { account: string } | string
 }
 
 const footerGroups: FooterGroup[] = [
   {
-    title: 'LABORATORY',
     items: [
       {
         label: 'Postsop',
@@ -30,18 +29,18 @@ const footerGroups: FooterGroup[] = [
       },
       { label: 'Architecture' },
     ],
+    title: 'LABORATORY',
   },
   {
-    title: 'CREATION',
     items: [
       { label: 'Poetries', link: '/poetries/entrance' },
       { label: 'Articles' },
       { label: 'Blog' },
       { label: 'Showcase' },
     ],
+    title: 'CREATION',
   },
   {
-    title: 'FIND ME',
     items: [
       {
         label: 'GitHub',
@@ -57,9 +56,9 @@ const footerGroups: FooterGroup[] = [
         label: 'Telegram',
       },
     ],
+    title: 'FIND ME',
   },
   {
-    title: 'EXPLORE MORE',
     items: [
       {
         label: 'Home',
@@ -76,49 +75,11 @@ const footerGroups: FooterGroup[] = [
         label: 'Cooperative development',
       },
     ],
+    title: 'EXPLORE MORE',
   },
 ]
 
-function renderLink(item: FooterItem, group: FooterGroup) {
-  const isExternalLink = (link: string) => /^https?:\/\//.test(link)
-
-  const key = `${group.title}-${item.label}`
-
-  if (!item.link) {
-    return (
-      <span key={key} className="cursor-pointer text-sm hover:underline">
-        {item.label}
-      </span>
-    )
-  } else if (typeof item.link === 'object') {
-    return null
-  } else if (isExternalLink(item.link)) {
-    return (
-      <a
-        key={key}
-        href={item.link}
-        target="_blank"
-        rel="noreferrer"
-        className="cursor-pointer text-sm hover:underline"
-      >
-        {item.label}
-      </a>
-    )
-  } else {
-    return (
-      <Link
-        key={key}
-        to={item.link}
-        className="cursor-pointer text-sm hover:underline"
-      >
-        {item.label}
-      </Link>
-    )
-  }
-}
-
 export default function Footer() {
-  // eslint-disable-next-line @eslint-react/purity
   const currentYear = new Date().getFullYear()
 
   return (
@@ -143,14 +104,61 @@ export default function Footer() {
             CHANYUXI
           </p>
           <p className="text-xs text-zinc-600 dark:text-zinc-400">
-            Version {APP_VERSION}
+            Version
+            {' '}
+            {APP_VERSION}
           </p>
         </div>
 
         <p className="text-center text-xs text-zinc-600 dark:text-zinc-400">
-          Copyright {currentYear} CHANYUXI. All rights reserved.
+          Copyright
+          {' '}
+          {currentYear}
+          {' '}
+          CHANYUXI. All rights reserved.
         </p>
       </div>
     </footer>
   )
+}
+
+function renderLink(item: FooterItem, group: FooterGroup) {
+  const isExternalLink = (link: string) => /^https?:\/\//.test(link)
+
+  const key = `${group.title}-${item.label}`
+
+  if (!item.link) {
+    return (
+      <span className="cursor-pointer text-sm hover:underline" key={key}>
+        {item.label}
+      </span>
+    )
+  }
+  else if (typeof item.link === 'object') {
+    return null
+  }
+  else if (isExternalLink(item.link)) {
+    return (
+      <a
+        className="cursor-pointer text-sm hover:underline"
+        href={item.link}
+        key={key}
+        rel="noreferrer"
+        target="_blank"
+      >
+        {item.label}
+      </a>
+    )
+  }
+  else {
+    return (
+      <Link
+        className="cursor-pointer text-sm hover:underline"
+        key={key}
+        to={item.link}
+      >
+        {item.label}
+      </Link>
+    )
+  }
 }

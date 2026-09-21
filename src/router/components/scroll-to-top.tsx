@@ -9,7 +9,7 @@ export function ScrollToTop() {
       return
     }
 
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    window.scrollTo({ behavior: 'auto', left: 0, top: 0 })
   }, [hash, pathname, search])
 
   return null

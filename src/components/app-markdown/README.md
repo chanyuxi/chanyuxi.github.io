@@ -1,0 +1,1 @@
+This directory is a collection of components based on Markdown files.

@@ -5,22 +5,22 @@ import { defineConfig } from 'vite'
 import { markdownMatterPlugin } from './build/plugins/markdown-matter'
 
 export default defineConfig(({ mode }) => ({
-  plugins: [markdownMatterPlugin(), react(), tailwindcss()],
-  server: {
-    port: 3987,
-  },
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
   build: {
-    sourcemap: mode === 'development',
     minify: mode === 'development' ? false : 'terser',
+    sourcemap: mode === 'development',
     terserOptions: {
       compress: {
         drop_console: true,
       },
     },
+  },
+  plugins: [markdownMatterPlugin(), react(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
+  server: {
+    port: 3987,
   },
 }))

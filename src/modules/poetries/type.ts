@@ -1,31 +1,31 @@
 export interface PoetryCatalog {
-  slug: string
-  title: string
-  subtitle: string
+  alt: string
   image: string
   imageSrcSet: string
-  alt: string
   order: number
-}
-
-export interface PoetryFrontmatter {
-  title?: string
-  description?: string
-  order?: number
-  draft?: boolean
-}
-
-export interface PoetryPost {
-  id: string
   slug: string
-  catalog: string
+  subtitle: string
   title: string
-  description: string | null
-  order: number
-  content: string
-  routePath: string
 }
 
 export interface PoetryCatalogWithPosts extends PoetryCatalog {
   posts: PoetryPost[]
+}
+
+export interface PoetryFrontmatter {
+  description?: string
+  draft?: boolean
+  order?: number
+  title?: string
+}
+
+export interface PoetryPost {
+  catalog: string
+  content: string
+  description: null | string
+  id: string
+  order: number
+  routePath: string
+  slug: string
+  title: string
 }

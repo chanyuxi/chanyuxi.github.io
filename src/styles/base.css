@@ -1,0 +1,17 @@
+@layer base {
+  * {
+    color: var(--color-black);
+
+    @variant dark {
+      color: var(--color-slate-50);
+    }
+  }
+
+  body {
+    background: var(--color-stone-50);
+
+    @variant dark {
+      background: var(--color-neutral-800);
+    }
+  }
+}

@@ -1,11 +1,11 @@
+import type { Plugin } from 'vite'
+
 import { readFile } from 'node:fs/promises'
 
 import matter from 'gray-matter'
-import type { Plugin } from 'vite'
 
 export function markdownMatterPlugin(): Plugin {
   return {
-    name: 'markdown-matter',
     async load(id) {
       const [filepath, ...queryParts] = id.split('?')
 
@@ -16,10 +16,11 @@ export function markdownMatterPlugin(): Plugin {
       const { content, data } = matter(await readFile(filepath, 'utf8'))
 
       return `export default ${JSON.stringify({
-        frontmatter: normalizeMarkdownData(data),
         content: content.trim(),
+        frontmatter: normalizeMarkdownData(data),
       })}`
     },
+    name: 'markdown-matter',
   }
 }
 
@@ -37,7 +38,7 @@ function normalizeMarkdownData(value: unknown): unknown {
       Object.entries(value).map(([key, item]) => [
         key,
         normalizeMarkdownData(item),
-      ])
+      ]),
     )
   }
 

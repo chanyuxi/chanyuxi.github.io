@@ -19,7 +19,7 @@ const h = tv({
   },
 })
 
-export default function H({ level, children }: PropsWithChildren<HProps>) {
+export default function H({ children, level }: PropsWithChildren<HProps>) {
   const Tag = `h${level}` as const
 
   return <Tag className={h({ level })}>{children}</Tag>

@@ -15,18 +15,18 @@ export default function PoetryDetail() {
   const itemVariants = createPoetryItemVariants(shouldReduceMotion)
 
   if (!post) {
-    return <Navigate to="/poetry/entrance" replace />
+    return <Navigate replace to="/poetry/entrance" />
   }
 
   return (
     <motion.section
-      initial="hidden"
       animate="visible"
-      variants={pageVariants}
       className="py-8 sm:py-10 md:py-12 lg:py-16"
+      initial="hidden"
+      variants={pageVariants}
     >
       <div className="base-container">
-        <motion.div variants={itemVariants} className="my-18 sm:my-24 lg:my-28">
+        <motion.div className="my-18 sm:my-24 lg:my-28" variants={itemVariants}>
           <article className="font-mashanzheng min-w-0 px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12 dark:border-white/10">
             <div className="max-w-none">
               <AppMarkdown content={post.content} />

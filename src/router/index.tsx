@@ -1,4 +1,5 @@
 import type { ComponentType } from 'react'
+
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router'
 
 import Home from '@/modules/home'
@@ -17,40 +18,40 @@ const lazyRoute = (load: () => Promise<RouteModule>) => async () => {
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    Component: RootLayout,
     children: [
       {
-        index: true,
         Component: Home,
+        index: true,
       },
       {
-        path: 'introduction',
         lazy: lazyRoute(() => import('@/modules/introduction')),
+        path: 'introduction',
       },
       {
-        path: 'poetries',
-        lazy: lazyRoute(() => import('../modules/poetries')),
         children: [
           {
-            path: 'entrance',
             lazy: lazyRoute(() => import('../modules/poetries/entrance')),
+            path: 'entrance',
           },
           {
-            path: ':catalog/:slug',
             lazy: lazyRoute(() => import('../modules/poetries/detail')),
+            path: ':catalog/:slug',
           },
           {
-            path: ':catalog',
             lazy: lazyRoute(() => import('../modules/poetries/catalog')),
+            path: ':catalog',
           },
         ],
+        lazy: lazyRoute(() => import('../modules/poetries')),
+        path: 'poetries',
       },
       {
+        element: <Navigate replace to="/" />,
         path: '*',
-        element: <Navigate to="/" replace />,
       },
     ],
+    Component: RootLayout,
+    path: '/',
   },
 ])
 

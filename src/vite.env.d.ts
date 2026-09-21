@@ -2,8 +2,8 @@
 
 declare module '*.md' {
   const markdownModule: {
-    frontmatter: Record<string, unknown>
     content: string
+    frontmatter: Record<string, unknown>
   }
 
   export default markdownModule

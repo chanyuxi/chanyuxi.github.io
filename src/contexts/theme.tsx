@@ -3,6 +3,7 @@ import {
   type PropsWithChildren,
   use,
   useLayoutEffect,
+  useMemo,
   useState,
 } from 'react'
 
@@ -16,16 +17,6 @@ const ThemeContext = createContext<ThemeContextType>({
   toggleTheme: () => {},
 })
 
-function getInitialTheme() {
-  const saved = localStorage.getItem('theme')
-  if (saved === 'light' || saved === 'dark') {
-    return saved
-  }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light'
-}
-
 export function ThemeProvider(props: PropsWithChildren) {
   const { children } = props
 
@@ -37,12 +28,20 @@ export function ThemeProvider(props: PropsWithChildren) {
     localStorage.setItem('theme', newTheme)
   }
 
+  const contextValue = useMemo<ThemeContextType>(
+    () => ({
+      theme,
+      toggleTheme,
+    }),
+    [theme, toggleTheme],
+  )
+
   useLayoutEffect(() => {
     const root = document.documentElement
     root.className = theme
   }, [theme])
 
-  return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>
+  return <ThemeContext value={contextValue}>{children}</ThemeContext>
 }
 
 export function useTheme() {
@@ -51,4 +50,14 @@ export function useTheme() {
     throw new Error('useTheme must be used within a ThemeProvider')
   }
   return context
+}
+
+function getInitialTheme() {
+  const saved = localStorage.getItem('theme')
+  if (saved === 'light' || saved === 'dark') {
+    return saved
+  }
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light'
 }

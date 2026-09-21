@@ -1,34 +1,35 @@
 import type { Root } from 'mdast'
+
 import { visit } from 'unist-util-visit'
 
 import { directiveTagMap } from './components'
 
-type PhrasingNode = {
-  type: string
-  value?: string
-  children?: PhrasingNode[]
-  data?: {
-    directiveLabel?: boolean | null
-  }
-}
-
-type ParagraphNode = {
-  type: 'paragraph'
-  children?: PhrasingNode[]
-  data?: {
-    directiveLabel?: boolean | null
-  }
-}
-
 type DirectiveNode = {
-  type: 'containerDirective' | 'leafDirective' | 'textDirective'
-  name: string
   attributes?: Record<string, unknown>
   children?: Array<ParagraphNode | PhrasingNode>
   data?: {
     hName?: string
     hProperties?: Record<string, unknown>
   }
+  name: string
+  type: 'containerDirective' | 'leafDirective' | 'textDirective'
+}
+
+type ParagraphNode = {
+  children?: PhrasingNode[]
+  data?: {
+    directiveLabel?: boolean | null
+  }
+  type: 'paragraph'
+}
+
+type PhrasingNode = {
+  children?: PhrasingNode[]
+  data?: {
+    directiveLabel?: boolean | null
+  }
+  type: string
+  value?: string
 }
 
 export function remarkDirectiveComponents() {
@@ -37,9 +38,9 @@ export function remarkDirectiveComponents() {
       const directive = node as unknown as DirectiveNode
 
       if (
-        directive.type !== 'containerDirective' &&
-        directive.type !== 'leafDirective' &&
-        directive.type !== 'textDirective'
+        directive.type !== 'containerDirective'
+        && directive.type !== 'leafDirective'
+        && directive.type !== 'textDirective'
       ) {
         return
       }
@@ -62,8 +63,8 @@ export function remarkDirectiveComponents() {
       }
 
       if (
-        directive.type === 'containerDirective' &&
-        isDirectiveLabelParagraph(directive.children?.[0])
+        directive.type === 'containerDirective'
+        && isDirectiveLabelParagraph(directive.children?.[0])
       ) {
         directive.children = directive.children?.slice(1)
       }
@@ -85,16 +86,16 @@ function getDirectiveLabel(directive: DirectiveNode): string | undefined {
   return directive.children?.map(child => getNodeText(child)).join('')
 }
 
-function isDirectiveLabelParagraph(
-  node: ParagraphNode | PhrasingNode | undefined
-): node is ParagraphNode {
-  return node?.type === 'paragraph' && node.data?.directiveLabel === true
-}
-
 function getNodeText(node: ParagraphNode | PhrasingNode): string {
   if ('value' in node && node.value) {
     return node.value
   }
 
   return node.children?.map(child => getNodeText(child)).join('') ?? ''
+}
+
+function isDirectiveLabelParagraph(
+  node: ParagraphNode | PhrasingNode | undefined,
+): node is ParagraphNode {
+  return node?.type === 'paragraph' && node.data?.directiveLabel === true
 }

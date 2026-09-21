@@ -4,40 +4,8 @@ const POETRY_EASE = [0.22, 1, 0.36, 1] as const
 
 const REDUCED_FADE_DURATION = 0.22
 
-export function createPoetryPageVariants(
-  shouldReduceMotion: boolean | null
-): Variants {
-  if (shouldReduceMotion) {
-    return {
-      hidden: { opacity: 0 },
-      visible: {
-        opacity: 1,
-        transition: {
-          duration: REDUCED_FADE_DURATION,
-          staggerChildren: 0.04,
-          delayChildren: 0.03,
-        },
-      },
-    }
-  }
-
-  return {
-    hidden: { opacity: 0, y: 22 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.72,
-        ease: POETRY_EASE,
-        staggerChildren: 0.1,
-        delayChildren: 0.08,
-      },
-    },
-  }
-}
-
 export function createPoetryItemVariants(
-  shouldReduceMotion: boolean | null
+  shouldReduceMotion: boolean | null,
 ): Variants {
   if (shouldReduceMotion) {
     return {
@@ -47,21 +15,21 @@ export function createPoetryItemVariants(
   }
 
   return {
-    hidden: { opacity: 0, y: 28, scale: 0.985 },
+    hidden: { opacity: 0, scale: 0.985, y: 28 },
     visible: {
       opacity: 1,
-      y: 0,
       scale: 1,
       transition: {
         duration: 0.68,
         ease: POETRY_EASE,
       },
+      y: 0,
     },
   }
 }
 
 export function createPoetryMediaVariants(
-  shouldReduceMotion: boolean | null
+  shouldReduceMotion: boolean | null,
 ): Variants {
   if (shouldReduceMotion) {
     return {
@@ -79,6 +47,38 @@ export function createPoetryMediaVariants(
         duration: 0.95,
         ease: POETRY_EASE,
       },
+    },
+  }
+}
+
+export function createPoetryPageVariants(
+  shouldReduceMotion: boolean | null,
+): Variants {
+  if (shouldReduceMotion) {
+    return {
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: {
+          delayChildren: 0.03,
+          duration: REDUCED_FADE_DURATION,
+          staggerChildren: 0.04,
+        },
+      },
+    }
+  }
+
+  return {
+    hidden: { opacity: 0, y: 22 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.08,
+        duration: 0.72,
+        ease: POETRY_EASE,
+        staggerChildren: 0.1,
+      },
+      y: 0,
     },
   }
 }

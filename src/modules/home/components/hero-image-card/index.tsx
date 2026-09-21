@@ -1,25 +1,25 @@
 import { motion } from 'motion/react'
 
 interface HeroImageCardProps {
+  animate: { rotate: number, translateX: number }
   src: string
-  animate: { translateX: number; rotate: number }
 }
 export function HeroImageCard(props: HeroImageCardProps) {
-  const { src, animate } = props
+  const { animate, src } = props
 
   return (
     <motion.div
-      initial={{ translateX: 0, rotate: 0 }}
-      whileInView={animate}
-      transition={{ duration: 0.5, delay: 0.25 }}
       className="inline-block size-40 rounded-lg bg-white p-2 shadow-lg transition-shadow dark:shadow-none"
+      initial={{ rotate: 0, translateX: 0 }}
+      transition={{ delay: 0.25, duration: 0.5 }}
+      whileInView={animate}
     >
       <img
-        src={src}
         alt="Profile illustration"
-        loading="eager"
-        fetchPriority="high"
         decoding="async"
+        fetchPriority="high"
+        loading="eager"
+        src={src}
       />
     </motion.div>
   )

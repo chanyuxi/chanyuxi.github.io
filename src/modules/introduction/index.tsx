@@ -4,34 +4,34 @@ import { ToolCard } from '@/modules/home/components/tool-card'
 
 const frameworks = [
   {
-    name: 'Vue',
-    icon: '/images/vue-logo.svg',
     achievements: [
       'Accumulated completion of 30+ projects',
       'Research on source code',
       '3 years of experience',
       'Use it to work for the longest time',
     ],
+    icon: '/images/vue-logo.svg',
+    name: 'Vue',
   },
   {
-    name: 'React',
-    icon: '/images/react-logo.svg',
     achievements: [
       'Accumulated completion of 10+ projects',
       'Research on source code',
       '3 years of experience',
       'My favorite framework',
     ],
+    icon: '/images/react-logo.svg',
+    name: 'React',
   },
   {
-    name: 'Angular',
-    icon: '/images/angular-logo.ico',
     achievements: [
       'Almost no one uses it domestically',
       'Just hang it up and take a look',
-      "I don't know either.",
+      'I don\'t know either.',
       'Preparing to make a friend',
     ],
+    icon: '/images/angular-logo.ico',
+    name: 'Angular',
   },
 ]
 
@@ -67,11 +67,11 @@ export default function Introduction() {
 
           <div className="flex flex-col justify-center gap-6 lg:flex-row">
             {frameworks.map(framework => (
-              <div key={framework.name} className="flex-1">
+              <div className="flex-1" key={framework.name}>
                 <FrameworkCard
-                  name={framework.name}
-                  icon={framework.icon}
                   achievements={framework.achievements}
+                  icon={framework.icon}
+                  name={framework.name}
                 />
               </div>
             ))}
@@ -84,7 +84,7 @@ export default function Introduction() {
           <SectionTitle title="Commonly used tools" />
 
           {commonlyUsedTools.map(block => (
-            <div key={block.title} className="mb-4">
+            <div className="mb-4" key={block.title}>
               <div className="mb-4 text-center xl:text-lg">{block.title}</div>
 
               <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">

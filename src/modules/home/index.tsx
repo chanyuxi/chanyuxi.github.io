@@ -21,15 +21,16 @@ export default function Home() {
           <div className="flex flex-1 flex-col gap-8 xl:order-2">
             <div className="mx-auto size-40">
               {heroImages.map(image => (
-                <div key={image.id} className="absolute size-40">
-                  <HeroImageCard src={image.src} animate={image.animate} />
+                <div className="absolute size-40" key={image.id}>
+                  <HeroImageCard animate={image.animate} src={image.src} />
                 </div>
               ))}
             </div>
 
             <div>
               <h1 className="home-hero-title text-center text-4xl font-bold select-none xl:text-5xl">
-                Forever{' '}
+                Forever
+                {' '}
                 <span className="bg-linear-to-r from-pink-500 to-violet-500 bg-clip-text text-2xl font-extrabold text-transparent xl:text-3xl">
                   Leslie
                 </span>
@@ -49,13 +50,13 @@ export default function Home() {
           </div>
 
           <div className="leading-xl space-y-8 tracking-wide opacity-90 xl:order-1 xl:w-1/2 xl:text-lg">
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <motion.p animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
               Hello there! I'm a frontend engineer focused on building
               responsive, polished, and user-friendly interfaces. Most of my
               work revolves around React, CSS, JavaScript, and the small details
               that make web experiences feel smooth.
             </motion.p>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <motion.p animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
               I'm originally from Zhanjiang, Guangdong, a coastal city that
               taught me patience, adaptability, and respect for change. I try to
               bring the same mindset into my work: stay steady, keep improving,
