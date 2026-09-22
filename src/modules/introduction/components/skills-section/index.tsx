@@ -7,34 +7,27 @@ import {
 
 const skills = [
   {
-    details: ['JavaScript', 'TypeScript', 'Node.js', 'HTML', 'CSS', 'Sass'],
+    details: ['JavaScript', 'TypeScript', 'Node.js', 'CSS', 'Sass', 'Java', 'Kotlin', 'Rust', 'C'],
     items: 'JavaScript · TypeScript · Node.js',
     label: 'Languages',
   },
   {
-    details: ['Vue 2', 'Vue 3', 'React', 'React Native', 'Uniapp'],
+    details: ['Vue 2', 'Vue 3', 'React', 'React Native', 'Uniapp', 'Electron'],
     items: 'Vue 2 / 3 · React · React Native · Uniapp',
     label: 'Frameworks',
   },
   {
-    details: ['Vuex', 'Pinia', 'Redux', 'Axios', 'REST API', 'JSON'],
+    details: ['Vuex', 'Pinia', 'Redux', 'Axios', 'Zod', 'Zustand'],
     items: 'Vuex · Pinia · Redux · Axios',
     label: 'State & data',
   },
   {
-    details: ['Vite', 'Webpack', 'Rollup', 'Esbuild', 'ESLint', 'Vite plugins'],
+    details: ['Vite', 'Webpack', 'Rollup', 'Esbuild', 'ESLint'],
     items: 'Vite · Webpack · Rollup · Esbuild · ESLint',
     label: 'Tooling',
   },
   {
-    details: [
-      'Tailwind CSS',
-      'Ant Design',
-      'Element UI',
-      'GitFlow',
-      'Responsive UI',
-      'Design systems',
-    ],
+    details: ['Tailwind CSS', 'Ant Design', 'Element UI', 'GitFlow', 'Responsive UI'],
     items: 'Tailwind CSS · Ant Design · Element UI · GitFlow',
     label: 'UI & delivery',
   },

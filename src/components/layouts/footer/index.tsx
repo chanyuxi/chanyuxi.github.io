@@ -75,7 +75,7 @@ const footerGroups: FooterGroup[] = [
         label: 'Posts',
       },
       {
-        label: 'Cooperative development',
+        label: 'Cooperation',
       },
       {
         label: 'Changelog',
