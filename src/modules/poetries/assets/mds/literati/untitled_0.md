@@ -1,6 +1,6 @@
 ---
 title: 赠纳兰
-description: 长忆卿
+description: 蜡炬成灰泪始干
 order: 2
 ---
 

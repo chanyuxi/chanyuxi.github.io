@@ -14,8 +14,10 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "assets:font": "tsx scripts/subset-poetry-font.ts",
     "build": "vite build",
     "changeset": "changeset",
+    "changeset:version": "changeset version && tsx scripts/date-changelog.ts",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "typecheck": "tsc -b --pretty false",
@@ -32,6 +34,7 @@
     "cn": "^0.3.0",
     "lucide-react": "^0.562.0",
     "motion": "^12.30.1",
+    "qrcode.react": "^4.2.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-markdown": "^10.1.0",
@@ -71,7 +74,9 @@
     "husky": "^9.1.7",
     "jsonc-eslint-parser": "^3.3.0",
     "reset-css": "^5.0.2",
+    "subset-font": "^2.9.0",
     "terser": "^5.46.0",
+    "tsx": "^4.23.15",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.70.0",
     "vite": "^7.0.6"

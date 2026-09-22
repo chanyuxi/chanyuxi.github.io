@@ -64,7 +64,7 @@ export function SkillsSection() {
                 <CollapsibleContent className="collapsible-panel-height overflow-hidden transition-collapsible duration-300 data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0">
                   <div className="mt-4 flex flex-wrap gap-2">
                     {group.details.map(skill => (
-                      <Badge key={skill} variant="skill">
+                      <Badge className="shadow-2xs" key={skill} variant="skill">
                         {skill}
                       </Badge>
                     ))}

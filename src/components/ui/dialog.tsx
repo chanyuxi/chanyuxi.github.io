@@ -38,7 +38,7 @@ function DialogContent({
             data-slot="dialog-close"
             render={(
               <Button
-                className="absolute top-2 right-2"
+                className="absolute top-3 right-3 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground dark:hover:bg-white/10"
                 size="icon-sm"
                 variant="ghost"
               />
@@ -113,7 +113,7 @@ function DialogOverlay({
   return (
     <DialogPrimitive.Backdrop
       className={cn(
-        'fixed inset-0 isolate z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0',
+        'fixed inset-0 isolate z-50 bg-black/20 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0',
         className,
       )}
       data-slot="dialog-overlay"

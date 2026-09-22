@@ -17,7 +17,7 @@ export const POETRY_CATEGORIES = [
     order: 1,
     slug: 'magnificent-land',
     subtitle: 'Magnificent Land',
-    title: '\u5c71\u6cb3',
+    title: '山河',
   },
   {
     alt: 'Fair Maiden catalog cover',
@@ -26,7 +26,7 @@ export const POETRY_CATEGORIES = [
     order: 2,
     slug: 'fair-maiden',
     subtitle: 'Fair Maiden',
-    title: '\u79c0\u8272',
+    title: '秀色',
   },
   {
     alt: 'Literati catalog cover',
@@ -35,7 +35,7 @@ export const POETRY_CATEGORIES = [
     order: 3,
     slug: 'literati',
     subtitle: 'Literati',
-    title: '\u541b\u751f',
+    title: '君生',
   },
   {
     alt: 'Mortal World catalog cover',
@@ -44,6 +44,6 @@ export const POETRY_CATEGORIES = [
     order: 4,
     slug: 'mortal-world',
     subtitle: 'Mortal World',
-    title: '\u4eba\u95f4',
+    title: '人间',
   },
 ] satisfies PoetryCatalog[]

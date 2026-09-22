@@ -42,7 +42,7 @@
   --tracking-eyebrow: 0.2em;
   --tracking-poetry: 0.42em;
 
-  --grid-template-columns-hero: 1.2fr 0.8fr;
+  --grid-template-columns-hero: 1fr 1fr;
   --grid-template-columns-section: 0.55fr 1.45fr;
   --grid-template-columns-experience-meta: 11rem 1fr;
   --transition-property-collapsible: height, opacity;
