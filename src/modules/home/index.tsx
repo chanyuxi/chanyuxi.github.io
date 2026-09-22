@@ -1,9 +1,6 @@
-import './index.css'
-
 import { Github, Send } from 'lucide-react'
-import { motion } from 'motion/react'
 
-import Button from '@/components/button'
+import { Button } from '@/components/ui/button'
 import { GITHUB_LINK } from '@/constants'
 
 import { HeroImageCard } from './components/hero-image-card'
@@ -16,52 +13,59 @@ export default function Home() {
 
   return (
     <div>
-      <section className="py-8 sm:py-10 md:py-12 lg:py-20">
-        <div className="base-container relative flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
+      <section className="relative overflow-hidden py-14 sm:py-18 lg:py-24">
+        <div className="relative base-container flex flex-col gap-12 xl:flex-row xl:items-center xl:justify-between xl:gap-20">
           <div className="flex flex-1 flex-col gap-8 xl:order-2">
-            <div className="mx-auto size-40">
+            <div className="relative mx-auto size-48">
               {heroImages.map(image => (
-                <div className="absolute size-40" key={image.id}>
-                  <HeroImageCard animate={image.animate} src={image.src} />
+                <div className="absolute inset-4 size-40" key={image.id}>
+                  <HeroImageCard
+                    animate={image.animate}
+                    src={image.src}
+                    srcSet={image.srcSet}
+                  />
                 </div>
               ))}
             </div>
 
             <div>
-              <h1 className="home-hero-title text-center text-4xl font-bold select-none xl:text-5xl">
+              <h1 className="text-center text-4xl font-normal tracking-display select-none xl:text-5xl">
                 Forever
                 {' '}
-                <span className="bg-linear-to-r from-pink-500 to-violet-500 bg-clip-text text-2xl font-extrabold text-transparent xl:text-3xl">
+                <span className="text-2xl font-medium text-muted-foreground xl:text-3xl dark:text-stone-400">
                   Leslie
                 </span>
               </h1>
             </div>
 
             <div className="flex items-center justify-end gap-4 xl:justify-center">
-              <Button type="button">
-                <Send size={16} />
+              <Button type="button" variant="outline">
+                <Send data-icon="inline-start" size={16} />
                 <span>Contact me</span>
               </Button>
-              <Button onClick={handleGithubClick} type="button" variant="solid">
-                <Github size={16} />
+              <Button onClick={handleGithubClick} type="button">
+                <Github data-icon="inline-start" size={16} />
                 <span>Github</span>
               </Button>
             </div>
           </div>
 
-          <div className="leading-xl space-y-8 tracking-wide opacity-90 xl:order-1 xl:w-1/2 xl:text-lg">
-            <motion.p animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
+          <div className="space-y-6 text-base leading-7 text-muted-foreground xl:order-1 xl:w-1/2 xl:text-lg xl:leading-8 dark:text-stone-300">
+            <p className="text-xs font-medium tracking-navigation text-muted-soft uppercase dark:text-stone-500">
+              Frontend engineer · Shenzhen
+            </p>
+            <p className="animate-in duration-500 fade-in motion-reduce:animate-none">
               Hello there! I'm a frontend engineer focused on building
               responsive, polished, and user-friendly interfaces. Most of my
               work revolves around React, CSS, JavaScript, and the small details
               that make web experiences feel smooth.
-            </motion.p>
-            <motion.p animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
+            </p>
+            <p className="animate-in duration-500 fade-in motion-reduce:animate-none">
               I'm originally from Zhanjiang, Guangdong, a coastal city that
               taught me patience, adaptability, and respect for change. I try to
               bring the same mindset into my work: stay steady, keep improving,
               and build things with care.
-            </motion.p>
+            </p>
           </div>
         </div>
       </section>

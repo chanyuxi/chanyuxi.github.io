@@ -23,6 +23,7 @@ export default function PoetryEntrance() {
       variants={pageVariants}
     >
       <div className="base-container">
+        <h1 className="sr-only">Poetries</h1>
         <div className="flex flex-col gap-4 md:gap-6">
           {poetryCategories.map((catalog, index) => {
             return (
@@ -33,7 +34,7 @@ export default function PoetryEntrance() {
                 whileHover={shouldReduceMotion ? undefined : { y: -4 }}
               >
                 <Link
-                  className="group relative block min-h-44 overflow-hidden sm:min-h-52 md:min-h-60 lg:min-h-68"
+                  className="group relative block min-h-44 overflow-hidden rounded-2xl border border-hairline shadow-soft sm:min-h-52 md:min-h-60 lg:min-h-68 dark:border-white/10"
                   to={`/poetries/${catalog.slug}`}
                 >
                   <motion.img
@@ -41,6 +42,7 @@ export default function PoetryEntrance() {
                     className="group-hover:scale-1.035 absolute inset-0 size-full object-cover transition duration-700 ease-out"
                     decoding="async"
                     fetchPriority={index === 0 ? 'high' : 'auto'}
+                    loading={index === 0 ? 'eager' : 'lazy'}
                     sizes="(min-width: 1280px) 1040px, (min-width: 1024px) 800px, 100vw"
                     src={catalog.image}
                     srcSet={catalog.imageSrcSet}
@@ -50,9 +52,9 @@ export default function PoetryEntrance() {
                   <div className="absolute inset-0 bg-white/0 transition duration-700 group-hover:bg-white/5" />
 
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-white">
-                    <h1 className="font-mashanzheng text-3xl tracking-wide sm:text-4xl md:text-5xl">
+                    <h2 className="font-mashanzheng text-3xl tracking-wide sm:text-4xl md:text-5xl">
                       {catalog.title}
-                    </h1>
+                    </h2>
                     <p className="text-xs font-medium tracking-wider text-white/80 uppercase sm:text-xs">
                       {catalog.subtitle}
                     </p>

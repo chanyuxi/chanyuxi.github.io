@@ -1,4 +1,19 @@
 {
-  "extends": "./tsconfig.app.json",
-  "include": ["vite.config.ts", "eslint.config.ts", "./build/**/*.ts" ]
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.cache/tsconfig.build.tsbuildinfo",
+    "types": [
+      "node"
+    ],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./node_modules/.cache/types/build"
+  },
+  "include": [
+    "vite.config.ts",
+    "eslint.config.ts",
+    "commitlint.config.ts",
+    "build/**/*.ts"
+  ]
 }

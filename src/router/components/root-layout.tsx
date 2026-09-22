@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router'
 
-import Footer from '@/components/footer'
-import Header from '@/components/header'
-import Layout from '@/components/layout'
+import Footer from '@/components/layouts/footer'
+import Header from '@/components/layouts/header'
+import Layout from '@/components/layouts/layout'
 
 import { ScrollToTop } from './scroll-to-top'
 

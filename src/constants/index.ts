@@ -7,3 +7,4 @@ const packageMeta = JSON.parse(packageJsonRaw) as {
 export const APP_VERSION = packageMeta.version ?? '0.0.0'
 
 export const GITHUB_LINK = 'https://github.com/chanyuxi'
+export const TELEGRAM_LINK = 'https://t.me/chanyuxi'

@@ -6,5 +6,15 @@
     {
       "path": "./tsconfig.build.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.cache/tsconfig.tsbuildinfo",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "files": []
 }

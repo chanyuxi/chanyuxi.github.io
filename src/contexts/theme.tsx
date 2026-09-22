@@ -2,31 +2,29 @@ import {
   createContext,
   type PropsWithChildren,
   use,
+  useCallback,
   useLayoutEffect,
   useMemo,
   useState,
 } from 'react'
 
+type Theme = 'dark' | 'light'
+
 interface ThemeContextType {
-  theme: string
+  theme: Theme
   toggleTheme: () => void
 }
 
-const ThemeContext = createContext<ThemeContextType>({
-  theme: 'light',
-  toggleTheme: () => {},
-})
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider(props: PropsWithChildren) {
   const { children } = props
 
   const [theme, setTheme] = useState(getInitialTheme)
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
-  }
+  const toggleTheme = useCallback(() => {
+    setTheme(currentTheme => currentTheme === 'light' ? 'dark' : 'light')
+  }, [])
 
   const contextValue = useMemo<ThemeContextType>(
     () => ({
@@ -38,7 +36,10 @@ export function ThemeProvider(props: PropsWithChildren) {
 
   useLayoutEffect(() => {
     const root = document.documentElement
-    root.className = theme
+    root.classList.toggle('dark', theme === 'dark')
+    root.classList.toggle('light', theme === 'light')
+    root.style.colorScheme = theme
+    localStorage.setItem('theme', theme)
   }, [theme])
 
   return <ThemeContext value={contextValue}>{children}</ThemeContext>
@@ -52,7 +53,15 @@ export function useTheme() {
   return context
 }
 
-function getInitialTheme() {
+function getInitialTheme(): Theme {
+  const root = document.documentElement
+  if (root.classList.contains('dark')) {
+    return 'dark'
+  }
+  if (root.classList.contains('light')) {
+    return 'light'
+  }
+
   const saved = localStorage.getItem('theme')
   if (saved === 'light' || saved === 'dark') {
     return saved

@@ -28,10 +28,10 @@ export default function PoetryCatalog() {
     >
       <div className="base-container max-w-4xl">
         <motion.header
-          className="my-8 border-b border-black/8 pb-8 text-center dark:border-white/10"
+          className="my-8 border-b border-hairline pb-8 text-center dark:border-white/10"
           variants={itemVariants}
         >
-          <p className="mb-3 text-[0.65rem] font-medium tracking-[0.42em] text-zinc-400 uppercase dark:text-zinc-500">
+          <p className="mb-3 text-xs font-medium tracking-poetry text-zinc-400 uppercase dark:text-zinc-500">
             {poetryCatalog.subtitle}
           </p>
           <h1 className="font-mashanzheng text-3xl tracking-wide sm:text-4xl">
@@ -50,12 +50,12 @@ export default function PoetryCatalog() {
                     whileHover={shouldReduceMotion ? undefined : { x: 6 }}
                   >
                     <Link
-                      className="font-mashanzheng group block border-b border-black/8 py-5 sm:py-6 dark:border-white/10"
+                      className="font-mashanzheng group block border-b border-hairline py-5 sm:py-6 dark:border-white/10"
                       to={post.routePath}
                     >
                       <div className="flex items-start justify-between gap-5">
                         <div className="min-w-0">
-                          <div className="text-2xl font-medium transition-colors duration-500 group-hover:text-blue-600 dark:group-hover:text-blue-300">
+                          <div className="text-2xl font-medium transition-colors duration-500 group-hover:text-muted-foreground dark:group-hover:text-stone-300">
                             {post.title}
                           </div>
                           {post.description
@@ -66,7 +66,7 @@ export default function PoetryCatalog() {
                               )
                             : null}
                         </div>
-                        <span className="pt-1 font-bitter text-xs text-black/25 uppercase dark:text-white/25">
+                        <span className="pt-1 font-sans text-xs text-black/25 uppercase dark:text-white/25">
                           {String(index + 1).padStart(2, '0')}
                         </span>
                       </div>

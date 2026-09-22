@@ -1,3 +1,17 @@
 @utility base-container {
-  @apply mx-auto w-full px-6 md:w-150 lg:w-200 xl:w-260;
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+}
+
+@utility collapsible-panel-height {
+  height: var(--collapsible-panel-height);
+}
+
+@keyframes hero-card-enter {
+  from {
+    transform: translateX(0) rotate(0);
+  }
+
+  to {
+    transform: translateX(var(--hero-card-translate-x)) rotate(var(--hero-card-rotate));
+  }
 }

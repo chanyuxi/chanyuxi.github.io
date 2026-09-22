@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "composite": true,
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -10,8 +9,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "emitDeclarationOnly": true,
-    "noEmit": false,
     "skipLibCheck": true,
     "noUncheckedSideEffectImports": true
   }

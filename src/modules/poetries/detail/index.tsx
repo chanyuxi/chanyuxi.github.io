@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react'
 import { Navigate, useParams } from 'react-router'
 
-import AppMarkdown from '@/components/app-markdown'
+import AppMarkdown from '@/components/common/app-markdown'
 
 import { getPoetryPost } from '../manifest'
 import { createPoetryItemVariants, createPoetryPageVariants } from '../motion'
@@ -15,7 +15,7 @@ export default function PoetryDetail() {
   const itemVariants = createPoetryItemVariants(shouldReduceMotion)
 
   if (!post) {
-    return <Navigate replace to="/poetry/entrance" />
+    return <Navigate replace to="/poetries/entrance" />
   }
 
   return (

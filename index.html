@@ -7,6 +7,23 @@
   <meta name="description" content="Hello, my name is Chanyuxi. Nice to meet you">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <title>CHANYUXI - Welcome to my blog</title>
+  <script>
+    (() => {
+      const root = document.documentElement
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+
+      try {
+        const savedTheme = localStorage.getItem('theme')
+        if (savedTheme === 'dark' || savedTheme === 'light') {
+          theme = savedTheme
+        }
+      }
+      catch {}
+
+      root.classList.add(theme)
+      root.style.colorScheme = theme
+    })()
+  </script>
   <script type="module" src="./src/main.tsx"></script>
 </head>
 

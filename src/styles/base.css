@@ -1,17 +1,53 @@
 @layer base {
   * {
-    color: var(--color-black);
+    @apply border-border outline-ring/50;
+    scrollbar-color: var(--color-muted-soft) transparent;
+    scrollbar-width: thin;
+  }
 
-    @variant dark {
-      color: var(--color-slate-50);
-    }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-muted-soft);
+    background-clip: padding-box;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--color-muted-foreground);
   }
 
   body {
-    background: var(--color-stone-50);
+    color: var(--color-foreground);
+    background: var(--color-background);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
 
     @variant dark {
-      background: var(--color-neutral-800);
+      color: var(--color-foreground);
+      background: var(--color-background);
     }
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    color: var(--color-ink);
+
+    @variant dark {
+      color: var(--color-stone-50);
+    }
+  }
+
+  ::selection {
+    color: var(--color-ink);
+    background: rgb(167 229 211 / 55%);
   }
 }

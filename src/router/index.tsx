@@ -28,6 +28,10 @@ const router = createBrowserRouter([
         path: 'introduction',
       },
       {
+        lazy: lazyRoute(() => import('@/modules/changelog')),
+        path: 'changelog',
+      },
+      {
         children: [
           {
             lazy: lazyRoute(() => import('../modules/poetries/entrance')),

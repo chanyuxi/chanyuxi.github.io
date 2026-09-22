@@ -1,17 +1,25 @@
+import heroAvatar from './assets/hero-avatar-320.webp'
+import heroAvatarLarge from './assets/hero-avatar-480.webp'
+
+const heroAvatarSrcSet = `${heroAvatar} 320w, ${heroAvatarLarge} 480w`
+
 export const heroImages = [
   {
     animate: { rotate: -8, translateX: -16 },
     id: 1,
-    src: '/images/bc603030dabf48723ece562bc43ad844.png',
+    src: heroAvatar,
+    srcSet: heroAvatarSrcSet,
   },
   {
     animate: { rotate: -0, translateX: 0 },
     id: 2,
-    src: '/images/bc603030dabf48723ece562bc43ad844.png',
+    src: heroAvatar,
+    srcSet: heroAvatarSrcSet,
   },
   {
     animate: { rotate: 8, translateX: 16 },
     id: 3,
-    src: '/images/bc603030dabf48723ece562bc43ad844.png',
+    src: heroAvatar,
+    srcSet: heroAvatarSrcSet,
   },
 ]

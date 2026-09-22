@@ -1,5 +1,112 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-skill-label: var(--skill-label);
+  --color-skill-summary: var(--skill-summary);
+  --color-skill-badge: var(--skill-badge);
+  --color-skill-badge-foreground: var(--skill-badge-foreground);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
 @theme {
-  --font-bitter: 'bitter', sans-serif;
+  --font-sans: 'Google Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  --tracking-display: -0.04em;
+  --tracking-display-hero: -0.045em;
+  --tracking-section: -0.035em;
+  --tracking-label: 0.16em;
+  --tracking-navigation: 0.18em;
+  --tracking-eyebrow: 0.2em;
+  --tracking-poetry: 0.42em;
+
+  --grid-template-columns-hero: 1.2fr 0.8fr;
+  --grid-template-columns-section: 0.55fr 1.45fr;
+  --grid-template-columns-experience-meta: 11rem 1fr;
+  --transition-property-collapsible: height, opacity;
+
+  --color-canvas: #f5f5f5;
+  --color-canvas-soft: #fafafa;
+  --color-ink: #0c0a09;
+  --color-body: #4e4e4e;
+  --color-muted-soft: #a8a29e;
+  --color-surface: #f0efed;
+  --color-hairline: #e7e5e4;
+  --color-hairline-strong: #d6d3d1;
+  --color-dark-surface: #0c0a09;
+  --color-dark-elevated: #1c1917;
+  --shadow-soft: 0 4px 16px rgb(12 10 9 / 4%);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: #f5f5f5;
+  --foreground: #4e4e4e;
+  --card: #ffffff;
+  --card-foreground: #4e4e4e;
+  --popover: #ffffff;
+  --popover-foreground: #4e4e4e;
+  --primary: #292524;
+  --primary-foreground: #fafafa;
+  --secondary: #f0efed;
+  --secondary-foreground: #292524;
+  --muted: #f0efed;
+  --muted-foreground: #777169;
+  --accent: #f0efed;
+  --accent-foreground: #0c0a09;
+  --destructive: #dc2626;
+  --border: #e7e5e4;
+  --input: #d6d3d1;
+  --ring: #a8a29e;
+  --skill-label: #0c0a09;
+  --skill-summary: #777169;
+  --skill-badge: #ffffff;
+  --skill-badge-foreground: #292524;
+}
+
+.dark {
+  --background: #0c0a09;
+  --foreground: #e7e5e4;
+  --card: #1c1917;
+  --card-foreground: #e7e5e4;
+  --popover: #1c1917;
+  --popover-foreground: #e7e5e4;
+  --primary: #fafafa;
+  --primary-foreground: #0c0a09;
+  --secondary: #292524;
+  --secondary-foreground: #fafafa;
+  --muted: #292524;
+  --muted-foreground: #a8a29e;
+  --accent: #292524;
+  --accent-foreground: #fafafa;
+  --destructive: #f87171;
+  --border: rgb(255 255 255 / 10%);
+  --input: rgb(255 255 255 / 15%);
+  --ring: #78716c;
+  --skill-label: #f5f5f5;
+  --skill-summary: #a8a29e;
+  --skill-badge: #292524;
+  --skill-badge-foreground: #fafafa;
 }

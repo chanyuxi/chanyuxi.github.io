@@ -34,7 +34,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: .node-version
           cache: pnpm
 
       # Prepare the GitHub Pages environment and inject related metadata.
@@ -45,6 +45,12 @@ jobs:
         env:
           HUSKY: 0
         run: pnpm install --frozen-lockfile
+
+      - name: Lint source
+        run: pnpm run lint
+
+      - name: Type-check source
+        run: pnpm run typecheck
 
       - name: Build site
         run: pnpm run build
