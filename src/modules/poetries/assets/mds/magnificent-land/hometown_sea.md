@@ -1,6 +1,6 @@
 ---
 title: 乡海
-description: 海的尽头是故乡
+description: 海的尽头是乡
 order: 9
 ---
 

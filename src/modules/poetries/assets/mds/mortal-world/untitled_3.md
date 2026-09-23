@@ -1,6 +1,6 @@
 ---
 title: 无题
-description: 酒醒，又是一秋
+description: 酒醒又是一秋
 order: 8
 ---
 

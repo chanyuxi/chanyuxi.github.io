@@ -1,6 +1,6 @@
 ---
 title: 老屋
-description: 阿伯还在的夏天
+description: 逝去的夏天
 order: 5
 ---
 
