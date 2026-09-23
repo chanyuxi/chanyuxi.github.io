@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Badge } from '@/components/ui/badge'
 import {
   Collapsible,
@@ -34,6 +36,12 @@ const skills = [
 ]
 
 export function SkillsSection() {
+  const [active, setActive] = useState<null | string>(null)
+
+  const handleOpenChange = (label: string) => {
+    setActive(active === label ? null : label)
+  }
+
   return (
     <section className="bg-canvas-soft py-14 sm:py-18 lg:py-24 dark:bg-dark-elevated">
       <div className="base-container">
@@ -52,6 +60,8 @@ export function SkillsSection() {
               <Collapsible
                 className="py-5"
                 key={group.label}
+                onOpenChange={() => handleOpenChange(group.label)}
+                open={active === group.label}
               >
                 <CollapsibleTrigger className="w-full cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4">
                   <h3 className="font-medium text-skill-label">

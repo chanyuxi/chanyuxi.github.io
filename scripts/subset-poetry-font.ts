@@ -1,3 +1,7 @@
+// Since Chinese font files are excessively large, this script scans the project
+// for all Chinese characters actually used and generates a font subset to accelerate
+// webpage loading speeds.
+
 import {
   mkdir,
   readdir,
@@ -18,20 +22,16 @@ type SubsetFont = (
 const require = createRequire(import.meta.url)
 const subsetFont = require('subset-font') as SubsetFont
 
-const sourceFontPath = fileURLToPath(
-  new URL('./assets/MaShanZheng-Regular.ttf', import.meta.url),
-)
-const outputFontPath = fileURLToPath(
-  new URL('../public/fonts/MaShanZheng-Regular.woff2', import.meta.url),
-)
+const d = (path: string) => fileURLToPath(new URL(path, import.meta.url))
+
+const sourceFontPath = d('./assets/MaShanZheng-Regular.ttf')
+const outputFontPath = d('../public/fonts/MaShanZheng-Regular.woff2')
+
 const paths = [
-  fileURLToPath(
-    new URL('../src/modules/poetries/assets/mds/', import.meta.url),
-  ),
-  fileURLToPath(
-    new URL('../src/modules/poetries/constants.ts', import.meta.url),
-  ),
+  d('../src/modules/poetries/assets/mds/'),
+  d('../src/modules/poetries/constants.ts'),
 ]
+
 const commonPunctuation = '，。！？；：、（）「」『』【】《》〈〉“”‘’…——·～'
 
 const poetryText = `${(await Promise.all(paths.map(readText))).join('\n')}${commonPunctuation}`

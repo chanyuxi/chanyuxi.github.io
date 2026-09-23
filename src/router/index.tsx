@@ -32,6 +32,30 @@ const router = createBrowserRouter([
         path: 'changelog',
       },
       {
+        element: <Navigate replace to="/under-development" />,
+        path: 'product',
+      },
+      {
+        element: <Navigate replace to="/under-development" />,
+        path: 'post/entrance',
+      },
+      {
+        element: <Navigate replace to="/under-development" />,
+        path: 'life',
+      },
+      {
+        element: <Navigate replace to="/under-development" />,
+        path: 'cooperation',
+      },
+      {
+        lazy: lazyRoute(() => import('@/modules/platform/under-development')),
+        path: 'under-development',
+      },
+      {
+        lazy: lazyRoute(() => import('@/modules/platform/not-found')),
+        path: '404',
+      },
+      {
         children: [
           {
             lazy: lazyRoute(() => import('../modules/poetries/entrance')),
@@ -50,7 +74,7 @@ const router = createBrowserRouter([
         path: 'poetries',
       },
       {
-        element: <Navigate replace to="/" />,
+        element: <Navigate replace to="/404" />,
         path: '*',
       },
     ],

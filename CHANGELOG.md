@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.4.2 - 2026-09-23
+
+### Added
+
+- More poems introduced, now being perfected.
+
+## 0.4.1 - 2026-09-22
+
+### Changed
+
+- Significantly improve the loading speed.
+
+### Added
+
+- Introduced friendly tips page.
+
 ## 0.4.0 - 2026-09-21
 
 ### Changed

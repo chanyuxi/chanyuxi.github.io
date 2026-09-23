@@ -1,6 +1,6 @@
 ---
 title: 程
-description: 山一程，水一程，身向榆关那畔行
+description: 一程山水一程歌
 order: 3
 ---
 
