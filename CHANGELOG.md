@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.0 - 2026-09-24
+
+### Added
+
+- No more static web page.
+
+### Changed
+
+- Add toasts and centralize error feedback.
+- Improve accessibility, assets, and build checks.
+
 ## 0.4.2 - 2026-09-23
 
 ### Added
