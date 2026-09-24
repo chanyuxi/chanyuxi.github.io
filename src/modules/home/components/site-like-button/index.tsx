@@ -81,7 +81,7 @@ export function SiteLikeButton() {
                 <span className="sr-only">Loading likes</span>
               </>
             )
-          : <span className="translate-y-0.5">{count ?? '0'}</span>}
+          : <span className="-translate-y-px sm:translate-y-0">{count ?? '0'}</span>}
       </span>
       <FlyingHearts hearts={hearts} onComplete={removeHeart} />
     </Button>
