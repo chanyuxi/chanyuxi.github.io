@@ -4,3 +4,7 @@ dist
 tsconfig.*.tsbuildinfo
 .vercel
 .env*.local
+.env*
+!.env.example
+
+PROMPT.md

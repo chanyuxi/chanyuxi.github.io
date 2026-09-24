@@ -13,6 +13,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@shared/*": [
+        "./shared/*"
       ]
     },
     "declaration": true,
@@ -20,6 +23,9 @@
     "outDir": "./node_modules/.cache/types/app"
   },
   "include": [
+    "api",
+    "server",
+    "shared",
     "src",
     "node_modules/vite/client.d.ts",
     "src/vite.env.d.ts"

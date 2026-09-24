@@ -53,11 +53,11 @@ export function ExperienceSection() {
                 key={item.company}
               >
                 <CollapsibleTrigger className="w-full cursor-pointer py-7 text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4">
-                  <div className="grid gap-3 sm:grid-cols-experience-meta sm:gap-8">
-                    <p className="font-mono text-xs leading-7 text-muted-foreground">
+                  <div className="grid gap-3 sm:grid-cols-experience-meta sm:gap-8 md:grid-cols-[minmax(0,1fr)_11rem]">
+                    <p className="font-mono text-xs leading-7 text-muted-foreground md:order-2 md:text-right">
                       {item.period}
                     </p>
-                    <div>
+                    <div className="md:order-1">
                       <h3 className="text-lg font-medium text-ink dark:text-stone-100">
                         {item.company}
                       </h3>
@@ -70,7 +70,7 @@ export function ExperienceSection() {
                 </CollapsibleTrigger>
 
                 <CollapsibleContent className="collapsible-panel-height overflow-hidden transition-collapsible duration-300 data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0">
-                  <div className="pb-7 sm:ml-52">
+                  <div className="pb-7 sm:ml-52 md:ml-0">
                     <p className="text-xs font-medium tracking-label text-muted-soft uppercase dark:text-stone-500">
                       Key contributions
                     </p>

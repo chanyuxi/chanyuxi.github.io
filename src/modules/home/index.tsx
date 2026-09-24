@@ -1,9 +1,10 @@
-import { Github, Send } from 'lucide-react'
+import { Github } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { GITHUB_LINK } from '@/constants'
+import { GITHUB_LINK } from '@/constant'
 
 import { HeroImageCard } from './components/hero-image-card'
+import { SiteLikeButton } from './components/site-like-button'
 import { heroImages } from './constants'
 
 export default function Home() {
@@ -38,11 +39,8 @@ export default function Home() {
               </h1>
             </div>
 
-            <div className="flex items-center justify-end gap-4 xl:justify-center">
-              <Button type="button" variant="outline">
-                <Send data-icon="inline-start" size={16} />
-                <span>Contact me</span>
-              </Button>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 xl:justify-center">
+              <SiteLikeButton />
               <Button onClick={handleGithubClick} type="button">
                 <Github data-icon="inline-start" size={16} />
                 <span>Github</span>

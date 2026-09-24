@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { APP_VERSION, GITHUB_LINK, QRCODE_RAW, TELEGRAM_LINK } from '@/constants'
+import { APP_VERSION, GITHUB_LINK, QRCODE_RAW, TELEGRAM_LINK } from '@/constant'
 
 interface FooterGroup {
   items: FooterItem[]
