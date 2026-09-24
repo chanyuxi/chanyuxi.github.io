@@ -69,7 +69,7 @@ export function SiteLikeButton() {
       />
       <span
         aria-live="polite"
-        className="inline-flex min-w-4 justify-end text-right text-xs text-muted-foreground tabular-nums dark:text-stone-400"
+        className="inline-flex min-w-4 justify-end text-right text-sm text-muted-foreground tabular-nums dark:text-stone-400"
       >
         {isLoading
           ? (
@@ -81,7 +81,7 @@ export function SiteLikeButton() {
                 <span className="sr-only">Loading likes</span>
               </>
             )
-          : count ?? '0'}
+          : <span className="translate-y-0.5">{count ?? '0'}</span>}
       </span>
       <FlyingHearts hearts={hearts} onComplete={removeHeart} />
     </Button>
