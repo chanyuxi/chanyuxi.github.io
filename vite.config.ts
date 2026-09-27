@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [markdownMatterPlugin(), react(), tailwindcss()],
+  // TODO: Consider to update vite version to 8 from 7 then we can use resolve.tsconfigPaths feature.
   resolve: {
     alias: {
       '@': '/src',
