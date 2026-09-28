@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from 'motion/react'
 
 import { buttonVariants } from '@/components/ui/button'
 
-import avatar from '../../assets/avatar.png'
+import avatar from '../../assets/avatar.webp'
 
 export function HeroSection() {
   const shouldReduceMotion = useReducedMotion()
@@ -57,7 +57,9 @@ export function HeroSection() {
             alt="Portrait of Yongzheng Chen"
             className="aspect-4/3 w-full rounded-2xl object-cover object-top"
             decoding="async"
+            height={518}
             src={avatar}
+            width={518}
           />
           <div className="mt-5 grid gap-4 pb-5 text-sm sm:grid-cols-2">
             <div>

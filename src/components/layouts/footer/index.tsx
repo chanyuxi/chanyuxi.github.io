@@ -1,4 +1,4 @@
-import { QRCodeSVG } from 'qrcode.react'
+import { lazy, Suspense } from 'react'
 import { Link } from 'react-router'
 
 import {
@@ -21,6 +21,8 @@ interface FooterItem {
 }
 
 type QrCodeKey = keyof typeof QRCODE_RAW
+
+const QrCode = lazy(() => import('@/components/common/qr-code'))
 
 const footerGroups: FooterGroup[] = [
   {
@@ -173,13 +175,9 @@ function renderLink(
             {' '}
             QR code
           </DialogTitle>
-          <QRCodeSVG
-            bgColor="#ffffff"
-            className="block"
-            fgColor="#000000"
-            size={144}
-            value={QRCODE_RAW[qrcode]}
-          />
+          <Suspense fallback={<div className="size-36 bg-white" />}>
+            <QrCode value={QRCODE_RAW[qrcode]} />
+          </Suspense>
         </DialogContent>
       </Dialog>
     )

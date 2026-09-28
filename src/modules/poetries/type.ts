@@ -1,3 +1,5 @@
+import type { CompiledMarkdownNode } from '@/components/common/compiled-markdown'
+
 export interface PoetryCatalog {
   alt: string
   image: string
@@ -21,9 +23,9 @@ export interface PoetryFrontmatter {
 
 export interface PoetryPost {
   catalog: string
-  content: string
   description: null | string
   id: string
+  loadContent: () => Promise<CompiledMarkdownNode[]>
   order: number
   routePath: string
   slug: string

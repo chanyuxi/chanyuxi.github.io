@@ -1,21 +1,45 @@
+import { readFileSync } from 'node:fs'
+
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import { cn as cnCompiler } from 'cn/vite'
 import { defineConfig } from 'vite'
 
 import { markdownMatterPlugin } from './build/plugins/markdown-matter'
 
+const { version } = JSON.parse(
+  readFileSync(new URL('./package.json', import.meta.url), 'utf8'),
+) as { version: string }
+
 export default defineConfig(({ mode }) => ({
   build: {
-    minify: mode === 'development' ? false : 'terser',
-    sourcemap: mode === 'development',
-    terserOptions: {
-      compress: {
-        drop_console: true,
+    minify: mode === 'development' ? false : 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'data-vendor': ['@tanstack/react-query', 'axios', 'zod'],
+          'react-vendor': ['react', 'react-dom', 'react-router'],
+          'ui-vendor': ['@base-ui/react', 'class-variance-authority', 'cn/engine', 'lucide-react'],
+        },
       },
     },
+    sourcemap: mode === 'development',
   },
-  plugins: [markdownMatterPlugin(), react(), tailwindcss()],
-  // TODO: Consider to update vite version to 8 from 7 then we can use resolve.tsconfigPaths feature.
+  define: {
+    __APP_VERSION__: JSON.stringify(version),
+  },
+  esbuild: {
+    drop: mode === 'development' ? [] : ['console'],
+  },
+  plugins: [
+    cnCompiler({
+      content: ['src/**/*.{ts,tsx}'],
+      out: 'src/libs/cn-tables.ts',
+    }),
+    markdownMatterPlugin(),
+    react(),
+    tailwindcss(),
+  ],
   resolve: {
     alias: {
       '@': '/src',

@@ -62,7 +62,11 @@ const router = createBrowserRouter([
             path: 'entrance',
           },
           {
-            lazy: lazyRoute(() => import('../modules/poetries/detail')),
+            lazy: async () => {
+              const { default: Component, loader } = await import('../modules/poetries/detail')
+
+              return { Component, loader }
+            },
             path: ':catalog/:slug',
           },
           {

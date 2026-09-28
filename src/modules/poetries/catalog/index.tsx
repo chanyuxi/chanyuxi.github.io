@@ -34,7 +34,7 @@ export default function PoetryCatalog() {
           <p className="mb-3 text-xs font-medium tracking-poetry text-zinc-400 uppercase dark:text-zinc-500">
             {poetryCatalog.subtitle}
           </p>
-          <h1 className="font-mashanzheng text-3xl tracking-wide sm:text-4xl">
+          <h1 className="font-mashanzheng-display text-3xl tracking-wide sm:text-4xl">
             {poetryCatalog.title}
           </h1>
         </motion.header>
@@ -50,7 +50,7 @@ export default function PoetryCatalog() {
                     whileHover={shouldReduceMotion ? undefined : { x: 6 }}
                   >
                     <Link
-                      className="font-mashanzheng group block border-b border-hairline py-5 sm:py-6 dark:border-white/10"
+                      className="font-mashanzheng-display group block border-b border-hairline py-5 sm:py-6 dark:border-white/10"
                       to={post.routePath}
                     >
                       <div className="flex items-start justify-between gap-5">

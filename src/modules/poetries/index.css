@@ -1,11 +1,11 @@
 @font-face {
-  src: url('/fonts/MaShanZheng-Regular.woff2') format('woff2');
-  font-family: 'mashanzheng';
+  src: url('./assets/fonts/MaShanZheng-Display.woff2') format('woff2');
+  font-family: 'mashanzheng-display';
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-.font-mashanzheng {
-  font-family: 'mashanzheng', sans-serif;
+.font-mashanzheng-display {
+  font-family: 'mashanzheng-display', sans-serif;
 }

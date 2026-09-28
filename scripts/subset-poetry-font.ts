@@ -2,16 +2,12 @@
 // for all Chinese characters actually used and generates a font subset to accelerate
 // webpage loading speeds.
 
-import {
-  mkdir,
-  readdir,
-  readFile,
-  stat,
-  writeFile,
-} from 'node:fs/promises'
+import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import { createRequire } from 'node:module'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+
+import matter from 'gray-matter'
 
 type SubsetFont = (
   buffer: Buffer,
@@ -24,32 +20,46 @@ const subsetFont = require('subset-font') as SubsetFont
 
 const d = (path: string) => fileURLToPath(new URL(path, import.meta.url))
 
-const sourceFontPath = d('./assets/MaShanZheng-Regular.ttf')
-const outputFontPath = d('../public/fonts/MaShanZheng-Regular.woff2')
+const sourceFontPath /****/ = d('./assets/MaShanZheng-Regular.ttf')
+const outputFontPath /****/ = d('../src/modules/poetries/assets/fonts/MaShanZheng-Regular.woff2')
+const displayFontPath /***/ = d('../src/modules/poetries/assets/fonts/MaShanZheng-Display.woff2')
+const markdownPath /******/ = d('../src/modules/poetries/assets/mds/')
+const constantsPath /*****/ = d('../src/modules/poetries/constants.ts')
 
 const paths = [
-  d('../src/modules/poetries/assets/mds/'),
-  d('../src/modules/poetries/constants.ts'),
+  markdownPath,
+  constantsPath,
 ]
 
 const commonPunctuation = '，。！？；：、（）「」『』【】《》〈〉“”‘’…——·～'
 
 const poetryText = `${(await Promise.all(paths.map(readText))).join('\n')}${commonPunctuation}`
+const displayText = `${await readText(constantsPath)}${await readMarkdownMetadataText(markdownPath)}${commonPunctuation}`
 
-if (!poetryText.trim()) {
+if (!poetryText.trim() || !displayText.trim()) {
   throw new Error('No poetry text found for font subsetting.')
 }
 
+const sourceFont = await readFile(sourceFontPath)
 const subset = await subsetFont(
-  await readFile(sourceFontPath),
+  sourceFont,
   poetryText,
+  { targetFormat: 'woff2' },
+)
+const displaySubset = await subsetFont(
+  sourceFont,
+  displayText,
   { targetFormat: 'woff2' },
 )
 
 await mkdir(dirname(outputFontPath), { recursive: true })
-await writeFile(outputFontPath, subset)
+await Promise.all([
+  writeFile(outputFontPath, subset),
+  writeFile(displayFontPath, displaySubset),
+])
 
 console.log(`Wrote ${outputFontPath} (${subset.byteLength} bytes).`)
+console.log(`Wrote ${displayFontPath} (${displaySubset.byteLength} bytes).`)
 
 async function readDirectoryText(directory: string): Promise<string> {
   const entries = await readdir(directory, { withFileTypes: true })
@@ -70,6 +80,31 @@ async function readDirectoryText(directory: string): Promise<string> {
   )
 
   return contents.join('\n')
+}
+
+async function readMarkdownMetadataText(directory: string): Promise<string> {
+  const entries = await readdir(directory, { withFileTypes: true })
+  const contents = await Promise.all(
+    entries.map(async (entry) => {
+      const entryPath = join(directory, entry.name)
+
+      if (entry.isDirectory()) {
+        return readMarkdownMetadataText(entryPath)
+      }
+
+      if (!entry.isFile() || !entry.name.endsWith('.md')) {
+        return ''
+      }
+
+      const { data } = matter(await readFile(entryPath, 'utf8'))
+
+      return Object.values(data).join('')
+    }),
+  )
+
+  return [...contents.join('')]
+    .filter(character => /\p{Script=Han}/u.test(character))
+    .join('')
 }
 
 async function readText(path: string): Promise<string> {

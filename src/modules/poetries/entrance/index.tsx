@@ -52,7 +52,7 @@ export default function PoetryEntrance() {
                   <div className="absolute inset-0 bg-white/0 transition duration-700 group-hover:bg-white/5" />
 
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-white">
-                    <h2 className="font-mashanzheng text-3xl tracking-wide sm:text-4xl md:text-5xl">
+                    <h2 className="font-mashanzheng-display text-3xl tracking-wide sm:text-4xl md:text-5xl">
                       {catalog.title}
                     </h2>
                     <p className="text-xs font-medium tracking-wider text-white/80 uppercase sm:text-xs">

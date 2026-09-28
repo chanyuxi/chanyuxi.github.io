@@ -1,19 +1,4 @@
-import packageJsonRaw from '../../package.json?raw'
-
-function getAppVersion() {
-  try {
-    const packageMeta = JSON.parse(packageJsonRaw) as {
-      version?: string
-    }
-
-    return packageMeta.version ?? 'unreachable'
-  }
-  catch {
-    return 'unreachable'
-  }
-}
-
-export const APP_VERSION = getAppVersion()
+export const APP_VERSION = __APP_VERSION__
 
 // Shared link
 export const GITHUB_LINK = 'https://github.com/chanyuxi'

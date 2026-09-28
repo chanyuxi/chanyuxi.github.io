@@ -3,26 +3,26 @@ import type {
   PoetryFrontmatter,
   PoetryPost,
 } from './type'
+import type { CompiledMarkdownNode } from '@/components/common/compiled-markdown'
 
 import { POETRY_CATEGORIES } from './constants'
 
-type PoetryMarkdownModule = {
-  content: string
-  frontmatter: PoetryFrontmatter
-}
-
-// Eagerly load every poem so the catalog is fully resolved at module init.
-const rawPosts = import.meta.glob<PoetryMarkdownModule>(
+const rawPostFrontmatters = import.meta.glob<PoetryFrontmatter>(
   './assets/mds/**/*.md',
-  { eager: true, import: 'default' },
+  { eager: true, import: 'default', query: '?frontmatter' },
+)
+
+const rawPostContents = import.meta.glob<CompiledMarkdownNode[]>(
+  './assets/mds/**/*.md',
+  { import: 'default', query: '?content' },
 )
 
 const catalogOrderMap = new Map(
   POETRY_CATEGORIES.map(catalog => [catalog.slug, catalog.order]),
 )
 
-export const poetryPosts: PoetryPost[] = Object.entries(rawPosts)
-  .map(([path, module]) => createPost(path, module))
+export const poetryPosts: PoetryPost[] = Object.entries(rawPostFrontmatters)
+  .map(([path, frontmatter]) => createPost(path, frontmatter))
   .filter((post): post is PoetryPost => post !== null)
   .sort(comparePosts)
 
@@ -49,31 +49,28 @@ function comparePosts(a: PoetryPost, b: PoetryPost) {
   return aOrder - bOrder || a.order - b.order || a.title.localeCompare(b.title)
 }
 
-function createPost(
-  path: string,
-  { content, frontmatter }: PoetryMarkdownModule,
-): null | PoetryPost {
+function createPost(path: string, frontmatter: PoetryFrontmatter): null | PoetryPost {
   if (frontmatter.draft) {
     return null
   }
 
   const { catalog, slug } = parsePath(path)
+  const loadContent = rawPostContents[path]
+
+  if (!loadContent) {
+    throw new Error(`Missing poetry content loader: ${path}`)
+  }
 
   return {
     catalog,
-    content,
     description: frontmatter.description ?? null,
     id: `${catalog}/${slug}`,
+    loadContent,
     order: frontmatter.order ?? 0,
     routePath: `/poetries/${catalog}/${slug}`,
     slug,
-    title: frontmatter.title ?? extractHeading(content) ?? humanizeSlug(slug),
+    title: frontmatter.title ?? humanizeSlug(slug),
   }
-}
-
-// Fallback title: first H1 in the markdown body.
-function extractHeading(content: string) {
-  return content.match(/^#\s+(.+)$/m)?.[1]?.trim()
 }
 
 // Last-resort title: "fair-maiden_intro" -> "Fair Maiden Intro".
