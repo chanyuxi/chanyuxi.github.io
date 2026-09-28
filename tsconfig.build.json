@@ -3,9 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.cache/tsconfig.build.tsbuildinfo",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "./node_modules/.cache/types/build"
