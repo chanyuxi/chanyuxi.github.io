@@ -1,6 +1,6 @@
-import { createSiteLikesHandlers } from '../server/site-likes/handlers.js'
-import { createSiteLikesRepository } from '../server/site-likes/repository.js'
-import { createSiteLikesService } from '../server/site-likes/service.js'
+import { createSiteLikesHandlers } from '../server/site-likes/handlers'
+import { createSiteLikesRepository } from '../server/site-likes/repository'
+import { createSiteLikesService } from '../server/site-likes/service'
 
 const repository = createSiteLikesRepository()
 const service = createSiteLikesService(repository)

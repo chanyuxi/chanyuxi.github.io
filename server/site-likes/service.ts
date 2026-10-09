@@ -1,5 +1,5 @@
-import type { SiteLikes } from '../../shared/contracts/site-likes.js'
-import type { SiteLikesRepository } from './repository.js'
+import type { SiteLikes } from '../../shared/contracts/site-likes'
+import type { SiteLikesRepository } from './repository'
 
 export interface SiteLikesService {
   getSiteLikes: () => Promise<SiteLikes>

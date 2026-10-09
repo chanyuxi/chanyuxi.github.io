@@ -1,16 +1,16 @@
-import type { ApiLogger } from '../http.js'
-import type { SiteLikesService } from './service.js'
+import type { ApiLogger } from '../http'
+import type { SiteLikesService } from './service'
 
 import {
   incrementSiteLikesRequestSchema,
   MAX_SITE_LIKES_INCREMENT,
   SiteLikesErrorCode,
-} from '../../shared/contracts/site-likes.js'
+} from '../../shared/contracts/site-likes'
 import {
   defineApiHandler,
   parseJsonBody,
   successResponse,
-} from '../http.js'
+} from '../http'
 
 const invalidIncrementMessage
   = `increment must be an integer between 1 and ${MAX_SITE_LIKES_INCREMENT}`
