@@ -7,7 +7,12 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible'
 import { Progress } from '@/components/ui/progress'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import { useBreakpoint } from '@/hooks/use-breakpoint'
 
 interface Skill {
   details: (SkillDetail | string)[]
@@ -50,16 +55,19 @@ const skills: Skill[] = [
       },
       {
         completedProjects: '30+',
-        highlights: ['Familiar with the source code', 'Proficient in using hooks'],
+        highlights: [
+          'Familiar with the source code',
+          'Proficient in using hooks',
+        ],
         name: 'React',
-        proficiency: 80,
+        proficiency: 90,
         usageTime: 4,
       },
       {
         completedProjects: '5+',
         highlights: ['With expo'],
         name: 'React Native',
-        proficiency: 60,
+        proficiency: 70,
         usageTime: 1,
       },
       'Uniapp',
@@ -69,25 +77,12 @@ const skills: Skill[] = [
     label: 'Frameworks',
   },
   {
-    details: [
-      'Vuex',
-      'Pinia',
-      'Redux',
-      'Axios',
-      'Zod',
-      'Zustand',
-    ],
+    details: ['Vuex', 'Pinia', 'Redux', 'Axios', 'Zod', 'Zustand'],
     items: 'Vuex · Pinia · Redux · Axios',
     label: 'State & data',
   },
   {
-    details: [
-      'Vite',
-      'Webpack',
-      'Rollup',
-      'Esbuild',
-      'ESLint',
-    ],
+    details: ['Vite', 'Webpack', 'Rollup', 'Esbuild', 'ESLint'],
     items: 'Vite · Webpack · Rollup · Esbuild · ESLint',
     label: 'Tooling',
   },
@@ -105,10 +100,19 @@ const skills: Skill[] = [
 ]
 
 export function SkillsSection() {
-  const [active, setActive] = useState<null | string>(null)
+  const bp = useBreakpoint()
 
-  const handleOpenChange = (label: string, open: boolean) => {
-    setActive(current => open ? label : current === label ? null : current)
+  const [actives, setActives] = useState<number[]>([])
+
+  const handleOpenChange = (index: number) => {
+    let indexGroup = []
+    if (bp === 'base') {
+      indexGroup = [index]
+    }
+    else {
+      indexGroup = index % 2 === 0 ? [index, index + 1] : [index - 1, index]
+    }
+    setActives(actives.includes(index) ? [] : indexGroup)
   }
 
   return (
@@ -125,12 +129,12 @@ export function SkillsSection() {
           </div>
 
           <div className="grid gap-x-10 md:grid-cols-2">
-            {skills.map(group => (
+            {skills.map((group, index) => (
               <Collapsible
                 className="py-5"
                 key={group.label}
-                onOpenChange={open => handleOpenChange(group.label, open)}
-                open={active === group.label}
+                onOpenChange={() => handleOpenChange(index)}
+                open={actives.includes(index)}
               >
                 <CollapsibleTrigger className="w-full cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4">
                   <h3 className="font-medium text-skill-label">
@@ -143,7 +147,8 @@ export function SkillsSection() {
                 <CollapsibleContent className="collapsible-panel-height overflow-hidden transition-collapsible duration-300 data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0">
                   <div className="mt-4 flex flex-wrap gap-2 py-1">
                     {group.details.map((skill) => {
-                      const name = typeof skill === 'string' ? skill : skill.name
+                      const name
+                        = typeof skill === 'string' ? skill : skill.name
 
                       return <SkillBadge key={name} skillDetail={skill} />
                     })}
@@ -163,17 +168,14 @@ function SkillBadge({
 }: {
   skillDetail: Skill['details'][number]
 }) {
-  const name = typeof skillDetail === 'string'
-    ? skillDetail
-    : skillDetail.name
+  const name = typeof skillDetail === 'string' ? skillDetail : skillDetail.name
   const badge = (
     <Badge className="shadow-2xs" variant="skill">
       {name}
     </Badge>
   )
 
-  if (typeof skillDetail === 'string')
-    return badge
+  if (typeof skillDetail === 'string') return badge
 
   return (
     <Tooltip>
@@ -181,42 +183,39 @@ function SkillBadge({
         {badge}
       </TooltipTrigger>
       <TooltipContent
-        className="w-64 max-w-[calc(100vw-2rem)] flex-col items-stretch gap-4 rounded-xl p-4 shadow-soft"
+        className="w-64 max-w-[calc(100vw-2rem)] flex-col items-stretch gap-3 rounded-xl border border-foreground/15 bg-secondary/25 p-4 text-foreground shadow-soft backdrop-blur-xs lg:w-96"
+        hiddenArrow
         sideOffset={8}
       >
         <p className="text-sm font-medium">{name}</p>
 
-        <dl className="grid grid-cols-2 gap-3 border-y border-background/15 py-3">
+        <dl className="grid grid-cols-2 gap-3 border-y border-foreground/15 py-3">
           <div>
-            <dt className="text-[11px] text-background/65">Experience</dt>
-            <dd className="mt-1 font-mono text-xs">
-              {`${skillDetail.usageTime} years`}
-            </dd>
+            <dt>Experience</dt>
+            <dd className="mt-1 italic">{`${skillDetail.usageTime} years`}</dd>
           </div>
           <div>
-            <dt className="text-[11px] text-background/65">Projects</dt>
-            <dd className="mt-1 font-mono text-xs">
-              {skillDetail.completedProjects}
-            </dd>
+            <dt>Projects</dt>
+            <dd className="mt-1 italic">{skillDetail.completedProjects}</dd>
           </div>
         </dl>
 
         <Progress
           aria-label={`${name} proficiency`}
-          className="gap-x-3 gap-y-2 **:data-[slot=progress-indicator]:bg-background **:data-[slot=progress-track]:bg-background/20"
+          className="gap-x-3 gap-y-2 **:data-[slot=progress-indicator]:bg-foreground **:data-[slot=progress-track]:bg-foreground/20"
           value={skillDetail.proficiency}
         >
-          <span className="text-[11px] text-background/65">Proficiency</span>
-          <span className="ml-auto font-mono text-xs">
+          <span>Proficiency</span>
+          <span className="ml-auto italic">
             {`${skillDetail.proficiency}%`}
           </span>
         </Progress>
 
         <div>
-          <p className="text-[11px] text-background/65">Highlights</p>
+          <p>Highlights</p>
           <ul className="mt-2 space-y-1.5">
             {skillDetail.highlights.map(highlight => (
-              <li className="flex gap-2 leading-5" key={highlight}>
+              <li className="flex gap-2 leading-5 italic" key={highlight}>
                 <span>{highlight}</span>
               </li>
             ))}

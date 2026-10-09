@@ -6,6 +6,16 @@ import {
 
 const career = [
   {
+    company: 'Shenzhen Ronghui Lianchuang Co., Ltd.',
+    contributions: [
+      'Participated in frontend development for projects such as Fiatx, Paylabs, and PayOK.',
+      'Developed shared tools for the team.',
+    ],
+    period: 'Jan 2026 — Present',
+    summary:
+      'Developed web applications and mobile apps, and maintained legacy codebases.',
+  },
+  {
     company: 'Guangzhou Yanqu Information Technology Co., Ltd.',
     contributions: [
       'Built a responsive resume platform from the ground up, covering internationalization, accounts, payments, assessments, and more than 100 REST integrations.',

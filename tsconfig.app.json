@@ -4,19 +4,12 @@
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.cache/tsconfig.app.tsbuildinfo",
     "jsx": "react-jsx",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@shared/*": [
-        "./shared/*"
-      ]
+      "@/*": ["./src/*"],
+      "@shared/*": ["./shared/*"]
     },
     "declaration": true,
     "emitDeclarationOnly": true,
