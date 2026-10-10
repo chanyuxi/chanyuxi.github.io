@@ -1,7 +1,7 @@
 import { eq, sql } from 'drizzle-orm'
 
-import { getDatabase } from '../db/index'
-import { SITE_LIKES_ID, siteLikes } from '../db/schema'
+import { getDatabase } from '../db/index.js'
+import { SITE_LIKES_ID, siteLikes } from '../db/schema.js'
 
 export interface SiteLikesRepository {
   getCount: () => Promise<number>

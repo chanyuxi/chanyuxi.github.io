@@ -1,5 +1,7 @@
 # Introduction
 
+![GitHub Banner](assets/images/github_banner_image.png)
+
 Don't say anything, everything will go according to fate! It's like you'll never find me on Github! 😉
 
 ``` java
