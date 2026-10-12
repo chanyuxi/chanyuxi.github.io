@@ -12,6 +12,10 @@ export function rehypePresentation(options: CompileMarkdownOptions) {
         return
       }
 
+      if (element.tagName === 'a') {
+        transformExternalLink(element)
+      }
+
       if (options.changelog) {
         styleChangelogElement(element)
         return
@@ -76,6 +80,17 @@ function styleHeading(element: HastElement) {
 
   if (classes) {
     element.properties.className = classes
+  }
+}
+
+function transformExternalLink(element: HastElement) {
+  const href = typeof element.properties.href === 'string'
+    ? element.properties.href
+    : ''
+
+  if (/^https?:\/\//i.test(href)) {
+    element.properties.target = '_blank'
+    element.properties.rel = 'noreferrer'
   }
 }
 

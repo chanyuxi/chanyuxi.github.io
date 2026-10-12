@@ -11,6 +11,7 @@ export default function Header() {
     { name: 'Introduction', path: '/introduction' },
     { name: 'product', path: '/product' },
     { name: 'Post', path: '/post/entrance' },
+    { name: 'AI', path: '/ai' },
     { name: 'life', path: '/life' },
     { name: 'cooperation', path: '/cooperation' },
   ]
