@@ -2,4 +2,4 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - '@chanyuxi/eslint-waltz@1.4.0'
+  - '@chanyuxi/*'
