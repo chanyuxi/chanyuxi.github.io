@@ -36,6 +36,10 @@ const router = createBrowserRouter([
         path: 'ai',
       },
       {
+        lazy: lazyRoute(() => import('@/modules/auth/sign-in')),
+        path: 'auth/sign-in',
+      },
+      {
         element: <Navigate replace to="/under-development" />,
         path: 'product',
       },

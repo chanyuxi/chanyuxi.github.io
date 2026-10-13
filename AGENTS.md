@@ -1,6 +1,7 @@
 # AI Work Guide
 
 - Always edit this file in English.
+- Always use English for text within the project.
 - The README.md file can never be edited.
 - Do not create any test files (for the time being).
 

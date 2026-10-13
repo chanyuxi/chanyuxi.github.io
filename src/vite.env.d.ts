@@ -2,6 +2,10 @@
 
 declare const __APP_VERSION__: string
 
+interface ImportMetaEnv {
+  readonly VITE_NEON_AUTH_URL: string
+}
+
 declare module '*.md' {
   export const content: import('./components/common/compiled-markdown').CompiledMarkdownNode[]
   export const frontmatter: Record<string, unknown>

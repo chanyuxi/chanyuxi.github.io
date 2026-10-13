@@ -1,7 +1,8 @@
-import { Github } from 'lucide-react'
+import { ArrowRight, Github } from 'lucide-react'
+import { Link } from 'react-router'
 
 import { buttonVariants } from '@/components/ui/button'
-import { GITHUB_LINK } from '@/constant'
+import { GITHUB_LINK, NEXT_STAGE } from '@/constant'
 
 import { HeroImageCard } from './components/hero-image-card'
 import { SiteLikeButton } from './components/site-like-button'
@@ -53,19 +54,61 @@ export default function Home() {
             Frontend engineer · Shenzhen
           </p>
           <p className="animate-in duration-500 fade-in motion-reduce:animate-none">
-            Hello there! I'm a frontend engineer focused on building
-            responsive, polished, and user-friendly interfaces. Most of my
-            work revolves around React, CSS, JavaScript, and the small details
-            that make web experiences feel smooth.
+            I'm Yongzheng, a frontend engineer based in Shenzhen. I mostly
+            work with React, TypeScript, and CSS, building interfaces and
+            fussing over the little details. Some days, that means persuading
+            a button to move two pixels.
           </p>
           <p className="animate-in duration-500 fade-in motion-reduce:animate-none">
-            I'm originally from Zhanjiang, Guangdong, a coastal city that
-            taught me patience, adaptability, and respect for change. I try to
-            bring the same mindset into my work: stay steady, keep improving,
-            and build things with care.
+            I'm originally from Zhanjiang, Guangdong. This is where I share
+            the things I build and a few poems along the way. It's a personal
+            site, so expect the occasional detour and a permanently
+            unfinished to-do list.
           </p>
         </div>
       </div>
+
+      {NEXT_STAGE && (
+        <section
+          aria-label="About this project"
+          className="base-container mt-12 sm:mt-16 lg:mt-20"
+        >
+          <div className="max-w-2xl space-y-4 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 dark:text-stone-300">
+            <p>
+              Built with React, TypeScript, and Vite, styled with Tailwind CSS,
+              and hosted on Vercel.
+            </p>
+            <p>
+              A little motion, a few poems, and the occasional
+              {' '}
+              &ldquo;while I'm here...&rdquo;
+              {' '}
+              feature.
+            </p>
+          </div>
+        </section>
+      )}
+
+      {NEXT_STAGE && (
+        <section
+          aria-label="AI chat"
+          className="base-container mt-12 sm:mt-16 lg:mt-20"
+        >
+          <div className="max-w-2xl space-y-4 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 dark:text-stone-300">
+            <p>
+              Bring a question, a rough idea, or a stubborn bit of code.
+              Small talk is optional.
+            </p>
+            <Link
+              className="group inline-flex min-h-10 items-center gap-2 font-medium text-ink underline-offset-4 transition-colors duration-300 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring dark:text-stone-100"
+              to="/ai"
+            >
+              Open AI chat
+              <ArrowRight aria-hidden="true" className="size-4 transition-transform duration-300 motion-safe:group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </section>
+      )}
     </section>
   )
 }
