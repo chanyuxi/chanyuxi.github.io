@@ -32,6 +32,10 @@ const router = createBrowserRouter([
         path: 'changelog',
       },
       {
+        lazy: lazyRoute(() => import('@/modules/ai')),
+        path: 'ai',
+      },
+      {
         element: <Navigate replace to="/under-development" />,
         path: 'product',
       },

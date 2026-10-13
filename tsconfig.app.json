@@ -5,12 +5,11 @@
     "tsBuildInfoFile": "./node_modules/.cache/tsconfig.app.tsbuildinfo",
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "ignoreDeprecations": "6.0",
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@shared/*": ["./shared/*"]
     },
+    "types": ["node"],
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "./node_modules/.cache/types/app"
