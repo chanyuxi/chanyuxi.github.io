@@ -1,4 +1,4 @@
-import { Menu as MenuIcon } from 'lucide-react'
+import { LogOut, Menu as MenuIcon } from 'lucide-react'
 import { useNavigate } from 'react-router'
 
 import ThemeToggle from '@/components/common/theme-toggle'
@@ -11,6 +11,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import { useAuth } from '@/contexts/auth'
+import { toast } from '@/libs/toast'
 
 interface MenuProps {
   items: { name: string, path: string }[]
@@ -18,11 +20,21 @@ interface MenuProps {
 
 export default function Menu(props: MenuProps) {
   const nav = useNavigate()
+  const { isSigningOut, signOut, status } = useAuth()
 
   const { items } = props
 
   const handleMenuItemClick = (path: string) => {
     nav(path)
+  }
+
+  const handleSignOut = async () => {
+    try {
+      await signOut()
+    }
+    catch {
+      toast('Unable to sign out. Please try again.', { immediately: true })
+    }
   }
 
   return (
@@ -42,6 +54,18 @@ export default function Menu(props: MenuProps) {
         </div>
 
         <ThemeToggle />
+        {status === 'authenticated' && (
+          <Button
+            aria-label="Sign out"
+            loading={isSigningOut}
+            onClick={handleSignOut}
+            size="icon"
+            title="Sign out"
+            variant="outline"
+          >
+            {!isSigningOut && <LogOut aria-hidden="true" size={16} />}
+          </Button>
+        )}
         <Sheet>
           <SheetTrigger
             render={(

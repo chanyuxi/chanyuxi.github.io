@@ -1,33 +1,25 @@
-import { authClient } from '@/libs/auth'
+import { Card, CardContent } from '@/components/ui/card'
 
 import { CredentialsForm } from '../components/credentials-form'
-import { SessionPanel } from '../components/session-panel'
 
 export default function SignIn() {
-  const { data: session, isPending } = authClient.useSession()
-
   return (
-    <section className="flex min-h-[calc(100svh-4.5rem)] items-center py-14 sm:py-20">
+    <section className="flex min-h-[calc(100svh-4.5rem)] items-center bg-[radial-gradient(circle_at_50%_30%,rgb(167_229_211/28%),transparent_28rem)] py-10 sm:py-16 dark:bg-[radial-gradient(circle_at_50%_30%,rgb(200_184_224/14%),transparent_28rem)]">
       <div className="base-container">
-        <div className="mx-auto w-full max-w-sm">
-          <p className="text-center text-xs font-medium tracking-eyebrow text-muted-soft uppercase dark:text-stone-500">
-            Authentication
-          </p>
-          <h1 className="mt-4 text-center font-serif text-4xl font-light tracking-display sm:text-5xl">
-            Sign in
-          </h1>
-          <p className="mt-5 text-center text-base leading-7 text-muted-foreground dark:text-stone-300">
-            Sign in with your email and password to manage the site.
-          </p>
+        <Card className="mx-auto w-full max-w-md gap-0 rounded-2xl py-0" variant="glass">
+          <CardContent className="p-6 sm:p-8">
+            <h1 className="text-center font-serif text-4xl font-light tracking-display">
+              Sign in
+            </h1>
+            <p className="mx-auto mt-3 max-w-sm text-center text-sm leading-6 text-muted-foreground dark:text-stone-300">
+              Use your email and password to continue.
+            </p>
 
-          <div className="mt-10">
-            {isPending
-              ? null
-              : session
-                ? <SessionPanel email={session.user.email} name={session.user.name} />
-                : <CredentialsForm />}
-          </div>
-        </div>
+            <div className="mt-8">
+              <CredentialsForm />
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
   )
