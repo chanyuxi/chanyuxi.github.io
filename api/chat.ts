@@ -3,6 +3,9 @@ import { z } from 'zod'
 import { ChatUnavailableError, streamChat } from '../server/chat.js'
 
 const responseHeaders = { 'Cache-Control': 'no-store' }
+// TODO: If the schema already handles validation, is it necessary
+// for `streamChat` to check the context length again? Or should
+// we remove the check here?
 const requestSchema = z.object({
   messages: z.array(z.object({
     content: z.string().trim().min(1).max(64_000),

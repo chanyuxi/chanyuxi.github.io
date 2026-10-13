@@ -7,6 +7,7 @@ const SYSTEM_PROMPT = [
   'If code or a formula is essential, write it as unformatted plain text.',
   'Match the user\'s language unless they request another language.',
 ].join(' ')
+
 // Leave time to report an error before Vercel's 300-second function limit.
 const REQUEST_TIMEOUT_MS = 270_000
 const MAX_CONTEXT_CHARACTERS = 40_000
@@ -21,11 +22,10 @@ export class ChatUnavailableError extends Error {
 }
 
 export async function streamChat(messages: ChatTurn[], signal: AbortSignal) {
-  // Browser -> /api/chat -> this server -> AI provider. Only the server reads
-  // credentials; VITE_ variables or direct browser calls would expose the key.
   const apiKey = process.env.AI_API_KEY?.trim()
   const baseURL = process.env.AI_BASE_URL?.trim().replace(/\/+$/, '')
   const model = process.env.AI_MODEL?.trim()
+
   if (!apiKey || !baseURL || !model) throw new ChatUnavailableError()
 
   // Keep recent complete exchanges within a predictable prompt size.
@@ -34,6 +34,7 @@ export async function streamChat(messages: ChatTurn[], signal: AbortSignal) {
     context.length > 1
     && context.reduce((length, message) => length + message.content.length, 0) > MAX_CONTEXT_CHARACTERS
   ) {
+    // Shorten a dialogue pair until the context is no longer too large.
     context.splice(0, 2)
   }
 
