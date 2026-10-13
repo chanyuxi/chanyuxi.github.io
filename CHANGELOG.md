@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.0 - 2026-10-13
+
+### Changed
+
+- Open external links in new tabs.
+
+### Added
+
+- Introduced the first version of the AI ​​conversation feature.
+
 ## 0.5.0 - 2026-09-24
 
 ### Changed
