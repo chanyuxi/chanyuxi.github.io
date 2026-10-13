@@ -13,7 +13,7 @@ export default function AIChat() {
             Talking
           </h1>
           <p className="text-base leading-7 text-muted-foreground">
-            Ask AI(grok-4.7) something, then follow your curiosity. Each reply builds on your conversation.
+            Ask something, then follow your curiosity. Each reply builds on your conversation.
           </p>
         </div>
 

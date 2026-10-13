@@ -18,7 +18,7 @@
     "build": "vite build",
     "changeset": "changeset",
     "changeset:version": "changeset version && tsx scripts/date-changelog.ts",
-    "dev:vercel": "node --env-file=.env.local node_modules/vercel/dist/vc.js dev",
+    "dev:vercel": "node --env-file=.env.local node_modules/vercel/dist/vc.js dev --debug",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "typecheck": "tsc -b --pretty false",
