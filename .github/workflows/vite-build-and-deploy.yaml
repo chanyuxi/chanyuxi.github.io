@@ -25,11 +25,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Keep pnpm aligned with the repo toolchain.
+      # pnpm version comes from the "packageManager" field in package.json.
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10.28.1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
