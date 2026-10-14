@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0
+
+### Add
+
+- We can now register and log in.
+
 ## 0.6.0 - 2026-10-13
 
 ### Changed
