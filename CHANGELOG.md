@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.7.0
+## 0.7.0 - 2026-10-14
 
-### Add
+### Added
 
 - We can now register and log in.
 

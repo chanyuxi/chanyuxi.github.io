@@ -5,6 +5,7 @@
       "maxDuration": 300
     }
   },
+  "ignoreCommand": "if [ \"$VERCEL_ENV\" = \"production\" ]; then git log -1 --pretty=%s | grep -qE '^chore: release v[0-9]' || exit 0; fi; exit 1",
   "rewrites": [
     {
       "source": "/((?!api/|src/|shared/|@vite/|@react-refresh|node_modules/|@id/|@fs/|fonts/|images/|favicon\\.svg).*)",
