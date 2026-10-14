@@ -14,7 +14,7 @@ export function HeroImageCard(props: HeroImageCardProps) {
 
   return (
     <div
-      className="inline-block size-40 overflow-hidden rounded-2xl border border-hairline bg-card p-2 shadow-soft motion-safe:animate-[hero-card-enter_500ms_ease-out_250ms_both] dark:border-white/10 dark:bg-dark-elevated"
+      className="surface-card inline-block size-40 overflow-hidden rounded-2xl p-2 motion-safe:animate-[hero-card-enter_500ms_ease-out_250ms_both]"
       style={style}
     >
       <img

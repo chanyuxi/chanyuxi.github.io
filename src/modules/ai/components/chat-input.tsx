@@ -1,10 +1,10 @@
 import type { RefObject, SubmitEvent } from 'react'
 
+import { MAX_CHAT_MESSAGE_LENGTH } from '@shared/constants/chat'
 import { ArrowUp } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
-import { MAX_MESSAGE_LENGTH } from '../constants'
 import { useAutoResizeTextarea } from '../hooks/use-auto-resize-textarea'
 
 type ChatInputProps = {
@@ -26,7 +26,7 @@ export function ChatInput({ input, inputRef, loading, onChange, onSubmit }: Chat
           aria-label="Your message"
           className="block field-sizing-content min-h-12 w-full resize-none overflow-hidden rounded-2xl border-0 bg-card py-4 pr-16 pl-5 text-base leading-7 shadow-soft transition-shadow duration-300 placeholder:text-muted-foreground read-only:opacity-60 focus-visible:shadow-ink/10 focus-visible:outline-none dark:focus-visible:shadow-black/40"
           id="ai-message"
-          maxLength={MAX_MESSAGE_LENGTH}
+          maxLength={MAX_CHAT_MESSAGE_LENGTH}
           onChange={event => onChange(event.target.value)}
           onKeyDown={(event) => {
             if (

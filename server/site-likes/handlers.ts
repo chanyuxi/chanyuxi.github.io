@@ -1,9 +1,9 @@
 import type { ApiLogger } from '../http.js'
 import type { SiteLikesService } from './service.js'
 
+import { MAX_SITE_LIKES_INCREMENT } from '../../shared/constants/site-likes.js'
 import {
   incrementSiteLikesRequestSchema,
-  MAX_SITE_LIKES_INCREMENT,
   SiteLikesErrorCode,
 } from '../../shared/contracts/site-likes.js'
 import {

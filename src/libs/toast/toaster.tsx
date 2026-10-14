@@ -1,6 +1,8 @@
 import { XIcon } from 'lucide-react'
 import { useSyncExternalStore } from 'react'
 
+import { Button } from '@/components/ui/button'
+
 import { toastStore } from './store'
 
 export function Toaster() {
@@ -26,14 +28,16 @@ export function Toaster() {
           >
             {current.message}
           </span>
-          <button
+          <Button
             aria-label="Dismiss notification"
-            className="inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors duration-300 outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="text-muted-foreground"
             onClick={() => toastStore.dismiss(current.id)}
+            size="icon"
             type="button"
+            variant="ghost"
           >
-            <XIcon aria-hidden="true" className="size-4" />
-          </button>
+            <XIcon aria-hidden="true" />
+          </Button>
         </div>
       )}
     </div>

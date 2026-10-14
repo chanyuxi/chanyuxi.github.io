@@ -28,7 +28,7 @@ export default function PoetryCatalog() {
     >
       <div className="base-container max-w-4xl">
         <motion.header
-          className="my-8 border-b border-hairline pb-8 text-center dark:border-white/10"
+          className="my-8 border-b border-hairline pb-8 text-center"
           variants={itemVariants}
         >
           <p className="mb-3 text-xs font-medium tracking-poetry text-zinc-400 uppercase dark:text-zinc-500">
@@ -50,7 +50,7 @@ export default function PoetryCatalog() {
                     whileHover={shouldReduceMotion ? undefined : { x: 6 }}
                   >
                     <Link
-                      className="font-mashanzheng-display group block border-b border-hairline py-5 sm:py-6 dark:border-white/10"
+                      className="font-mashanzheng-display group block border-b border-hairline py-5 sm:py-6"
                       to={post.routePath}
                     >
                       <div className="flex items-start justify-between gap-5">
@@ -77,7 +77,7 @@ export default function PoetryCatalog() {
             )
           : (
               <motion.div
-                className="py-16 text-center text-sm text-zinc-500 dark:border-white/15 dark:text-zinc-400"
+                className="py-16 text-center text-sm text-zinc-500 dark:text-zinc-400"
                 variants={itemVariants}
               >
                 No poems yet.

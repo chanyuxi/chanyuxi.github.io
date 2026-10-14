@@ -1,0 +1,2 @@
+export const MAX_CHAT_CONTEXT_MESSAGES = 21
+export const MAX_CHAT_MESSAGE_LENGTH = 4_000

@@ -4,10 +4,12 @@ import type { ZodType } from 'zod'
 export interface ApiRequestConfig<TResponse, TData = unknown>
   extends AxiosRequestConfig<TData> {
   requestSchema?: ZodType<TData>
+  requireAuth?: boolean
   responseSchema: ZodType<TResponse>
 }
 
 export interface ApiSchemaConfig<TResponse = unknown, TData = unknown> {
   requestSchema?: ZodType<TData>
+  requireAuth?: boolean
   responseSchema?: ZodType<TResponse>
 }

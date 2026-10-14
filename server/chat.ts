@@ -1,5 +1,7 @@
 import OpenAI from 'openai'
 
+import { MAX_CHAT_CONTEXT_MESSAGES } from '../shared/constants/chat.js'
+
 const SYSTEM_PROMPT = [
   'You are a helpful assistant. Answer clearly in plain text paragraphs.',
   'Keep paragraphs short and separate them with one blank line.',
@@ -29,7 +31,7 @@ export async function streamChat(messages: ChatTurn[], signal: AbortSignal) {
   if (!apiKey || !baseURL || !model) throw new ChatUnavailableError()
 
   // Keep recent complete exchanges within a predictable prompt size.
-  const context = messages.slice(-21)
+  const context = messages.slice(-MAX_CHAT_CONTEXT_MESSAGES)
   while (
     context.length > 1
     && context.reduce((length, message) => length + message.content.length, 0) > MAX_CONTEXT_CHARACTERS

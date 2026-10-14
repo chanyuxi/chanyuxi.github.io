@@ -1,13 +1,9 @@
-import { lazy, Suspense } from 'react'
 import { Link } from 'react-router'
 
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-import { APP_VERSION, GITHUB_LINK, QRCODE_RAW, TELEGRAM_LINK } from '@/constant'
+import { APP_VERSION } from '@/constants/app'
+import { EXTERNAL_LINKS } from '@/constants/external-links'
+
+import { QrCodeDialog } from './components/qr-code-dialog'
 
 interface FooterGroup {
   items: FooterItem[]
@@ -20,28 +16,22 @@ interface FooterItem {
   qrcode?: QrCodeKey
 }
 
-type QrCodeKey = keyof typeof QRCODE_RAW
-
-const QrCode = lazy(() => import('@/components/common/qr-code'))
+type QrCodeKey = keyof typeof EXTERNAL_LINKS.qrCodes
 
 const footerGroups: FooterGroup[] = [
   {
     items: [
       {
-        label: 'Postsop',
-        link: 'https://github.com/chanyuxi/postsop',
-      },
-      {
-        label: 'Nausea',
-        link: 'https://github.com/chanyuxi/nausea',
+        label: 'Postsop (paused)',
+        link: EXTERNAL_LINKS.projects.postsop,
       },
       {
         label: 'eslint-waltz',
-        link: 'https://www.npmjs.com/package/@chanyuxi/eslint-waltz',
+        link: EXTERNAL_LINKS.projects.eslintWaltz,
       },
       {
-        label: 'Haree',
-        link: 'https://github.com/chanyuxi/haree',
+        label: 'form',
+        link: EXTERNAL_LINKS.projects.form,
       },
     ],
     title: 'LABORATORY',
@@ -49,7 +39,6 @@ const footerGroups: FooterGroup[] = [
   {
     items: [
       { label: 'Poetries', link: '/poetries/entrance' },
-      { label: 'Articles' },
       { label: 'Blog' },
     ],
     title: 'CREATION',
@@ -58,7 +47,7 @@ const footerGroups: FooterGroup[] = [
     items: [
       {
         label: 'GitHub',
-        link: GITHUB_LINK,
+        link: EXTERNAL_LINKS.social.github,
       },
       {
         label: 'QQ',
@@ -70,7 +59,11 @@ const footerGroups: FooterGroup[] = [
       },
       {
         label: 'Telegram',
-        link: TELEGRAM_LINK,
+        link: EXTERNAL_LINKS.social.telegram,
+      },
+      {
+        label: 'WhatsApp',
+        qrcode: 'whatsapp',
       },
     ],
     title: 'FIND ME',
@@ -78,18 +71,11 @@ const footerGroups: FooterGroup[] = [
   {
     items: [
       {
-        label: 'Home',
-        link: '/',
-      },
-      {
         label: 'Introduction',
         link: '/introduction',
       },
       {
         label: 'Posts',
-      },
-      {
-        label: 'Cooperation',
       },
       {
         label: 'Changelog',
@@ -104,12 +90,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-hairline bg-canvas-soft transition-colors duration-300 dark:border-white/10 dark:bg-dark-elevated">
+    <footer className="border-t border-hairline bg-canvas-soft transition-colors duration-300 dark:bg-dark-elevated">
       <div className="base-container py-14 sm:py-18 lg:py-20">
-        <div className="grid gap-10 border-b border-hairline pb-12 sm:grid-cols-2 lg:grid-cols-4 dark:border-white/10">
+        <div className="grid gap-10 border-b border-hairline pb-12 sm:grid-cols-2 lg:grid-cols-4">
           {footerGroups.map(group => (
             <section key={group.title}>
-              <p className="mb-6 text-xs font-medium tracking-label text-muted-soft uppercase dark:text-stone-500">
+              <p className="section-eyebrow mb-6">
                 {group.title}
               </p>
 
@@ -125,18 +111,12 @@ export default function Footer() {
             CHANYUXI
           </p>
           <p className="text-xs text-muted-foreground dark:text-stone-400">
-            Version
-            {' '}
-            {APP_VERSION}
+            {`Version ${APP_VERSION}`}
           </p>
         </div>
 
         <p className="text-center text-xs text-muted-foreground dark:text-stone-400">
-          Copyright
-          {' '}
-          {currentYear}
-          {' '}
-          CHANYUXI. All rights reserved.
+          {`Copyright ${currentYear} CHANYUXI. All rights reserved.`}
         </p>
       </div>
     </footer>
@@ -155,36 +135,16 @@ function renderLink(
     const { qrcode } = item
 
     return (
-      <Dialog key={key}>
-        <DialogTrigger
-          render={(
-            <button
-              className="cursor-pointer text-sm text-muted-foreground transition-colors hover:text-ink dark:text-stone-400 dark:hover:text-stone-100"
-              type="button"
-            />
-          )}
-        >
-          {item.label}
-        </DialogTrigger>
-        <DialogContent
-          className="w-auto max-w-none gap-0 rounded-2xl bg-white p-3 shadow-[0_20px_56px_rgb(12_10_9/18%)] ring-0"
-          showCloseButton={false}
-        >
-          <DialogTitle className="sr-only">
-            {item.label}
-            {' '}
-            QR code
-          </DialogTitle>
-          <Suspense fallback={<div className="size-36 bg-white" />}>
-            <QrCode value={QRCODE_RAW[qrcode]} />
-          </Suspense>
-        </DialogContent>
-      </Dialog>
+      <QrCodeDialog
+        key={key}
+        label={item.label}
+        value={EXTERNAL_LINKS.qrCodes[qrcode]}
+      />
     )
   }
   else if (!item.link) {
     return (
-      <span className="cursor-pointer text-sm text-muted-foreground transition-colors hover:text-ink dark:text-stone-400 dark:hover:text-stone-100" key={key}>
+      <span className="quiet-link" key={key}>
         {item.label}
       </span>
     )
@@ -195,7 +155,7 @@ function renderLink(
   else if (isExternalLink(item.link)) {
     return (
       <a
-        className="cursor-pointer text-sm text-muted-foreground transition-colors hover:text-ink dark:text-stone-400 dark:hover:text-stone-100"
+        className="quiet-link"
         href={item.link}
         key={key}
         rel="noreferrer"
@@ -208,7 +168,7 @@ function renderLink(
   else {
     return (
       <Link
-        className="cursor-pointer text-sm text-muted-foreground transition-colors hover:text-ink dark:text-stone-400 dark:hover:text-stone-100"
+        className="quiet-link"
         key={key}
         to={item.link}
       >

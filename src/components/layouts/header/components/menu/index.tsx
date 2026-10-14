@@ -1,7 +1,6 @@
 import { Menu as MenuIcon } from 'lucide-react'
 import { useNavigate } from 'react-router'
 
-import ThemeToggle from '@/components/common/theme-toggle'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -41,7 +40,6 @@ export default function Menu(props: MenuProps) {
           ))}
         </div>
 
-        <ThemeToggle />
         <Sheet>
           <SheetTrigger
             render={(
@@ -56,8 +54,8 @@ export default function Menu(props: MenuProps) {
             <MenuIcon size={18} />
           </SheetTrigger>
 
-          <SheetContent className="w-72 border-hairline bg-card p-0 dark:border-white/10">
-            <SheetHeader className="border-b border-hairline px-5 py-6 dark:border-white/10">
+          <SheetContent className="w-72 border-hairline bg-card p-0">
+            <SheetHeader className="border-b border-hairline px-5 py-6">
               <SheetTitle className="text-sm font-semibold tracking-navigation">
                 CHANYUXI
               </SheetTitle>

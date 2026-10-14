@@ -4,7 +4,7 @@ import { content as changelog } from '../../../CHANGELOG.md'
 
 export default function Changelog() {
   return (
-    <section className="py-14 sm:py-18 lg:py-24">
+    <section className="section-spacing">
       <article className="base-container">
         <CompiledMarkdown content={changelog} />
       </article>

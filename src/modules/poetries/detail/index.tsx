@@ -36,7 +36,7 @@ export default function PoetryDetail() {
     >
       <div className="base-container">
         <motion.div className="my-18 sm:my-24 lg:my-28" variants={itemVariants}>
-          <article className="font-mashanzheng min-w-0 px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12 dark:border-white/10">
+          <article className="font-mashanzheng min-w-0 px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
             <div className="max-w-none">
               <CompiledMarkdown content={content} />
             </div>

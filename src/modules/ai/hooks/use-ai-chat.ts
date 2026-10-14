@@ -1,8 +1,10 @@
 import type { ChatMessage, ChatStreamEvent } from '../type'
 
+import {
+  MAX_CHAT_CONTEXT_MESSAGES,
+  MAX_CHAT_MESSAGE_LENGTH,
+} from '@shared/constants/chat'
 import { type SubmitEvent, useEffect, useRef, useState } from 'react'
-
-import { MAX_MESSAGE_LENGTH } from '../constants'
 
 export function useAIChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
@@ -22,8 +24,8 @@ export function useAIChat() {
     }
 
     const message = input.trim()
-    if (!message || input.length > MAX_MESSAGE_LENGTH) {
-      setError(`Enter a message of up to ${MAX_MESSAGE_LENGTH} characters.`)
+    if (!message || input.length > MAX_CHAT_MESSAGE_LENGTH) {
+      setError(`Enter a message of up to ${MAX_CHAT_MESSAGE_LENGTH} characters.`)
       return
     }
 
@@ -51,7 +53,7 @@ export function useAIChat() {
       // or unfinished replies stay visible but are excluded from AI context.
       const context = messages
         .filter(message => message.status === 'complete')
-        .slice(-20)
+        .slice(-(MAX_CHAT_CONTEXT_MESSAGES - 1))
         .map(({ content, role }) => ({ content, role }))
       const response = await fetch('/api/chat', {
         body: JSON.stringify({ messages: [...context, { content: message, role: 'user' }] }),

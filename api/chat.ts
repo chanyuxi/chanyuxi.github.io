@@ -1,6 +1,10 @@
 import { z } from 'zod'
 
 import { ChatUnavailableError, streamChat } from '../server/chat.js'
+import {
+  MAX_CHAT_CONTEXT_MESSAGES,
+  MAX_CHAT_MESSAGE_LENGTH,
+} from '../shared/constants/chat.js'
 
 const responseHeaders = { 'Cache-Control': 'no-store' }
 // TODO: If the schema already handles validation, is it necessary
@@ -10,12 +14,15 @@ const requestSchema = z.object({
   messages: z.array(z.object({
     content: z.string().trim().min(1).max(64_000),
     role: z.enum(['user', 'assistant']),
-  })).min(1).max(21),
+  })).min(1).max(MAX_CHAT_CONTEXT_MESSAGES),
 }).refine(({ messages }) =>
   messages.at(-1)?.role === 'user'
   && messages.every((message, index) =>
     message.role === (index % 2 === 0 ? 'user' : 'assistant')
-    && (message.role !== 'user' || message.content.length <= 4000),
+    && (
+      message.role !== 'user'
+      || message.content.length <= MAX_CHAT_MESSAGE_LENGTH
+    ),
   ),
 )
 
