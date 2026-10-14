@@ -34,7 +34,7 @@ export default function PoetryEntrance() {
                 whileHover={shouldReduceMotion ? undefined : { y: -4 }}
               >
                 <Link
-                  className="group relative block min-h-44 overflow-hidden rounded-2xl border border-hairline shadow-soft sm:min-h-52 md:min-h-60 lg:min-h-68 dark:border-white/10"
+                  className="surface-card group relative block min-h-44 overflow-hidden rounded-2xl sm:min-h-52 md:min-h-60 lg:min-h-68"
                   to={`/poetries/${catalog.slug}`}
                 >
                   <motion.img

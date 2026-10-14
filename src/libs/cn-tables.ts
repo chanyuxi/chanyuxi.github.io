@@ -25,11 +25,11 @@ const DZ = (s: string): Int32Array => {
     }
     return out
 }
-const GROUP_COUNT = 167
+const GROUP_COUNT = 171
 const customValidatorNames: string[] = []
-const edgeStart = PS(U("E0400004013000215000000020000400002120012000212000220007100200000040020010600000022010301220001200421002000030102020120010000"))
-const labelStart = PS(U(":111841112111111193114658<11915664411111185333323111144341111352413111171156163471111111132745111111234113637244312152541117"))
-const labelText = "@containerabcdurationeasefghinlmoprstunderlineviawzlignnimatespectuto-rowsackdrop-blurgorightness-coniclinearradialrderttom-blrtyol-startursorilllexontromaprid-xy-colsrowssetvert-xyeistadingftax-wbin-ltxy-screenhwbjectpacityrutlinederigin-offsetblrtxyioghtng-offsettateundedw-btlr-spantartchizepace-yaleroll-mt-xadowrinkextorapckingnsitionlate-xy-offset"
+const edgeStart = PS(U("E040000401300021500000002000040000212001200021200022000710020000004002001060000002201030122000120042100200020030102020120010000"))
+const labelStart = PS(U(":111841112111111193114658<1191566441111118533332311114434111135241311117115616347111111113274511111123411353724411312152541117"))
+const labelText = "@containerabcdurationeasefghinlmoprstunderlineviawzlignnimatespectuto-rowsackdrop-blurgorightness-coniclinearradialrderttom-blrtyol-startursorilllexontromaprid-xy-colsrowssetvert-xyeistadingftax-wbin-ltxy-screenhwbjectpacityrutlinederigin-offsetblrtxyioghtng-offsettateundedw-btlr-spantartchizepace-aleroll-mt-xadowrinkxyextorapckingnsitionlate-xy-offset"
 // pre-order tree: targets derived from edge counts via subtree sizes
 const edgeTarget = (() => {
     const N = edgeStart.length - 1
@@ -48,21 +48,21 @@ const edgeTarget = (() => {
     }
     return out
 })()
-const nodeGroup = U("020000007008080:0<=>?@0000000000000000000000000U0000000Y00000000000000e00000000000p000t0uvwx0000000000~00000000000000000", 1)
+const nodeGroup = U("020000007008080:0<=>?@0000000000000000000000000U0000000Y00000000000000e00000000000p000t0uvwx0000000000~0000000000000000000", 1)
 // vlists = op-pattern pool + per-list refs; the engine indexes these directly
 const vlistPat = PS(U("1233353634333551266"))
 const vlistOps = U("932423325832F@0326325B:0325B:4325532032542H<C=18432585:8GA0328B:032")
-const vlistRef = U("01112345617888889:61:1;<=;333669999:391>?39>33331:617:333333397@:4444466::3A:93B;911999:;>6")
-const vlistGroup = DZ("0202020200200200202001000040020020020020020020020002002002020020200200202002002002002002002002000200020002000200200200020200000200200020000200200200200202002002020020020020020020020020020020020002002002020020020020020020020020020020020020020020020002002002002002000202020002000200020020020000200")
+const vlistRef = U("01112345617888889:61:1;<=;333669999:391>?39>33331:617:333333397@:4444466::3A:933B;911999:;>6")
+const vlistGroup = DZ("0202020200200200202001000040020020020020020020020002002002020020200200202002002002002002002002000200020002000200200200020200000200200020000200200200200202002002020020020020020020020020020020020002002002020020020020020020020020020020020020020020020002002002002002002000202020002000200020020020000200")
 // nodeVlist rebuilt sparse: (anchor deltas, vlist ids)
 const nodeVlist = (() => {
-    const out = new Int32Array(125).fill(-1)
-    const A = DZ("024222424224422222242224222442622442262242242222242422222222226224242222426224222422442424222")
-    const V = DZ("022222222022222222222222222222222222222222222222222222222222222222222222022222222222222222222")
+    const out = new Int32Array(127).fill(-1)
+    const A = DZ("0242224242244222222422242224426224422622422422222424222222222262242422224262242242422442424222")
+    const V = DZ("0222222220222222222222222222222222222222222222222222222222222222222222220222222222222222222222")
     for (let i = 0; i < A.length; i++) out[A[i]!] = V[i]!
     return out
 })()
-const SETS = " block contents flow-root hidden inline inline-block inline-flex inline-grid inline-table table table-caption table-cell table-column table-column-group table-footer-group table-header-group table-row table-row-group| not-sr-only sr-only|isolat e ion-auto|overflow- auto clip hidden scroll visible|overflow-x- auto clip hidden scroll visible| absolute fixed relative static sticky| collapse invisible visible|justify- around baseline between center center-safe end end-safe evenly normal start stretch|justify-self- auto center center-safe end end-safe start stretch|items- baseline baseline-last center center-safe end end-safe start stretch|self- auto baseline baseline-last center center-safe end end-safe start stretch| italic not-italic| proportional-nums tabular-nums| line-through no-underline overline| capitalize lowercase normal-case uppercase|truncate |whitespace- break-spaces normal nowrap pre pre-line pre-wrap|wrap- anywhere break-word normal|field-sizing- content fixed|pointer-events- auto none|resize  -none -x -y|select- all auto none text| normal size| baseline bottom middle sub super text-bottom text-top top| bounce none ping pulse spin| auto square video| auto fr max min px|none |clip- border content padding text| gradient-to-b gradient-to-bl gradient-to-br gradient-to-l gradient-to-r gradient-to-t gradient-to-tl gradient-to-tr none|to- b bl br l r t tl tr| auto full px|auto | alias all-scroll auto cell col-resize context-menu copy crosshair default e-resize ew-resize grab grabbing help move n-resize ne-resize nesw-resize no-drop none not-allowed ns-resize nw-resize nwse-resize pointer progress row-resize s-resize se-resize sw-resize text vertical-text w-resize wait zoom-in zoom-out|initial | in in-out initial linear out| col col-reverse row row-reverse| nowrap wrap wrap-reverse| auto initial none| black bold extrabold extralight light medium normal semibold thin|px | none subgrid| auto dvh dvw fit full lh lvh lvw max min px screen svh svw| loose none normal px relaxed snug tight|item | decimal disc none| auto dvh dvw fit full lvh lvw max min none prose px svh svw| auto px| auto dvh dvw fit full lh lvh lvw max min none px screen svh svw| auto dvh dvw fit full lvh lvw max min none px screen svh svw| contain cover fill none scale-down| bottom bottom-left bottom-right center left left-bottom left-top right right-bottom right-top top top-left top-right| first last none| dashed dotted double hidden none solid| full none|full | inner none| auto dvh dvw fit full lvh lvw max min px svh svw|base | center end justify left right start| clip ellipsis| balance nowrap pretty wrap| normal tight tighter wide wider widest| all colors none opacity shadow transform| full px| auto dvh dvw fit full lvh lvw max min px screen svh svw".split('|').map((s) => {
+const SETS = " block contents flow-root hidden inline inline-block inline-flex inline-grid inline-table table table-caption table-cell table-column table-column-group table-footer-group table-header-group table-row table-row-group| not-sr-only sr-only|isolat e ion-auto|overflow- auto clip hidden scroll visible|overflow-x- auto clip hidden scroll visible| absolute fixed relative static sticky| collapse invisible visible|justify- around baseline between center center-safe end end-safe evenly normal start stretch|justify-self- auto center center-safe end end-safe start stretch|items- baseline baseline-last center center-safe end end-safe start stretch|self- auto baseline baseline-last center center-safe end end-safe start stretch| italic not-italic| proportional-nums tabular-nums| line-through no-underline overline| capitalize lowercase normal-case uppercase|truncate |whitespace- break-spaces normal nowrap pre pre-line pre-wrap|wrap- anywhere break-word normal|mix-blend- color color-burn color-dodge darken difference exclusion hard-light hue lighten luminosity multiply normal overlay plus-darker plus-lighter saturation screen soft-light|field-sizing- content fixed|pointer-events- auto none|resize  -none -x -y|select- all auto none text| normal size| baseline bottom middle sub super text-bottom text-top top| bounce none ping pulse spin| auto square video| auto fr max min px|none |clip- border content padding text| gradient-to-b gradient-to-bl gradient-to-br gradient-to-l gradient-to-r gradient-to-t gradient-to-tl gradient-to-tr none|blend- color color-burn color-dodge darken difference exclusion hard-light hue lighten luminosity multiply normal overlay saturation screen soft-light|to- b bl br l r t tl tr| dashed dotted double hidden none solid| auto full px|auto | alias all-scroll auto cell col-resize context-menu copy crosshair default e-resize ew-resize grab grabbing help move n-resize ne-resize nesw-resize no-drop none not-allowed ns-resize nw-resize nwse-resize pointer progress row-resize s-resize se-resize sw-resize text vertical-text w-resize wait zoom-in zoom-out|initial | in in-out initial linear out| col col-reverse row row-reverse| nowrap wrap wrap-reverse| auto initial none| black bold extrabold extralight light medium normal semibold thin|px | none subgrid| auto dvh dvw fit full lh lvh lvw max min px screen svh svw| loose none normal px relaxed snug tight|item | decimal disc none| auto dvh dvw fit full lvh lvw max min none prose px svh svw| auto px| auto dvh dvw fit full lh lvh lvw max min none px screen svh svw| auto dvh dvw fit full lvh lvw max min none px screen svh svw| contain cover fill none scale-down| bottom bottom-left bottom-right center left left-bottom left-top right right-bottom right-top top top-left top-right| first last none| full none|full | inner none| auto dvh dvw fit full lvh lvw max min px svh svw|base | center end justify left right start| clip ellipsis| balance nowrap pretty wrap| normal tight tighter wide wider widest| all colors none opacity shadow transform| full px| auto dvh dvw fit full lvh lvw max min px screen svh svw".split('|').map((s) => {
     const tails = s.split(' ')
     const prefix = tails.shift()!
     for (let i = 0; i < tails.length; i++) {
@@ -70,14 +70,14 @@ const SETS = " block contents flow-root hidden inline inline-block inline-flex i
     }
     return tails
 })
-const AA = DZ("0000000000000000000000242224206D62224200264262244282204442222240622422222268242222426224424000444242442")
-const AG = DZ("î222222222222222222222ĕ22222Ďċ0B42222ð2ï262222222242¢22222222Â¿42¼³22222228222222022222622GJ{22222242")
-const AS = DZ("022222222222222222222222222222222222?B222200202E00HGJ22222300062214I000000A7f0000[^]90JP2QT222kn2200orq")
-const litAnchor = new Int32Array(447)
-const litGroup = new Int32Array(447)
-const litPool = new Int32Array(447)
+const AA = DZ("0000000000000000000000024222420066>622242002642622442822044422222406224222222682422224262244424000444242442")
+const AG = DZ("ð2222222222222222222222ę22222ĒďĒđĔā42222ø2÷262222222242¤¡22222222ÊÇ42Ä»222222282222220222226222MP22222242")
+const AS = DZ("022222222222222222222222222222222222222CF222200202E00HGJ2222230006221YD000000A;h0000Y\\[=0NN2O0R222il2200mpo")
+const litAnchor = new Int32Array(488)
+const litGroup = new Int32Array(488)
+const litPool = new Int32Array(488)
 let poolText = ''
-const poolOffsets = new Int32Array(524)
+const poolOffsets = new Int32Array(592)
 {
     const tailRef = new Map()
     let nextRef = 0
@@ -100,10 +100,10 @@ const poolOffsets = new Int32Array(524)
     }
 }
 // conflict adjacency (engine builds claim bitmask CSR at init)
-const adjGid = DZ("0B2:@8<22F2@:2<26B4<DB")
+const adjGid = DZ("0B2:@8<22F2@:2<26B6<DB")
 const adjStart = PS(U("1::432:4444:44>2221321"))
-const adjTgt = DZ("2ŜĿł222ŉ132Ő222222222E2ŉ5Ĝ22:2ä222]\\â2³_Þ2¹Ğ22éì2ë7V2¼222Å132Ä2Ã1È2Å5Ú2½ÀÅÈ222222Ï121Ð2¡©:2ÈµbP")
-const patGid = U("")
+const adjTgt = DZ("2ŤŇŊ222ő132Ř222222222E2ő5Ĥ22:2ì222_\\ê2»_æ2»Ħ22ñô2ó7V2Ä222Í132Ì2Ë1Ð2Í5â2ÅÈÍÐ222222×121Ø2§«:2Î»hP")
+const patGid = U("")
 const patTgt = U("U")
 const postfixLookupGroups = U("1")
 const orderSensitiveModifiers = "* ** after backdrop before details-content file first-letter first-line marker placeholder selection"

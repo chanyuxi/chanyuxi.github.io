@@ -13,16 +13,16 @@ export function StatusPage(props: StatusPageProps) {
   const { description, label, title } = props
 
   return (
-    <section className="flex min-h-[calc(100svh-4.5rem)] items-center py-14 sm:py-20">
+    <section className="flex min-h-page items-center py-14 sm:py-20">
       <div className="base-container">
         <div className="mx-auto max-w-xl text-center">
-          <p className="text-xs font-medium tracking-eyebrow text-muted-soft uppercase dark:text-stone-500">
+          <p className="section-eyebrow">
             {label}
           </p>
-          <h1 className="mt-4 font-serif text-4xl font-light tracking-display sm:text-5xl">
+          <h1 className="display-heading mt-4">
             {title}
           </h1>
-          <p className="mt-5 text-base leading-7 text-muted-foreground dark:text-stone-300">
+          <p className="section-body mt-5">
             {description}
           </p>
           <div className="mt-8 flex justify-center">

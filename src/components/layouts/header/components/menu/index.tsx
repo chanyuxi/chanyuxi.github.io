@@ -1,7 +1,6 @@
-import { LogOut, Menu as MenuIcon } from 'lucide-react'
+import { Menu as MenuIcon } from 'lucide-react'
 import { useNavigate } from 'react-router'
 
-import ThemeToggle from '@/components/common/theme-toggle'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -11,8 +10,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { useAuth } from '@/contexts/auth'
-import { toast } from '@/libs/toast'
 
 interface MenuProps {
   items: { name: string, path: string }[]
@@ -20,21 +17,11 @@ interface MenuProps {
 
 export default function Menu(props: MenuProps) {
   const nav = useNavigate()
-  const { isSigningOut, signOut, status } = useAuth()
 
   const { items } = props
 
   const handleMenuItemClick = (path: string) => {
     nav(path)
-  }
-
-  const handleSignOut = async () => {
-    try {
-      await signOut()
-    }
-    catch {
-      toast('Unable to sign out. Please try again.', { immediately: true })
-    }
   }
 
   return (
@@ -53,19 +40,6 @@ export default function Menu(props: MenuProps) {
           ))}
         </div>
 
-        <ThemeToggle />
-        {status === 'authenticated' && (
-          <Button
-            aria-label="Sign out"
-            loading={isSigningOut}
-            onClick={handleSignOut}
-            size="icon"
-            title="Sign out"
-            variant="outline"
-          >
-            {!isSigningOut && <LogOut aria-hidden="true" size={16} />}
-          </Button>
-        )}
         <Sheet>
           <SheetTrigger
             render={(
@@ -80,8 +54,8 @@ export default function Menu(props: MenuProps) {
             <MenuIcon size={18} />
           </SheetTrigger>
 
-          <SheetContent className="w-72 border-hairline bg-card p-0 dark:border-white/10">
-            <SheetHeader className="border-b border-hairline px-5 py-6 dark:border-white/10">
+          <SheetContent className="w-72 border-hairline bg-card p-0">
+            <SheetHeader className="border-b border-hairline px-5 py-6">
               <SheetTitle className="text-sm font-semibold tracking-navigation">
                 CHANYUXI
               </SheetTitle>

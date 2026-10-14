@@ -1,0 +1,1 @@
+export const MAX_SITE_LIKES_INCREMENT = 1_000

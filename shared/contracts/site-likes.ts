@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const MAX_SITE_LIKES_INCREMENT = 1_000
+import { MAX_SITE_LIKES_INCREMENT } from '../constants/site-likes.js'
 
 export const SiteLikesErrorCode = {
   InvalidIncrement: 'INVALID_INCREMENT',

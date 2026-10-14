@@ -116,14 +116,14 @@ export function SkillsSection() {
   }
 
   return (
-    <section className="bg-canvas-soft py-14 sm:py-18 lg:py-24 dark:bg-dark-elevated">
+    <section className="bg-canvas-soft section-spacing dark:bg-dark-elevated">
       <div className="base-container">
         <div className="grid gap-8">
           <div>
-            <p className="text-xs font-medium tracking-navigation text-muted-soft uppercase dark:text-stone-500">
+            <p className="section-eyebrow">
               Skills
             </p>
-            <h2 className="mt-3 text-3xl font-normal tracking-section">
+            <h2 className="section-heading">
               What I use
             </h2>
           </div>
@@ -144,7 +144,7 @@ export function SkillsSection() {
                     {group.items}
                   </p>
                 </CollapsibleTrigger>
-                <CollapsibleContent className="collapsible-panel-height overflow-hidden transition-collapsible duration-300 data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0">
+                <CollapsibleContent className="collapsible-panel">
                   <div className="mt-4 flex flex-wrap gap-2 py-1">
                     {group.details.map((skill) => {
                       const name

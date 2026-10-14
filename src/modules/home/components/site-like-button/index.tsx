@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button'
 
 import { useSiteLikes } from './use-site-likes'
 
+const LIKE_COUNT_FORMATTER = new Intl.NumberFormat('en-US')
+
 interface FlyingHeart {
   duration: number
   id: number
@@ -30,6 +32,7 @@ export function SiteLikeButton() {
   } = useSiteLikes()
   const [hearts, setHearts] = useState<FlyingHeart[]>([])
   const nextHeartIdRef = useRef(0)
+  const formattedCount = LIKE_COUNT_FORMATTER.format(count ?? 0)
 
   const handleClick = () => {
     nextHeartIdRef.current += 1
@@ -53,7 +56,7 @@ export function SiteLikeButton() {
   return (
     <Button
       aria-busy={isLoading || isSubmitting}
-      aria-label={`Like this site. Current count: ${count ?? 'loading'}`}
+      aria-label={`Like this site. Current count: ${isLoading ? 'loading' : formattedCount}`}
       aria-pressed={hasLikedToday}
       className="relative overflow-visible"
       onClick={handleClick}
@@ -81,7 +84,7 @@ export function SiteLikeButton() {
                 <span className="sr-only">Loading likes</span>
               </>
             )
-          : <span className="translate-y-px sm:translate-y-0">{count ?? '0'}</span>}
+          : <span className="translate-y-px sm:translate-y-0">{formattedCount}</span>}
       </span>
       <FlyingHearts hearts={hearts} onComplete={removeHeart} />
     </Button>

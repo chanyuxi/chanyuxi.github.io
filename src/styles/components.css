@@ -1,0 +1,45 @@
+@layer components {
+  .section-eyebrow {
+    @apply text-xs font-medium tracking-navigation text-muted-soft uppercase;
+
+    @variant dark {
+      @apply text-stone-500;
+    }
+  }
+
+  .section-heading {
+    @apply mt-3 text-3xl font-normal tracking-section;
+  }
+
+  .section-body {
+    @apply text-base leading-7 text-muted-foreground;
+  }
+
+  .display-heading {
+    @apply font-serif text-4xl font-light tracking-display sm:text-5xl;
+  }
+
+  .surface-card {
+    @apply border border-hairline bg-card shadow-soft;
+  }
+
+  .quiet-link {
+    @apply cursor-pointer text-sm text-muted-foreground transition-colors hover:text-ink;
+
+    @variant dark {
+      @apply text-stone-400 hover:text-stone-100;
+    }
+  }
+
+  .collapsible-panel {
+    height: var(--collapsible-panel-height);
+
+    @apply overflow-hidden transition-collapsible duration-300;
+  }
+
+  .collapsible-panel[data-ending-style],
+  .collapsible-panel[data-starting-style] {
+    height: 0;
+    opacity: 0;
+  }
+}

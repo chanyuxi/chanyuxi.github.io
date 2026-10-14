@@ -45,7 +45,7 @@ export function RequireAuth() {
             search: location.search,
           },
         }}
-        to="/auth/sign-in"
+        to="/auth"
       />
     )
   }
@@ -57,7 +57,7 @@ function AuthRouteLoading() {
   return (
     <section
       aria-live="polite"
-      className="flex min-h-[calc(100svh-4.5rem)] items-center justify-center"
+      className="flex min-h-page items-center justify-center"
       role="status"
     >
       <LoaderCircle aria-hidden="true" className="size-5 text-muted-foreground motion-safe:animate-spin" />
@@ -73,7 +73,7 @@ function getReturnTo(state: unknown) {
     !from
     || !from.pathname.startsWith('/')
     || from.pathname.startsWith('//')
-    || from.pathname === '/auth/sign-in'
+    || from.pathname === '/auth'
   ) {
     return '/'
   }

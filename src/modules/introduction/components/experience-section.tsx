@@ -43,16 +43,16 @@ const career = [
 export function ExperienceSection() {
   return (
     <section
-      className="scroll-mt-18 py-14 sm:py-18 lg:py-24"
+      className="scroll-mt-18 section-spacing"
       id="experience"
     >
       <div className="base-container">
         <div className="grid gap-8">
           <div>
-            <p className="text-xs font-medium tracking-navigation text-muted-soft uppercase dark:text-stone-500">
+            <p className="section-eyebrow">
               Experience
             </p>
-            <h2 className="mt-3 text-3xl font-normal tracking-section">
+            <h2 className="section-heading">
               Where I worked
             </h2>
           </div>
@@ -71,7 +71,7 @@ export function ExperienceSection() {
                       <h3 className="text-lg font-medium text-ink dark:text-stone-100">
                         {item.company}
                       </h3>
-                      <p className="mt-3 max-w-2xl leading-7 text-muted-foreground">
+                      <p className="section-body mt-3 max-w-2xl">
                         {item.summary}
                       </p>
                     </div>
@@ -79,9 +79,9 @@ export function ExperienceSection() {
                   <span className="sr-only">Toggle key contributions</span>
                 </CollapsibleTrigger>
 
-                <CollapsibleContent className="collapsible-panel-height overflow-hidden transition-collapsible duration-300 data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0">
+                <CollapsibleContent className="collapsible-panel">
                   <div className="pb-7 sm:ml-52 md:ml-0">
-                    <p className="text-xs font-medium tracking-label text-muted-soft uppercase dark:text-stone-500">
+                    <p className="section-eyebrow">
                       Key contributions
                     </p>
                     <ul className="mt-4 max-w-2xl space-y-3">

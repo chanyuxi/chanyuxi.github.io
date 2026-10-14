@@ -2,4 +2,4 @@
 'introduction': minor
 ---
 
-Add Neon Auth sign-in with server-side API token verification.
+Add Neon Auth email sign-in and sign-up with server-side API token verification.

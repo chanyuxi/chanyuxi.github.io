@@ -6,13 +6,13 @@ export default function AIChat() {
   const { error, handleSubmit, input, inputRef, loading, messages, setInput } = useAIChat()
 
   return (
-    <section className="py-14 sm:py-18 lg:py-24">
+    <section className="section-spacing">
       <div className="base-container">
         <div className="mb-8 space-y-4">
-          <h1 className="font-serif text-4xl font-light tracking-section sm:text-5xl">
+          <h1 className="display-heading">
             Talking
           </h1>
-          <p className="text-base leading-7 text-muted-foreground">
+          <p className="section-body">
             Ask something, then follow your curiosity. Each reply builds on your conversation.
           </p>
         </div>

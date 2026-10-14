@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from 'motion/react'
 
 import { buttonVariants } from '@/components/ui/button'
 
-import avatar from '../../assets/avatar.webp'
+import avatar from '../assets/avatar.webp'
 
 export function HeroSection() {
   const shouldReduceMotion = useReducedMotion()
@@ -13,23 +13,23 @@ export function HeroSection() {
   return (
     <motion.section
       animate={visible}
-      className="py-14 sm:py-18 lg:py-24"
+      className="section-spacing"
       initial={initial}
       transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
     >
       <div className="base-container grid gap-10 lg:grid-cols-hero lg:items-center lg:gap-16">
         <div>
-          <p className="mb-5 text-xs font-medium tracking-eyebrow text-muted-soft uppercase dark:text-stone-500">
+          <p className="section-eyebrow mb-5">
             About
           </p>
           <h1 className="text-5xl font-normal tracking-display-hero sm:text-6xl">
             Yongzheng Chen
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+          <p className="section-body mt-6 max-w-2xl text-lg leading-8">
             Frontend engineer with 3+ years of experience building web and
             mobile products with JavaScript, TypeScript, Vue, and React.
           </p>
-          <p className="mt-3 max-w-2xl leading-7 text-muted-foreground">
+          <p className="section-body mt-3 max-w-2xl">
             I focus on clear code, reusable components, practical tooling,
             and steady delivery.
           </p>

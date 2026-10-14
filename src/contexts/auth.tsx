@@ -15,6 +15,7 @@ interface AuthContextType {
   isSigningOut: boolean
   signIn: (credentials: SignInCredentials) => Promise<void>
   signOut: () => Promise<void>
+  signUp: (credentials: SignUpCredentials) => Promise<SignUpOutcome>
   status: AuthStatus
   user: AuthUser | null
 }
@@ -31,6 +32,16 @@ interface SignInCredentials {
   email: string
   password: string
 }
+
+interface SignUpCredentials {
+  email: string
+  name: string
+  password: string
+}
+
+// Returned when sign-up succeeds but the service issues no session, which
+// happens when email verification is enforced for new accounts.
+type SignUpOutcome = 'authenticated' | 'verification-pending'
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
@@ -82,6 +93,35 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setStatus('authenticated')
   }, [])
 
+  const signUp = useCallback(async (
+    credentials: SignUpCredentials,
+  ): Promise<SignUpOutcome> => {
+    const { authClient, resetAccessToken } = await import('@/libs/auth')
+    const { data, error } = await authClient.signUp.email(credentials)
+
+    if (error) {
+      throw new Error(error.message || 'Unable to create your account. Please try again.')
+    }
+
+    // Email verification may be enforced, in which case no session is issued.
+    if (!data || !('session' in data) || !data.session) {
+      return 'verification-pending'
+    }
+
+    resetAccessToken()
+
+    const sessionUser = await loadSessionUser()
+
+    if (!sessionUser) {
+      throw new Error('Unable to verify the new session. Please try again.')
+    }
+
+    setUser(sessionUser)
+    setStatus('authenticated')
+
+    return 'authenticated'
+  }, [])
+
   const signOut = useCallback(async () => {
     setIsSigningOut(true)
 
@@ -103,9 +143,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
     isSigningOut,
     signIn,
     signOut,
+    signUp,
     status,
     user,
-  }), [isSigningOut, signIn, signOut, status, user])
+  }), [isSigningOut, signIn, signOut, signUp, status, user])
 
   return <AuthContext value={contextValue}>{children}</AuthContext>
 }

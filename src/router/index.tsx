@@ -39,8 +39,8 @@ const router = createBrowserRouter([
       {
         children: [
           {
-            lazy: lazyRoute(() => import('@/modules/auth/sign-in')),
-            path: 'auth/sign-in',
+            lazy: lazyRoute(() => import('@/modules/auth')),
+            path: 'auth',
           },
         ],
         Component: PublicOnlyRoute,

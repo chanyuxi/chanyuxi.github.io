@@ -23,6 +23,8 @@
   --color-skill-summary: var(--skill-summary);
   --color-skill-badge: var(--skill-badge);
   --color-skill-badge-foreground: var(--skill-badge-foreground);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -53,8 +55,6 @@
   --color-body: #4e4e4e;
   --color-muted-soft: #a8a29e;
   --color-surface: #f0efed;
-  --color-hairline: #e7e5e4;
-  --color-hairline-strong: #d6d3d1;
   --color-dark-surface: #0c0a09;
   --color-dark-elevated: #1c1917;
   --shadow-soft: 0 4px 16px rgb(12 10 9 / 4%);
@@ -84,6 +84,8 @@
   --skill-summary: #777169;
   --skill-badge: #ffffff;
   --skill-badge-foreground: #292524;
+  --hairline: #e7e5e4;
+  --hairline-strong: #d6d3d1;
 }
 
 .dark {
@@ -109,4 +111,6 @@
   --skill-summary: #a8a29e;
   --skill-badge: #292524;
   --skill-badge-foreground: #fafafa;
+  --hairline: rgb(255 255 255 / 10%);
+  --hairline-strong: rgb(255 255 255 / 15%);
 }
