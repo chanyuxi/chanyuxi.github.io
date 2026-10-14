@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 import { cn as cnCompiler } from 'cn/vite'
 import { defineConfig } from 'vite'
 
+import { poetryCharacterSetPlugin } from './build/plugins/character-set-extractor/poetry'
 import { markdownMatterPlugin } from './build/plugins/markdown-matter'
 
 const { version } = JSON.parse(
@@ -32,6 +33,7 @@ export default defineConfig(({ mode }) => ({
     drop: mode === 'development' ? [] : ['console'],
   },
   plugins: [
+    poetryCharacterSetPlugin,
     cnCompiler({
       content: ['src/**/*.{ts,tsx}'],
       out: 'src/libs/cn-tables.ts',

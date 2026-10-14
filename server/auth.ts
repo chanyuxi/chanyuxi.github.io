@@ -1,4 +1,4 @@
-import type { Me } from '../shared/contracts/auth.js'
+import type { VerifiedUser } from '../shared/contracts/auth.js'
 import type { JWTPayload } from 'jose'
 
 import { createRemoteJWKSet, jwtVerify } from 'jose'
@@ -14,7 +14,7 @@ const invalidSessionMessage
 
 let jwks: ReturnType<typeof createRemoteJWKSet> | undefined
 
-export async function requireVerifiedUser(request: Request): Promise<Me> {
+export async function requireVerifiedUser(request: Request): Promise<VerifiedUser> {
   const authorization = request.headers.get('authorization')
 
   if (!authorization?.startsWith(BEARER_PREFIX)) {
