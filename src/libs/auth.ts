@@ -11,6 +11,8 @@ if (!neonAuthUrl) {
   )
 }
 
+console.log(neonAuthUrl)
+
 // The session cookie lives on the Neon Auth origin, so cross-origin
 // requests must send credentials for session and token exchange to work.
 export const authClient: ReactBetterAuthClient = createAuthClient(neonAuthUrl, {

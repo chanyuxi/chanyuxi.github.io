@@ -14,6 +14,10 @@ export function useMeQuery(options?: { enabled?: boolean }) {
     // sign-out removes the entry so nothing survives across sessions.
     queryFn: ({ signal }) => requestMe(signal),
     queryKey: authQueryKeys.me(),
+    // A rejected session is not transient, so retrying only multiplies
+    // doomed 401s. The axios interceptor still retries once when a fresh
+    // token actually differs (the sign-out-in-another-tab case).
+    retry: false,
     staleTime: 30_000,
   })
 }

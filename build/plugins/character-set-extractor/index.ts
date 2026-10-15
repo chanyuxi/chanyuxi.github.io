@@ -16,27 +16,28 @@ import {
   resolve,
 } from 'node:path'
 
-import matter from 'gray-matter'
+export interface CharacterSetTarget {
+  /**
+   * Extracts the characters to keep from each monitored file's content.
+   * Return an empty string for content that contributes nothing.
+   */
+  match: (content: string) => string
+  /**
+   * Directories or files whose content feeds the character set.
+   * Paths that are neither a readable directory nor a text file fail silently.
+   */
+  monitorFolder: string[]
+  /** Path of the subsetted font to write. */
+  output: string
+  /** Path of the source font to subset. */
+  source: string
+  /** Fixed characters that are always included in the subset. */
+  staticCharacters?: string
+}
 
 interface CharacterSetCacheEntry {
   characters: string
   fontMtimeMs: number
-}
-
-interface CharacterSetDetection {
-  extract?: CharacterSetExtraction
-  marker?: string
-  path: string
-}
-
-type CharacterSetExtraction = 'all' | 'frontmatter'
-
-interface CharacterSetTarget {
-  characters?: string
-  detect: (CharacterSetDetection | string)[]
-  marker?: string
-  output: string
-  source: string
 }
 
 interface FontCacheEntry {
@@ -55,14 +56,8 @@ type SubsetFont = (
   options: { targetFormat: 'woff2' },
 ) => Promise<Buffer>
 
-const CODE_EXTENSIONS = new Set([
-  '.js',
-  '.jsx',
-  '.ts',
-  '.tsx',
-])
-
 const TEXT_EXTENSIONS = new Set([
+  '.css',
   '.html',
   '.js',
   '.jsx',
@@ -81,15 +76,11 @@ export function characterSetExtractor(targets: CharacterSetTarget[]): Plugin {
   let regeneration = Promise.resolve()
   const caches: GenerationCaches = { characters: new Map(), fonts: new Map() }
 
-  const detectionRoots = () => targets.flatMap(target => [
-    resolve(root, target.source),
-    ...target.detect.map(detection => resolve(
-      root,
-      typeof detection === 'string' ? detection : detection.path,
-    )),
-  ])
-
   const generate = () => generateCharacterSets(root, targets, caches)
+
+  const monitorRoots = () => targets.flatMap(target =>
+    target.monitorFolder.map(folder => resolve(root, folder)),
+  )
 
   return {
     async buildStart() {
@@ -104,7 +95,7 @@ export function characterSetExtractor(targets: CharacterSetTarget[]): Plugin {
     },
     configureServer(server) {
       const scheduleRegeneration = (filepath: string) => {
-        if (!detectionRoots().some(path => isPathInside(filepath, path))) {
+        if (!monitorRoots().some(path => isPathInside(filepath, path))) {
           return
         }
 
@@ -138,7 +129,9 @@ export function characterSetExtractor(targets: CharacterSetTarget[]): Plugin {
 }
 
 async function collectFiles(path: string): Promise<string[]> {
-  const stats = await stat(path)
+  const stats = await stat(path).catch(() => null)
+
+  if (!stats) return []
 
   if (stats.isFile()) {
     return TEXT_EXTENSIONS.has(extname(path)) ? [path] : []
@@ -152,23 +145,6 @@ async function collectFiles(path: string): Promise<string[]> {
   ))
 
   return files.flat()
-}
-
-function extractFrontmatterCharacters(source: string) {
-  return Object.values(matter(source).data)
-    .filter(value => typeof value === 'string' || Array.isArray(value))
-    .join('')
-}
-
-function extractHanCharacters(text: string, decodeEscapes: boolean) {
-  const decodedText = decodeEscapes
-    ? text.replace(
-        /\\u([0-9a-fA-F]{4})/g,
-        (_match, code: string) => String.fromCodePoint(Number.parseInt(code, 16)),
-      )
-    : text
-
-  return decodedText.match(/\p{Script=Han}+/gu)?.join('') ?? ''
 }
 
 async function fileExists(path: string) {
@@ -191,12 +167,8 @@ async function generateCharacterSets(
   let changed = false
 
   for (const target of targets) {
-    const chunks = await Promise.all(target.detect.map(async (detection) => {
-      const rule = typeof detection === 'string'
-        ? { path: detection }
-        : detection
-      const detectionPath = resolve(root, rule.path)
-      const files = await collectFiles(detectionPath)
+    const chunks = await Promise.all(target.monitorFolder.map(async (folder) => {
+      const files = await collectFiles(resolve(root, folder))
 
       return Promise.all(files.map(async (filepath) => {
         inputs.add(filepath)
@@ -207,23 +179,12 @@ async function generateCharacterSets(
           fileCache.set(filepath, source)
         }
 
-        const marker = rule.marker ?? target.marker
-        if (marker && !source.includes(marker)) return ''
-
-        const extract = rule.extract ?? 'all'
-        const content = extract === 'frontmatter'
-          ? extractFrontmatterCharacters(source)
-          : source
-
-        return extractHanCharacters(
-          content,
-          CODE_EXTENSIONS.has(extname(filepath)),
-        )
+        return target.match(source)
       }))
     }))
 
     const characters = [
-      ...new Set(`${chunks.flat().join('')}${target.characters ?? ''}`),
+      ...new Set(`${chunks.flat().join('')}${target.staticCharacters ?? ''}`),
     ].join('')
 
     if (!characters) {

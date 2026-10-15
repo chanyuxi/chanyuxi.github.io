@@ -53,7 +53,9 @@ apiClient.interceptors.response.use(
     if (axios.isCancel(error)) return Promise.reject(error)
 
     // A cached token can outlive a sign-out in another tab. Reset the
-    // cache and retry once with a fresh token before surfacing the error.
+    // cache and retry once before surfacing the error — but only when a
+    // fresh token actually differs, otherwise the retry would just
+    // replay the same rejected 401 in a loop.
     if (
       axios.isAxiosError(error)
       && error.response?.status === 401
@@ -66,10 +68,17 @@ apiClient.interceptors.response.use(
       if (!config.retriedAfterAuth) {
         config.retriedAfterAuth = true
 
-        const { resetAccessToken } = await import('@/libs/auth')
+        const failedToken = String(error.config.headers.get('Authorization'))
+          .slice('Bearer '.length)
+        const { getAccessToken, resetAccessToken } = await import('@/libs/auth')
+
         resetAccessToken()
 
-        return apiClient.request(config)
+        const freshToken = await getAccessToken()
+
+        if (freshToken && freshToken !== failedToken) {
+          return apiClient.request(config)
+        }
       }
     }
 

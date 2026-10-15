@@ -1,5 +1,3 @@
-import './index.css'
-
 import type { LoaderFunctionArgs } from 'react-router'
 
 import { motion, useReducedMotion } from 'motion/react'

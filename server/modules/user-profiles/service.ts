@@ -20,8 +20,9 @@ export function createUserProfileService(
 
       if (request.avatar) {
         const avatar = decodeAvatarDataUrl(request.avatar)
-        const key = `avatars/${userId}/${avatar.contentHash}.${avatar.extension}`
+        const key = `${userId}/${avatar.contentHash}.${avatar.extension}`
         const stored = await putPublicObject(
+          'avatars',
           key,
           avatar.bytes,
           avatar.contentType,

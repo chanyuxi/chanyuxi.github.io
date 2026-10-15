@@ -6,12 +6,23 @@ import { optionalEnv } from './env.js'
 import { HttpError } from './http.js'
 
 // Thin seam over Neon Object Storage (an S3-compatible API). Writes go
-// through the branch's S3 endpoint; public URLs are built from the
-// public_read base so they stay stable and cacheable when stored in the
-// database. Configure via:
-//   NEON_STORAGE_ENDPOINT, NEON_STORAGE_REGION, NEON_STORAGE_BUCKET,
-//   NEON_STORAGE_ACCESS_KEY_ID, NEON_STORAGE_SECRET_ACCESS_KEY,
-//   NEON_STORAGE_PUBLIC_BASE_URL (the bucket's public_read base).
+// through the branch's S3 endpoint; public URLs are derived from the
+// endpoint plus the bucket name so they stay stable and cacheable when
+// stored in the database. Only the connection is configured via the
+// environment:
+//   NEON_STORAGE_ENDPOINT, NEON_STORAGE_REGION,
+//   NEON_STORAGE_ACCESS_KEY_ID, NEON_STORAGE_SECRET_ACCESS_KEY.
+// Buckets are not secrets: register new content types in PUBLIC_BUCKETS
+// below and create the matching bucket in the Neon Console (Object
+// storage tab, access level public_read) — no extra environment variables.
+
+// Registry of buckets whose objects are served at public URLs. Each key is
+// the stable name call sites refer to; each value is the Neon bucket name.
+export const PUBLIC_BUCKETS = {
+  avatars: 'avatars',
+} as const
+
+export type PublicBucket = keyof typeof PUBLIC_BUCKETS
 
 export interface StoredObject {
   key: string
@@ -20,9 +31,7 @@ export interface StoredObject {
 
 interface StorageConfig {
   accessKeyId: string
-  bucket: string
   endpoint: string
-  publicBaseUrl: string
   region: string
   secretAccessKey: string
 }
@@ -30,13 +39,14 @@ interface StorageConfig {
 let client: S3Client | undefined
 let config: StorageConfig | undefined
 
-/** Whether avatar uploads can be served right now. */
+/** Whether object storage is configured so uploads can be served right now. */
 export function isStorageConfigured(): boolean {
   return readConfig() !== undefined
 }
 
 /** Upload bytes under a content-hashed key and return its public URL. */
 export async function putPublicObject(
+  bucket: PublicBucket,
   key: string,
   body: Uint8Array,
   contentType: string,
@@ -52,7 +62,7 @@ export async function putPublicObject(
       // Content-hashed keys never change contents, so responses may be
       // cached aggressively by browsers and proxies.
       Body: body,
-      Bucket: storageConfig.bucket,
+      Bucket: PUBLIC_BUCKETS[bucket],
       CacheControl: 'public, max-age=31536000, immutable',
       ContentType: contentType,
       Key: key,
@@ -61,7 +71,7 @@ export async function putPublicObject(
 
   return {
     key,
-    url: `${storageConfig.publicBaseUrl}/${key}`,
+    url: `${storageConfig.endpoint}/${PUBLIC_BUCKETS[bucket]}/${key}`,
   }
 }
 
@@ -84,27 +94,16 @@ function readConfig(): StorageConfig | undefined {
   config ??= (() => {
     const endpoint = optionalEnv('NEON_STORAGE_ENDPOINT')
     const region = optionalEnv('NEON_STORAGE_REGION')
-    const bucket = optionalEnv('NEON_STORAGE_BUCKET')
     const accessKeyId = optionalEnv('NEON_STORAGE_ACCESS_KEY_ID')
     const secretAccessKey = optionalEnv('NEON_STORAGE_SECRET_ACCESS_KEY')
-    const publicBaseUrl = optionalEnv('NEON_STORAGE_PUBLIC_BASE_URL')
 
-    if (
-      !endpoint
-      || !region
-      || !bucket
-      || !accessKeyId
-      || !secretAccessKey
-      || !publicBaseUrl
-    ) {
+    if (!endpoint || !region || !accessKeyId || !secretAccessKey) {
       return undefined
     }
 
     return {
       accessKeyId,
-      bucket,
-      endpoint,
-      publicBaseUrl: publicBaseUrl.replace(/\/$/, ''),
+      endpoint: endpoint.replace(/\/$/, ''),
       region,
       secretAccessKey,
     }

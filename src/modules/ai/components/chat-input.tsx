@@ -48,12 +48,11 @@ export function ChatInput({ input, inputRef, loading, onChange, onSubmit }: Chat
         <Button
           aria-label="Send message"
           className="absolute right-2.5 bottom-2.5"
-          disabled={!input.trim()}
-          loading={loading}
+          disabled={!input.trim() || loading}
           size="icon"
           type="submit"
         >
-          {!loading && <ArrowUp aria-hidden="true" className="size-5" />}
+          <ArrowUp aria-hidden="true" className="size-5" />
         </Button>
       </div>
     </form>

@@ -40,7 +40,8 @@ export async function requireVerifiedUser(request: Request): Promise<VerifiedUse
 
     payload = result.payload
   }
-  catch {
+  catch (error) {
+    console.log(1, error)
     throw new HttpError(401, AuthErrorCode.Unauthenticated, invalidSessionMessage)
   }
 

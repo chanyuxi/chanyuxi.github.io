@@ -23,7 +23,7 @@
     "db:set-role": "tsx scripts/db-set-role.ts",
     "db:set-role:master": "tsx scripts/db-set-role.ts master",
     "db:studio": "drizzle-kit studio",
-    "dev:vercel": "node --env-file=.env.local node_modules/vercel/dist/vc.js dev --debug",
+    "dev:vercel": "vercel dev",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "typecheck": "tsc -b --pretty false",
@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
+    "@changesets/types": "^7.0.0",
     "@chanyuxi/eslint-waltz": "^1.4.0",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
@@ -104,7 +105,7 @@
     "unified": "^11.0.5",
     "unist-util-visit": "^5.1.0",
     "unplugin-icons": "^24.0.0",
-    "vercel": "^59.25.4",
+    "vercel": "^64.0.2",
     "vite": "^7.0.6"
   }
 }
