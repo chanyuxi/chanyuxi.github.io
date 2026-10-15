@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.8.0 - 2026-10-15
+
+### Added
+
+- Introduced the user profile page.
+
+### Changed
+
+- Simplified the header avatar menu.
+- The AI chat now explains failures more clearly.
+
 ## 0.7.0 - 2026-10-14
 
 ### Added

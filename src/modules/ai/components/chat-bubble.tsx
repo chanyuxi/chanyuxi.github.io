@@ -42,7 +42,7 @@ export function ChatBubble({ message, streaming }: ChatBubbleProps) {
           : (
               <div aria-label="Waiting for a reply" className="flex h-6 items-center gap-2 text-muted-foreground" role="status">
                 <LoaderCircle aria-hidden="true" className="size-4 motion-safe:animate-spin" />
-                <span className="text-sm leading-6">Thinking</span>
+                <span className="text-sm leading-6">Thinking...</span>
               </div>
             )}
       </div>
