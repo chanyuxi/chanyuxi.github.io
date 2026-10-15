@@ -86,4 +86,3 @@
 - Set up React routing and core components.
 - Add responsive navigation.
 - Add GitHub workflows and code standards.
-

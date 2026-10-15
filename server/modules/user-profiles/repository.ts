@@ -5,9 +5,16 @@ import { eq } from 'drizzle-orm'
 import { getDatabase } from '../../db/index.js'
 import { userProfiles } from '../../db/schema/index.js'
 
+export interface UserProfilePatch {
+  avatarUrl?: string
+  bio?: string
+  isProfileInitialized?: boolean
+}
+
 export interface UserProfileRepository {
   getByUserId: (userId: string) => Promise<undefined | UserProfile>
   getOrCreateByUserId: (userId: string) => Promise<UserProfile>
+  upsertByUserId: (userId: string, patch: UserProfilePatch) => Promise<UserProfile>
 }
 
 export function createUserProfileRepository(
@@ -46,5 +53,21 @@ export function createUserProfileRepository(
     return profile
   }
 
-  return { getByUserId, getOrCreateByUserId }
+  async function upsertByUserId(userId: string, patch: UserProfilePatch) {
+    // The conflict update only touches patched columns, so an absent
+    // `avatarUrl` never wipes an existing one.
+    const [upserted] = await databaseProvider()
+      .insert(userProfiles)
+      .values({ userId, ...patch })
+      .onConflictDoUpdate({ set: patch, target: userProfiles.userId })
+      .returning()
+
+    if (!upserted) {
+      throw new Error('The database did not return the user profile')
+    }
+
+    return upserted
+  }
+
+  return { getByUserId, getOrCreateByUserId, upsertByUserId }
 }

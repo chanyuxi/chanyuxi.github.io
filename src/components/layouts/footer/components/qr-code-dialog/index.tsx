@@ -1,65 +1,46 @@
-import { LoaderCircle } from 'lucide-react'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 
-interface QrCodeDialogProps {
+export interface QrCodeDialogProps {
   label: string
   value: string
 }
 
-const QrCode = lazy(() => import('@/components/common/qr-code'))
+const QrCodeDialogContent = lazy(() => import('./dialog'))
 
-export function QrCodeDialog({ label, value }: QrCodeDialogProps) {
-  return (
-    <Dialog>
-      <DialogTrigger
-        render={(
-          <Button
-            type="button"
-            variant="quiet"
-          />
-        )}
+export function QrCodeDialog(props: QrCodeDialogProps) {
+  const { label } = props
+  const [requested, setRequested] = useState(false)
+
+  if (!requested) {
+    return (
+      <Button
+        aria-haspopup="dialog"
+        onClick={() => setRequested(true)}
+        type="button"
+        variant="quiet"
       >
         {label}
-      </DialogTrigger>
+      </Button>
+    )
+  }
 
-      <DialogContent
-        showCloseButton={false}
-        variant="image"
-      >
-        <DialogTitle className="sr-only">
-          {`${label} QR code`}
-        </DialogTitle>
-
-        <Suspense fallback={<QrCodeLoading label={label} />}>
-          <QrCode value={value} />
-        </Suspense>
-      </DialogContent>
-    </Dialog>
-  )
-}
-
-function QrCodeLoading({ label }: { label: string }) {
   return (
-    <div
-      aria-live="polite"
-      className="flex size-36 items-center justify-center bg-white"
-      role="status"
+    <Suspense
+      fallback={(
+        <Button
+          aria-busy="true"
+          aria-haspopup="dialog"
+          disabled
+          type="button"
+          variant="quiet"
+        >
+          {label}
+        </Button>
+      )}
     >
-      <LoaderCircle
-        aria-hidden="true"
-        className="size-5 text-muted-foreground motion-safe:animate-spin"
-      />
-      <span className="sr-only">
-        {`Loading ${label} QR code`}
-      </span>
-    </div>
+      <QrCodeDialogContent {...props} />
+    </Suspense>
   )
 }

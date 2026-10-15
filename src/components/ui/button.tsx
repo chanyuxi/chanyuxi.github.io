@@ -45,6 +45,7 @@ function Button({
   className,
   disabled,
   loading = false,
+  nativeButton,
   size = 'default',
   variant = 'default',
   ...props
@@ -55,6 +56,7 @@ function Button({
       className={cn(buttonVariants({ className, size, variant }))}
       data-slot="button"
       disabled={disabled || loading}
+      nativeButton={nativeButton ?? !props.render}
       {...props}
     >
       {loading && <LoaderCircle aria-hidden="true" className="size-4 motion-safe:animate-spin" />}

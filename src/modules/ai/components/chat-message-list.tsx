@@ -1,6 +1,6 @@
 import type { ChatMessage } from '../type'
 
-import chatEmptyIcon from '../assets/chat-round-line-svgrepo-com.svg'
+import MessageCircleMore from '~icons/lucide/message-circle-more'
 
 import { ChatBubble } from './chat-bubble'
 
@@ -23,10 +23,9 @@ export function ChatMessageList({ error, loading, messages }: ChatMessageListPro
     >
       {messages.length === 0 && !error && (
         <div className="flex min-h-52 items-center justify-center">
-          <img
-            alt=""
-            className="size-20 dark:brightness-0 dark:invert"
-            src={chatEmptyIcon}
+          <MessageCircleMore
+            aria-hidden="true"
+            className="size-20 text-muted-soft dark:text-stone-600"
           />
           <p className="sr-only">Your conversation will appear here.</p>
         </div>

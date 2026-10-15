@@ -21,7 +21,7 @@ const aliases = {
 const manualChunks = {
   'data-vendor': ['@tanstack/react-query', 'axios', 'zod'],
   'react-vendor': ['react', 'react-dom', 'react-router'],
-  'ui-vendor': ['@base-ui/react', 'class-variance-authority', 'cn/engine', 'lucide-react'],
+  'ui-vendor': ['class-variance-authority', 'cn/engine'],
 }
 
 export default defineConfig(({ mode }) => {

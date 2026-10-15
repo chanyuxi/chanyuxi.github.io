@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react'
 
-import { Heart, LoaderCircle } from 'lucide-react'
+import Heart from '~icons/lucide/heart'
+import LoaderCircle from '~icons/lucide/loader-circle'
 import { useCallback, useRef, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -68,7 +69,6 @@ export function SiteLikeButton() {
           ? 'fill-destructive text-destructive transition-colors duration-300'
           : 'fill-transparent transition-colors duration-300'}
         data-icon="inline-start"
-        size={16}
       />
       <span
         aria-live="polite"

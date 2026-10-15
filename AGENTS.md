@@ -1,11 +1,10 @@
-# AI Work Guide
+# AI Work Guidance
 
-## Static
+## Static Rule
 
 - Always edit this file in English.
 - Always use English for text within the project.
 - The README.md file can never be edited.
-- Do not create any test files (for the time being).
 
 - Style requirements should prioritize the capabilities provided by Tailwind CSS, and 
   only fall back to alternative implementations if necessary.
@@ -18,6 +17,12 @@
   source of truth, and preserve the existing typography, light/dark mode, spacing 
   rhythm, and Tailwind-first styling approach.
 
-## Temporary
+## Changelog
 
+- Prefix each changeset summary with `added:`, `changed:`, `fixed:`, or `removed:`; without a prefix it falls back to `### Changed`.
+- Never edit `CHANGELOG.md` by hand; `pnpm changeset:version` writes it.
+
+## Temporary Rule
+
+- Do not create any test files.
 - From now on, only Iconify is permitted for use.

@@ -1,14 +1,20 @@
-import { LoaderCircle } from 'lucide-react'
+import LoaderCircle from '~icons/lucide/loader-circle'
 import { Navigate, Outlet, useLocation } from 'react-router'
 
 import { useAuth } from '@/contexts/auth'
+import { getReturnTo } from '@/libs/return-location'
 
-interface AuthLocationState {
-  from?: {
-    hash: string
-    pathname: string
-    search: string
-  }
+export function AuthRouteLoading() {
+  return (
+    <section
+      aria-live="polite"
+      className="flex min-h-page items-center justify-center"
+      role="status"
+    >
+      <LoaderCircle aria-hidden="true" className="size-5 text-muted-foreground motion-safe:animate-spin" />
+      <span className="sr-only">Checking your session…</span>
+    </section>
+  )
 }
 
 export function PublicOnlyRoute() {
@@ -51,32 +57,4 @@ export function RequireAuth() {
   }
 
   return <Outlet />
-}
-
-function AuthRouteLoading() {
-  return (
-    <section
-      aria-live="polite"
-      className="flex min-h-page items-center justify-center"
-      role="status"
-    >
-      <LoaderCircle aria-hidden="true" className="size-5 text-muted-foreground motion-safe:animate-spin" />
-      <span className="sr-only">Checking your session…</span>
-    </section>
-  )
-}
-
-function getReturnTo(state: unknown) {
-  const from = (state as AuthLocationState | null)?.from
-
-  if (
-    !from
-    || !from.pathname.startsWith('/')
-    || from.pathname.startsWith('//')
-    || from.pathname === '/auth'
-  ) {
-    return '/'
-  }
-
-  return `${from.pathname}${from.search}${from.hash}`
 }

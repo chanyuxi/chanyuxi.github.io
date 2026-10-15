@@ -1,5 +1,5 @@
+import ArrowRight from '~icons/lucide/arrow-right'
 import Github from '~icons/simple-icons/github'
-import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { Button } from '@/components/ui/button'

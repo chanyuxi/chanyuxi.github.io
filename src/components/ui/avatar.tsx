@@ -7,12 +7,12 @@ function Avatar({
   size = 'default',
   ...props
 }: {
-  size?: 'default' | 'lg' | 'sm'
+  size?: 'default' | 'lg' | 'sm' | 'xl'
 } & AvatarPrimitive.Root.Props) {
   return (
     <AvatarPrimitive.Root
       className={cn(
-        'group/avatar relative flex size-8 shrink-0 rounded-full select-none after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken data-[size=lg]:size-10 data-[size=sm]:size-6 dark:after:mix-blend-lighten',
+        'group/avatar relative flex size-8 shrink-0 rounded-full select-none after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken data-[size=lg]:size-10 data-[size=sm]:size-6 data-[size=xl]:size-28 dark:after:mix-blend-lighten',
         className,
       )}
       data-size={size}

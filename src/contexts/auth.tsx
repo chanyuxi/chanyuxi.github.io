@@ -54,22 +54,25 @@ export function AuthProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     let active = true
 
-    loadSessionUser()
-      .then((sessionUser) => {
-        if (!active) return
+    const cancelSessionLoad = scheduleIdleTask(() => {
+      loadSessionUser()
+        .then((sessionUser) => {
+          if (!active) return
 
-        setUser(sessionUser)
-        setStatus(sessionUser ? 'authenticated' : 'anonymous')
-      })
-      .catch(() => {
-        if (!active) return
+          setUser(sessionUser)
+          setStatus(sessionUser ? 'authenticated' : 'anonymous')
+        })
+        .catch(() => {
+          if (!active) return
 
-        setUser(null)
-        setStatus('anonymous')
-      })
+          setUser(null)
+          setStatus('anonymous')
+        })
+    })
 
     return () => {
       active = false
+      cancelSessionLoad()
     }
   }, [])
 
@@ -172,4 +175,21 @@ async function loadSessionUser(): Promise<AuthUser | null> {
         name: data.user.name,
       }
     : null
+}
+
+function scheduleIdleTask(task: () => void) {
+  const idleWindow = window as unknown as {
+    cancelIdleCallback?: Window['cancelIdleCallback']
+    requestIdleCallback?: Window['requestIdleCallback']
+  }
+
+  if (idleWindow.requestIdleCallback && idleWindow.cancelIdleCallback) {
+    const callbackId = idleWindow.requestIdleCallback(task, { timeout: 1_000 })
+
+    return () => idleWindow.cancelIdleCallback?.(callbackId)
+  }
+
+  const timeoutId = window.setTimeout(task, 250)
+
+  return () => window.clearTimeout(timeoutId)
 }

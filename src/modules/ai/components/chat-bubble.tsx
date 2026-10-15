@@ -1,6 +1,6 @@
 import type { ChatMessage } from '../type'
 
-import { LoaderCircle } from 'lucide-react'
+import LoaderCircle from '~icons/lucide/loader-circle'
 
 type ChatBubbleProps = {
   message: ChatMessage

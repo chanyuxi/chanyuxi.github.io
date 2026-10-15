@@ -1,7 +1,8 @@
 import type { UserProfileService } from './service.js'
 
+import { ProfileSetupErrorCode, profileSetupRequestSchema } from '../../../shared/contracts/auth.js'
 import { requireVerifiedUser } from '../../core/auth.js'
-import { defineApiHandler, successResponse } from '../../core/http.js'
+import { defineApiHandler, parseJsonBody, successResponse } from '../../core/http.js'
 
 export function createUserProfileHandlers(service: UserProfileService) {
   const GET = defineApiHandler(
@@ -14,5 +15,25 @@ export function createUserProfileHandlers(service: UserProfileService) {
     },
   )
 
-  return { GET }
+  // Completes the one-time Profile Setup flow. Responds with the same `Me`
+  // shape as GET /api/me so the client can swap it into its query cache.
+  const POST = defineApiHandler(
+    'profile-setup.complete',
+    async (request) => {
+      const user = await requireVerifiedUser(request)
+      const body = await parseJsonBody(
+        request,
+        profileSetupRequestSchema,
+        {
+          code: ProfileSetupErrorCode.InvalidRequest,
+          message: 'The profile setup request has an invalid format',
+        },
+      )
+      const profile = await service.completeSetup(user.id, body)
+
+      return successResponse({ ...user, profile })
+    },
+  )
+
+  return { GET, POST }
 }

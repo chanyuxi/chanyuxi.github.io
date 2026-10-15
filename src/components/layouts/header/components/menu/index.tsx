@@ -1,28 +1,17 @@
-import { Menu as MenuIcon } from 'lucide-react'
-import { useNavigate } from 'react-router'
+import MenuIcon from '~icons/lucide/menu'
+import { lazy, Suspense, useState } from 'react'
+import { Link } from 'react-router'
 
 import { Button } from '@/components/ui/button'
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
 
 interface MenuProps {
   items: { name: string, path: string }[]
 }
 
-export default function Menu(props: MenuProps) {
-  const nav = useNavigate()
+const MobileMenu = lazy(() => import('./mobile-menu'))
 
-  const { items } = props
-
-  const handleMenuItemClick = (path: string) => {
-    nav(path)
-  }
+export default function Menu({ items }: MenuProps) {
+  const [mobileMenuRequested, setMobileMenuRequested] = useState(false)
 
   return (
     <nav className="relative">
@@ -32,7 +21,7 @@ export default function Menu(props: MenuProps) {
             <Button
               className="capitalize"
               key={item.path}
-              onClick={() => handleMenuItemClick(item.path)}
+              render={<Link to={item.path} />}
               variant="nav"
             >
               {item.name}
@@ -40,46 +29,38 @@ export default function Menu(props: MenuProps) {
           ))}
         </div>
 
-        <Sheet>
-          <SheetTrigger
-            render={(
+        {mobileMenuRequested
+          ? (
+              <Suspense
+                fallback={(
+                  <Button
+                    aria-busy="true"
+                    aria-haspopup="dialog"
+                    aria-label="Loading navigation"
+                    className="lg:hidden"
+                    disabled
+                    size="icon"
+                    variant="outline"
+                  >
+                    <MenuIcon aria-hidden="true" className="size-4.5" />
+                  </Button>
+                )}
+              >
+                <MobileMenu items={items} />
+              </Suspense>
+            )
+          : (
               <Button
+                aria-haspopup="dialog"
                 aria-label="Toggle navigation"
                 className="lg:hidden"
+                onClick={() => setMobileMenuRequested(true)}
                 size="icon"
                 variant="outline"
-              />
+              >
+                <MenuIcon aria-hidden="true" className="size-4.5" />
+              </Button>
             )}
-          >
-            <MenuIcon size={18} />
-          </SheetTrigger>
-
-          <SheetContent className="w-72 border-hairline bg-card p-0">
-            <SheetHeader className="border-b border-hairline px-5 py-6">
-              <SheetTitle className="text-sm font-semibold tracking-navigation">
-                CHANYUXI
-              </SheetTitle>
-            </SheetHeader>
-
-            <div className="flex flex-col gap-1 p-3">
-              {items.map(item => (
-                <SheetClose
-                  key={item.path}
-                  render={(
-                    <Button
-                      className="capitalize"
-                      onClick={() => handleMenuItemClick(item.path)}
-                      size="menu"
-                      variant="menu-item"
-                    />
-                  )}
-                >
-                  {item.name}
-                </SheetClose>
-              ))}
-            </div>
-          </SheetContent>
-        </Sheet>
       </div>
     </nav>
   )

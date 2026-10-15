@@ -1,4 +1,4 @@
-import { XIcon } from 'lucide-react'
+import XIcon from '~icons/lucide/x'
 import { useSyncExternalStore } from 'react'
 
 import { Button } from '@/components/ui/button'

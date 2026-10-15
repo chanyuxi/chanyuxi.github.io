@@ -1,4 +1,5 @@
-import { Moon, Sun } from 'lucide-react'
+import Moon from '~icons/lucide/moon'
+import Sun from '~icons/lucide/sun'
 
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/contexts/theme'
@@ -18,7 +19,7 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
       size="icon"
       variant="outline"
     >
-      {theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}
+      {theme === 'light' ? <Moon className="size-4" /> : <Sun className="size-4" />}
     </Button>
   )
 }

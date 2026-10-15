@@ -1,4 +1,5 @@
-import { ArrowDown, Mail } from 'lucide-react'
+import ArrowDown from '~icons/lucide/arrow-down'
+import Mail from '~icons/lucide/mail'
 import { motion, useReducedMotion } from 'motion/react'
 
 import { buttonVariants } from '@/components/ui/button'

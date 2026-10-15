@@ -1,7 +1,7 @@
 import type { RefObject, SubmitEvent } from 'react'
 
 import { MAX_CHAT_MESSAGE_LENGTH } from '@shared/constants/chat'
-import { ArrowUp } from 'lucide-react'
+import ArrowUp from '~icons/lucide/arrow-up'
 
 import { Button } from '@/components/ui/button'
 
