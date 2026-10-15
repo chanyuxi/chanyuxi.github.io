@@ -62,7 +62,7 @@ export function ExperienceSection() {
               <Collapsible
                 key={item.company}
               >
-                <CollapsibleTrigger className="w-full cursor-pointer py-7 text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4">
+                <CollapsibleTrigger className="py-7">
                   <div className="grid gap-3 sm:grid-cols-experience-meta sm:gap-8 md:grid-cols-[minmax(0,1fr)_11rem]">
                     <p className="font-mono text-xs leading-7 text-muted-foreground md:order-2 md:text-right">
                       {item.period}
@@ -79,7 +79,7 @@ export function ExperienceSection() {
                   <span className="sr-only">Toggle key contributions</span>
                 </CollapsibleTrigger>
 
-                <CollapsibleContent className="collapsible-panel">
+                <CollapsibleContent>
                   <div className="pb-7 sm:ml-52 md:ml-0">
                     <p className="section-eyebrow">
                       Key contributions

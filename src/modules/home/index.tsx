@@ -1,4 +1,5 @@
-import { ArrowRight, Github } from 'lucide-react'
+import Github from '~icons/simple-icons/github'
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { Button } from '@/components/ui/button'
@@ -28,8 +29,7 @@ export default function Home() {
 
           <div>
             <h1 className="text-center text-4xl font-normal tracking-display select-none xl:text-5xl">
-              Forever
-              {' '}
+              {`Forever `}
               <span className="text-2xl font-medium text-muted-foreground xl:text-3xl dark:text-stone-400">
                 Leslie
               </span>
@@ -47,7 +47,7 @@ export default function Home() {
                 />
               )}
             >
-              <Github data-icon="inline-start" size={16} />
+              <Github className="size-4" data-icon="inline-start" />
               <span>Github</span>
             </Button>
           </div>

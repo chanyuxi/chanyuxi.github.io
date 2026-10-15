@@ -17,9 +17,11 @@ function DialogContent({
   children,
   className,
   showCloseButton = true,
+  variant = 'default',
   ...props
 }: {
   showCloseButton?: boolean
+  variant?: 'default' | 'image'
 } & DialogPrimitive.Popup.Props) {
   return (
     <DialogPortal>
@@ -27,6 +29,8 @@ function DialogContent({
       <DialogPrimitive.Popup
         className={cn(
           'fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-1/2 gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 transition-[opacity,scale] duration-200 ease-out outline-none data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0 motion-reduce:transition-none sm:max-w-sm',
+          variant === 'image'
+          && 'w-auto gap-0 rounded bg-white p-3 shadow-lg ring-0 dark:shadow-none',
           className,
         )}
         data-slot="dialog-content"
@@ -38,9 +42,9 @@ function DialogContent({
             data-slot="dialog-close"
             render={(
               <Button
-                className="absolute top-3 right-3 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground dark:hover:bg-white/10"
+                className="absolute top-3 right-3"
                 size="icon-sm"
-                variant="ghost"
+                variant="muted"
               />
             )}
           >

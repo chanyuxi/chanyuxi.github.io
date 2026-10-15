@@ -1,6 +1,6 @@
 import { Button as ButtonPrimitive } from '@base-ui/react/button'
+import LoaderCircle from '~icons/lucide/loader-circle'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { LoaderCircle } from 'lucide-react'
 
 import { cn } from '@/libs/utils'
 
@@ -13,27 +13,28 @@ const buttonVariants = cva(
     },
     variants: {
       size: {
-        'default':
-          'h-10 gap-2 px-5 has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4',
+        'default': 'h-10 gap-2 px-5 has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4',
         'icon': 'size-10',
         'icon-lg': 'size-11',
         'icon-sm': 'size-8',
         'icon-xs': 'size-7 [&_svg:not([class*="size-"])]:size-3',
         'lg': 'h-11 gap-2 px-6',
+        'menu': 'h-11 w-full justify-start gap-2.5 rounded-xl px-4',
+        'menu-sm': 'h-9 w-full justify-start gap-2.5 rounded-md px-2.5',
         'sm': 'h-8 gap-1.5 px-3 text-xs [&_svg:not([class*="size-"])]:size-3.5',
         'xs': 'h-7 gap-1 px-2.5 text-xs [&_svg:not([class*="size-"])]:size-3',
       },
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/85',
-        destructive:
-          'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
-        ghost:
-          'hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50',
-        link: 'text-primary underline-offset-4 hover:underline',
-        outline:
-          'border-input bg-transparent text-ink hover:bg-muted aria-expanded:bg-muted aria-expanded:text-foreground dark:text-stone-100',
-        secondary:
-          'bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
+        'default': 'bg-primary text-primary-foreground hover:bg-primary/85',
+        'destructive': 'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
+        'ghost': 'hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50',
+        'link': 'h-auto p-0 text-ink underline-offset-4 hover:underline dark:text-stone-100',
+        'menu-item': 'text-muted-foreground hover:bg-muted hover:text-ink aria-expanded:bg-muted aria-expanded:text-foreground dark:text-stone-300 dark:hover:bg-muted/50 dark:hover:text-white',
+        'muted': 'text-muted-foreground hover:bg-muted hover:text-foreground dark:hover:bg-white/10',
+        'nav': 'h-auto px-0 text-muted-foreground hover:text-ink dark:hover:text-stone-50',
+        'outline': 'border-input bg-transparent text-ink hover:bg-muted aria-expanded:bg-muted aria-expanded:text-foreground dark:text-stone-100',
+        'quiet': 'h-auto p-0 font-normal text-muted-foreground hover:text-ink dark:hover:text-stone-100',
+        'secondary': 'bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
       },
     },
   },

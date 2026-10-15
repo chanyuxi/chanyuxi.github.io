@@ -58,7 +58,7 @@ export function SiteLikeButton() {
       aria-busy={isLoading || isSubmitting}
       aria-label={`Like this site. Current count: ${isLoading ? 'loading' : formattedCount}`}
       aria-pressed={hasLikedToday}
-      className="relative overflow-visible"
+      className="relative"
       onClick={handleClick}
       type="button"
       variant="outline"

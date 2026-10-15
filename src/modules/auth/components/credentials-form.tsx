@@ -164,10 +164,8 @@ export function CredentialsForm({ mode, onModeChange }: CredentialsFormProps) {
       </Button>
 
       <p className="mt-5 text-center text-sm leading-6 text-muted-foreground">
-        {mode === 'sign-up' ? 'Already have an account?' : 'New here?'}
-        {' '}
+        {`${mode === 'sign-up' ? 'Already have an account?' : 'New here?'} `}
         <Button
-          className="h-auto p-0 text-ink dark:text-stone-100"
           disabled={isSubmitting}
           onClick={handleToggleMode}
           type="button"

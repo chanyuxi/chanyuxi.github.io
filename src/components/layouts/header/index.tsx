@@ -27,9 +27,9 @@ export default function Header() {
       <div className="base-container">
         <div className="flex min-h-18 items-center">
           <Button
-            className="h-auto px-0 text-sm font-semibold tracking-navigation text-ink hover:bg-transparent dark:text-stone-50"
+            className="font-semibold tracking-navigation text-ink dark:text-stone-50"
             onClick={handleLogoClick}
-            variant="ghost"
+            variant="nav"
           >
             CHANYUXI
           </Button>

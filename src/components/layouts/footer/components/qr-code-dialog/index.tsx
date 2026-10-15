@@ -22,9 +22,8 @@ export function QrCodeDialog({ label, value }: QrCodeDialogProps) {
       <DialogTrigger
         render={(
           <Button
-            className="quiet-link h-auto p-0 font-normal hover:no-underline"
             type="button"
-            variant="link"
+            variant="quiet"
           />
         )}
       >
@@ -32,13 +31,11 @@ export function QrCodeDialog({ label, value }: QrCodeDialogProps) {
       </DialogTrigger>
 
       <DialogContent
-        className="w-auto max-w-none gap-0 rounded bg-white p-3 shadow-lg ring-0"
         showCloseButton={false}
+        variant="image"
       >
         <DialogTitle className="sr-only">
-          {label}
-          {' '}
-          QR code
+          {`${label} QR code`}
         </DialogTitle>
 
         <Suspense fallback={<QrCodeLoading label={label} />}>
@@ -61,11 +58,7 @@ function QrCodeLoading({ label }: { label: string }) {
         className="size-5 text-muted-foreground motion-safe:animate-spin"
       />
       <span className="sr-only">
-        Loading
-        {' '}
-        {label}
-        {' '}
-        QR code
+        {`Loading ${label} QR code`}
       </span>
     </div>
   )

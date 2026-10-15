@@ -30,10 +30,10 @@ export default function Menu(props: MenuProps) {
         <div className="hidden items-center gap-6 lg:flex">
           {items.map(item => (
             <Button
-              className="px-0 text-sm font-medium text-muted-foreground capitalize hover:bg-transparent hover:text-ink dark:text-stone-400 dark:hover:text-stone-50"
+              className="capitalize"
               key={item.path}
               onClick={() => handleMenuItemClick(item.path)}
-              variant="ghost"
+              variant="nav"
             >
               {item.name}
             </Button>
@@ -45,7 +45,7 @@ export default function Menu(props: MenuProps) {
             render={(
               <Button
                 aria-label="Toggle navigation"
-                className="rounded-full lg:hidden"
+                className="lg:hidden"
                 size="icon"
                 variant="outline"
               />
@@ -67,9 +67,10 @@ export default function Menu(props: MenuProps) {
                   key={item.path}
                   render={(
                     <Button
-                      className="h-11 w-full justify-start rounded-xl px-4 text-muted-foreground capitalize hover:text-ink dark:text-stone-300 dark:hover:text-white"
+                      className="capitalize"
                       onClick={() => handleMenuItemClick(item.path)}
-                      variant="ghost"
+                      size="menu"
+                      variant="menu-item"
                     />
                   )}
                 >

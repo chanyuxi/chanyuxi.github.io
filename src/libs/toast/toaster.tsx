@@ -30,11 +30,10 @@ export function Toaster() {
           </span>
           <Button
             aria-label="Dismiss notification"
-            className="text-muted-foreground"
             onClick={() => toastStore.dismiss(current.id)}
             size="icon"
             type="button"
-            variant="ghost"
+            variant="muted"
           >
             <XIcon aria-hidden="true" />
           </Button>

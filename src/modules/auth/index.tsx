@@ -23,7 +23,7 @@ export default function AuthPage() {
   return (
     <section className="flex min-h-page items-center section-spacing">
       <div className="base-container">
-        <Card className="mx-auto w-full max-w-md gap-0 rounded-2xl py-0" variant="glass">
+        <Card className="mx-auto w-full max-w-md gap-0 py-0" variant="glass">
           <CardContent className="p-6 sm:p-8">
             <AnimatePresence initial={false} mode="popLayout">
               <motion.div

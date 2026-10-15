@@ -47,7 +47,7 @@ export function ChatInput({ input, inputRef, loading, onChange, onSubmit }: Chat
         />
         <Button
           aria-label="Send message"
-          className="absolute right-2.5 bottom-2.5 [&_svg:not([class*='size-'])]:size-5"
+          className="absolute right-2.5 bottom-2.5"
           disabled={!input.trim()}
           loading={loading}
           size="icon"

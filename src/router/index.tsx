@@ -4,7 +4,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router'
 
 import Home from '@/modules/home'
 
-import { PublicOnlyRoute } from './components/auth-route'
+import { PublicOnlyRoute, RequireAuth } from './components/auth-route'
 import { RootLayout } from './components/root-layout'
 
 type RouteModule = {
@@ -44,6 +44,15 @@ const router = createBrowserRouter([
           },
         ],
         Component: PublicOnlyRoute,
+      },
+      {
+        children: [
+          {
+            lazy: lazyRoute(() => import('@/modules/user/profile')),
+            path: 'user/profile',
+          },
+        ],
+        Component: RequireAuth,
       },
       {
         element: <Navigate replace to="/under-development" />,

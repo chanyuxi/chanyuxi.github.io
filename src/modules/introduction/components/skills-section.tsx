@@ -136,7 +136,7 @@ export function SkillsSection() {
                 onOpenChange={() => handleOpenChange(index)}
                 open={actives.includes(index)}
               >
-                <CollapsibleTrigger className="w-full cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4">
+                <CollapsibleTrigger>
                   <h3 className="font-medium text-skill-label">
                     {group.label}
                   </h3>
@@ -144,7 +144,7 @@ export function SkillsSection() {
                     {group.items}
                   </p>
                 </CollapsibleTrigger>
-                <CollapsibleContent className="collapsible-panel">
+                <CollapsibleContent>
                   <div className="mt-4 flex flex-wrap gap-2 py-1">
                     {group.details.map((skill) => {
                       const name
@@ -170,7 +170,7 @@ function SkillBadge({
 }) {
   const name = typeof skillDetail === 'string' ? skillDetail : skillDetail.name
   const badge = (
-    <Badge className="shadow-2xs" variant="skill">
+    <Badge variant="skill">
       {name}
     </Badge>
   )
@@ -179,13 +179,13 @@ function SkillBadge({
 
   return (
     <Tooltip>
-      <TooltipTrigger className="cursor-help rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+      <TooltipTrigger className="rounded-full">
         {badge}
       </TooltipTrigger>
       <TooltipContent
-        className="w-64 max-w-[calc(100vw-2rem)] flex-col items-stretch gap-3 rounded-xl border border-foreground/15 bg-secondary/25 p-4 text-foreground shadow-soft backdrop-blur-xs lg:w-96"
         hiddenArrow
         sideOffset={8}
+        variant="rich"
       >
         <p className="text-sm font-medium">{name}</p>
 

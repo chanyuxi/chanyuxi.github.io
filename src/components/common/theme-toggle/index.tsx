@@ -2,7 +2,6 @@ import { Moon, Sun } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/contexts/theme'
-import { cn } from '@/libs/utils'
 
 interface ThemeToggleProps {
   className?: string
@@ -14,7 +13,7 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
   return (
     <Button
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
-      className={cn('rounded-full', className)}
+      className={className}
       onClick={toggleTheme}
       size="icon"
       variant="outline"
