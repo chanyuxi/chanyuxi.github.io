@@ -1,28 +1,23 @@
-import type { ApiLogger } from '../http.js'
 import type { SiteLikesService } from './service.js'
 
-import { MAX_SITE_LIKES_INCREMENT } from '../../shared/constants/site-likes.js'
+import { MAX_SITE_LIKES_INCREMENT } from '../../../shared/constants/site-likes.js'
 import {
   incrementSiteLikesRequestSchema,
   SiteLikesErrorCode,
-} from '../../shared/contracts/site-likes.js'
+} from '../../../shared/contracts/site-likes.js'
 import {
   defineApiHandler,
   parseJsonBody,
   successResponse,
-} from '../http.js'
+} from '../../core/http.js'
 
 const invalidIncrementMessage
   = `increment must be an integer between 1 and ${MAX_SITE_LIKES_INCREMENT}`
 
-export function createSiteLikesHandlers(
-  service: SiteLikesService,
-  logger?: ApiLogger,
-) {
+export function createSiteLikesHandlers(service: SiteLikesService) {
   const GET = defineApiHandler(
     'site-likes.read',
     async () => successResponse(await service.getSiteLikes()),
-    logger,
   )
 
   const POST = defineApiHandler(
@@ -41,7 +36,6 @@ export function createSiteLikesHandlers(
         await service.incrementSiteLikes(payload.increment),
       )
     },
-    logger,
   )
 
   return { GET, POST }

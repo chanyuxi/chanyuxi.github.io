@@ -1,5 +1,7 @@
 import { drizzle } from 'drizzle-orm/neon-http'
 
+import { requireEnv } from '../core/env.js'
+
 let database: ReturnType<typeof drizzle> | undefined
 
 export function getDatabase() {
@@ -7,13 +9,7 @@ export function getDatabase() {
     return database
   }
 
-  const databaseUrl = process.env.NEON_DATABASE_URL
-
-  if (!databaseUrl) {
-    throw new Error('NEON_DATABASE_URL is not configured')
-  }
-
-  database = drizzle(databaseUrl)
+  database = drizzle(requireEnv('NEON_DATABASE_URL'))
 
   return database
 }

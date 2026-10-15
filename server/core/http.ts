@@ -1,7 +1,7 @@
 import type {
   ApiErrorResponse,
   ApiSuccessResponse,
-} from '../shared/contracts/api.js'
+} from '../../shared/contracts/api.js'
 import type { ZodType } from 'zod'
 
 const responseHeaders = {

@@ -1,17 +1,9 @@
-import { requireVerifiedUser } from '../server/auth.js'
-import { defineApiHandler, successResponse } from '../server/http.js'
-import { createUserProfileRepository } from '../server/user-profiles/repository.js'
-import { createUserProfileService } from '../server/user-profiles/service.js'
+import { createUserProfileHandlers } from '../server/modules/user-profiles/handlers.js'
+import { createUserProfileRepository } from '../server/modules/user-profiles/repository.js'
+import { createUserProfileService } from '../server/modules/user-profiles/service.js'
 
 const repository = createUserProfileRepository()
 const service = createUserProfileService(repository)
+const handlers = createUserProfileHandlers(service)
 
-export const GET = defineApiHandler(
-  'me.read',
-  async (request) => {
-    const user = await requireVerifiedUser(request)
-    const profile = await service.getOrCreateProfile(user.id)
-
-    return successResponse({ ...user, profile })
-  },
-)
+export const GET = handlers.GET

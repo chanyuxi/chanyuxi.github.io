@@ -1,4 +1,4 @@
-import type { MeProfile } from '../../shared/contracts/auth.js'
+import type { MeProfile } from '../../../shared/contracts/auth.js'
 import type { UserProfileRepository } from './repository.js'
 
 export interface UserProfileService {

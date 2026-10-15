@@ -1,10 +1,11 @@
-import type { VerifiedUser } from '../shared/contracts/auth.js'
+import type { VerifiedUser } from '../../shared/contracts/auth.js'
 import type { JWTPayload } from 'jose'
 
 import { createRemoteJWKSet, jwtVerify } from 'jose'
 
-import { AuthErrorCode } from '../shared/contracts/auth.js'
+import { AuthErrorCode } from '../../shared/contracts/auth.js'
 
+import { requireEnv } from './env.js'
 import { HttpError } from './http.js'
 
 const BEARER_PREFIX = 'Bearer '
@@ -64,13 +65,7 @@ export async function requireVerifiedUser(request: Request): Promise<VerifiedUse
 }
 
 function getAuthBaseUrl() {
-  const baseUrl = process.env.NEON_AUTH_BASE_URL
-
-  if (!baseUrl) {
-    throw new Error('NEON_AUTH_BASE_URL is not configured')
-  }
-
-  return baseUrl
+  return requireEnv('NEON_AUTH_BASE_URL')
 }
 
 function getJwks() {

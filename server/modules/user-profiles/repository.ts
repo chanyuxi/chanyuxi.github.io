@@ -1,9 +1,9 @@
-import type { UserProfile } from '../db/schema.js'
+import type { UserProfile } from '../../db/schema/index.js'
 
 import { eq } from 'drizzle-orm'
 
-import { getDatabase } from '../db/index.js'
-import { userProfiles } from '../db/schema.js'
+import { getDatabase } from '../../db/index.js'
+import { userProfiles } from '../../db/schema/index.js'
 
 export interface UserProfileRepository {
   getByUserId: (userId: string) => Promise<undefined | UserProfile>

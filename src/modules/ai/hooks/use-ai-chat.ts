@@ -4,6 +4,7 @@ import {
   MAX_CHAT_CONTEXT_MESSAGES,
   MAX_CHAT_MESSAGE_LENGTH,
 } from '@shared/constants/chat'
+import { apiErrorResponseSchema } from '@shared/contracts/api'
 import { type SubmitEvent, useEffect, useRef, useState } from 'react'
 
 export function useAIChat() {
@@ -33,6 +34,7 @@ export function useAIChat() {
     const userId = crypto.randomUUID()
     const replyId = crypto.randomUUID()
     let reply = ''
+    let failureMessage: null | string = null
     requestRef.current = controller
     setLoading(true)
     setError(null)
@@ -63,7 +65,8 @@ export function useAIChat() {
       })
 
       if (!response.ok || !response.body) {
-        throw new Error('AI request failed')
+        failureMessage = await readChatErrorMessage(response)
+        throw new Error(failureMessage)
       }
 
       const reader = response.body.getReader()
@@ -129,9 +132,9 @@ export function useAIChat() {
         if (!reply.trim()) {
           setMessages(current => current.filter(message => message.id !== replyId))
         }
-        setError(reply.trim()
+        setError(failureMessage ?? (reply.trim()
           ? 'The reply was interrupted. Your input is still here; please try again.'
-          : 'Could not get a reply. Your input is still here; please try again.')
+          : 'Could not get a reply. Your input is still here; please try again.'))
       }
       controller.abort()
     }
@@ -151,4 +154,20 @@ export function useAIChat() {
     messages,
     setInput,
   }
+}
+
+// Prefer the structured error body when the server rejects the request.
+async function readChatErrorMessage(response: Response) {
+  try {
+    const result = apiErrorResponseSchema.safeParse(await response.json())
+
+    if (result.success) {
+      return result.data.error.message
+    }
+  }
+  catch {
+    // The error body is not JSON; fall back to the generic message.
+  }
+
+  return 'AI request failed'
 }

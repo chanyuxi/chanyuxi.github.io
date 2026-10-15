@@ -1,4 +1,4 @@
-import type { SiteLikes } from '../../shared/contracts/site-likes.js'
+import type { SiteLikes } from '../../../shared/contracts/site-likes.js'
 import type { SiteLikesRepository } from './repository.js'
 
 export interface SiteLikesService {

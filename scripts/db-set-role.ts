@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/neon-http'
 
-import { userProfiles, userRole } from '../server/db/schema.js'
+import { userProfiles, userRole } from '../server/db/schema/index.js'
 
 const target = process.argv[2] === 'master' ? 'master' : 'dev'
 
