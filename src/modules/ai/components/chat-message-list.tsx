@@ -1,6 +1,7 @@
 import type { ChatMessage } from '../type'
 
 import MessageCircleMore from '~icons/lucide/message-circle-more'
+import { memo } from 'react'
 
 import { ChatBubble } from './chat-bubble'
 
@@ -10,7 +11,11 @@ type ChatMessageListProps = {
   messages: ChatMessage[]
 }
 
-export function ChatMessageList({ error, loading, messages }: ChatMessageListProps) {
+// Memoized so keystrokes in the chat input (parent state) do not re-render
+// the conversation; the messages identity only changes on stream flushes.
+export const ChatMessageList = memo(function ChatMessageList(
+  { error, loading, messages }: ChatMessageListProps,
+) {
   const lastMessageId = messages.at(-1)?.id
 
   return (
@@ -46,4 +51,4 @@ export function ChatMessageList({ error, loading, messages }: ChatMessageListPro
       )}
     </div>
   )
-}
+})

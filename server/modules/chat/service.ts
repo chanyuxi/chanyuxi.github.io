@@ -26,6 +26,12 @@ export interface ChatService {
   ) => Promise<ReadableStream<Uint8Array>>
 }
 
+interface ChatConfig {
+  apiKey: string
+  baseURL: string
+  model: string
+}
+
 export class ChatUnavailableError extends Error {
   constructor() {
     super('AI Chat is missing required server environment variables')
@@ -33,16 +39,19 @@ export class ChatUnavailableError extends Error {
   }
 }
 
+// Cached like the S3 client in core/storage.ts: environment variables never
+// change within a function instance, so one client serves every request.
+let cachedConfig: ChatConfig | undefined
+let cachedClient: OpenAI | undefined
+
 export function createChatService(): ChatService {
   return {
     // The request schema validates the shape and per-message limits; the
     // trimming below only keeps the prompt within a predictable budget.
     async streamChat(messages, signal) {
-      const apiKey = optionalEnv('AI_API_KEY')
-      const baseURL = optionalEnv('AI_BASE_URL')?.replace(/\/+$/, '')
-      const model = optionalEnv('AI_MODEL')
+      const config = readConfig()
 
-      if (!apiKey || !baseURL || !model) throw new ChatUnavailableError()
+      if (!config) throw new ChatUnavailableError()
 
       // Keep recent complete exchanges within a predictable prompt size.
       const context = messages.slice(-MAX_CHAT_CONTEXT_MESSAGES)
@@ -57,13 +66,7 @@ export function createChatService(): ChatService {
       const providerController = new AbortController()
 
       try {
-        const client = new OpenAI({
-          apiKey,
-          baseURL,
-          maxRetries: 0,
-          timeout: REQUEST_TIMEOUT_MS,
-        })
-        const stream = await client.chat.completions.create(
+        const stream = await getClient(config).chat.completions.create(
           {
             // The browser supplies conversational turns, never the system prompt
             // or model. The fixed server instruction comes before the context.
@@ -71,7 +74,7 @@ export function createChatService(): ChatService {
               { content: SYSTEM_PROMPT, role: 'system' },
               ...context,
             ],
-            model,
+            model: config.model,
             stream: true,
           },
           {
@@ -91,4 +94,29 @@ export function createChatService(): ChatService {
       }
     },
   }
+}
+
+function getClient(config: ChatConfig): OpenAI {
+  cachedClient ??= new OpenAI({
+    apiKey: config.apiKey,
+    baseURL: config.baseURL,
+    maxRetries: 0,
+    timeout: REQUEST_TIMEOUT_MS,
+  })
+
+  return cachedClient
+}
+
+function readConfig(): ChatConfig | undefined {
+  cachedConfig ??= (() => {
+    const apiKey = optionalEnv('AI_API_KEY')
+    const baseURL = optionalEnv('AI_BASE_URL')?.replace(/\/+$/, '')
+    const model = optionalEnv('AI_MODEL')
+
+    if (!apiKey || !baseURL || !model) return undefined
+
+    return { apiKey, baseURL, model }
+  })()
+
+  return cachedConfig
 }

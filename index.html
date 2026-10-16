@@ -8,6 +8,8 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <title>CHANYUXI - Welcome to my blog</title>
   <script>
+    // Mirrors src/constants/theme.ts (storage key + accepted values); keep
+    // both sides in sync.
     (() => {
       const root = document.documentElement
       let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'

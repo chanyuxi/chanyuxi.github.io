@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react'
 
-type Theme = 'dark' | 'light'
+import { isTheme, type Theme, THEME_STORAGE_KEY } from '@/constants/theme'
 
 interface ThemeContextType {
   theme: Theme
@@ -39,7 +39,7 @@ export function ThemeProvider(props: PropsWithChildren) {
     root.classList.toggle('dark', theme === 'dark')
     root.classList.toggle('light', theme === 'light')
     root.style.colorScheme = theme
-    localStorage.setItem('theme', theme)
+    localStorage.setItem(THEME_STORAGE_KEY, theme)
   }, [theme])
 
   return <ThemeContext value={contextValue}>{children}</ThemeContext>
@@ -62,8 +62,8 @@ function getInitialTheme(): Theme {
     return 'light'
   }
 
-  const saved = localStorage.getItem('theme')
-  if (saved === 'light' || saved === 'dark') {
+  const saved = localStorage.getItem(THEME_STORAGE_KEY)
+  if (isTheme(saved)) {
     return saved
   }
   return window.matchMedia('(prefers-color-scheme: dark)').matches

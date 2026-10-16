@@ -22,9 +22,8 @@ const GUST_AMPLITUDE = 0.35
 const HORIZON_RATIO = 0.34
 // Depth threshold separating the soft far layer from the near layer.
 const NEAR_SPLIT = 0.56
-// Internal canvas resolution factor. The canvas is upscaled by CSS, which
-// halves texture upload bandwidth and lends the streaks a soft edge for free.
-const RENDER_SCALE = 0.7
+// Render at the canvas's full calculated resolution so streak edges stay crisp.
+const RENDER_SCALE = 1
 // Share of landings that actually bloom a ripple.
 const RIPPLE_PROBABILITY = 0.72
 // Keep ripple strokes and contact flashes clear of the canvas bottom edge.

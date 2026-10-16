@@ -14,10 +14,19 @@ import {
 const invalidIncrementMessage
   = `increment must be an integer between 1 and ${MAX_SITE_LIKES_INCREMENT}`
 
+// The count is public and identical for everyone, so browsers and the Vercel
+// edge may serve it briefly instead of hitting the database on every visit.
+// The increment mutation returns the authoritative count, so a short window
+// of staleness only affects the initially displayed value.
+const COUNT_CACHE_CONTROL = 'public, max-age=30, stale-while-revalidate=60'
+
 export function createSiteLikesHandlers(service: SiteLikesService) {
   const GET = defineApiHandler(
     'site-likes.read',
-    async () => successResponse(await service.getSiteLikes()),
+    async () => successResponse(
+      await service.getSiteLikes(),
+      COUNT_CACHE_CONTROL,
+    ),
   )
 
   const POST = defineApiHandler(

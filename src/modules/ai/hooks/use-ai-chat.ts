@@ -7,6 +7,11 @@ import {
 import { apiErrorResponseSchema } from '@shared/contracts/api'
 import { type SubmitEvent, useEffect, useRef, useState } from 'react'
 
+// Stream deltas are batched into ~16 state updates per second so the token
+// rate never dictates the render rate. The completion and error updates
+// below always commit the final content, so no tail is lost to the throttle.
+const STREAM_FLUSH_INTERVAL_MS = 60
+
 export function useAIChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState('')
@@ -35,6 +40,7 @@ export function useAIChat() {
     const replyId = crypto.randomUUID()
     let reply = ''
     let failureMessage: null | string = null
+    let flushTimer: ReturnType<typeof setTimeout> | undefined
     requestRef.current = controller
     setLoading(true)
     setError(null)
@@ -49,6 +55,22 @@ export function useAIChat() {
       role: 'assistant',
       status: 'pending',
     }])
+
+    // Deltas accumulate in `reply`; flushes apply the latest text at a
+    // fixed interval instead of once per token.
+    const cancelFlush = () => {
+      if (flushTimer !== undefined) {
+        clearTimeout(flushTimer)
+        flushTimer = undefined
+      }
+    }
+
+    const flushReply = () => {
+      flushTimer = undefined
+      setMessages(current => current.map(message =>
+        message.id === replyId ? { ...message, content: reply } : message,
+      ))
+    }
 
     try {
       // Send up to ten completed exchanges plus the current question. Failed
@@ -88,9 +110,9 @@ export function useAIChat() {
           throw new Error('Invalid AI stream event')
         }
         reply += event.content
-        setMessages(current => current.map(message =>
-          message.id === replyId ? { ...message, content: reply } : message,
-        ))
+        if (flushTimer === undefined) {
+          flushTimer = setTimeout(flushReply, STREAM_FLUSH_INTERVAL_MS)
+        }
       }
 
       try {
@@ -114,20 +136,29 @@ export function useAIChat() {
         reader.releaseLock()
       }
 
+      // Commit any tail the throttle has not flushed yet, then finalize.
+      cancelFlush()
+
       if (!completed || !reply.trim()) throw new Error('AI reply was interrupted')
       setMessages(current => current.map(message =>
-        message.id === userId || message.id === replyId
-          ? { ...message, status: 'complete' }
-          : message,
+        message.id === replyId
+          ? { ...message, content: reply, status: 'complete' }
+          : message.id === userId
+            ? { ...message, status: 'complete' }
+            : message,
       ))
       setInput('')
     }
     catch {
+      cancelFlush()
+
       if (!controller.signal.aborted) {
         setMessages(current => current.map(message =>
-          message.id === userId || message.id === replyId
-            ? { ...message, status: 'failed' }
-            : message,
+          message.id === replyId
+            ? { ...message, content: reply, status: 'failed' }
+            : message.id === userId
+              ? { ...message, status: 'failed' }
+              : message,
         ))
         if (!reply.trim()) {
           setMessages(current => current.filter(message => message.id !== replyId))

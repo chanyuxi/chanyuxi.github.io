@@ -4,8 +4,10 @@ import type {
 } from '../../shared/contracts/api.js'
 import type { ZodType } from 'zod'
 
+const NO_STORE = 'no-store'
+
 const responseHeaders = {
-  'Cache-Control': 'no-store',
+  'Cache-Control': NO_STORE,
 }
 
 export type ApiHandler = (request: Request) => Promise<Response> | Response
@@ -86,8 +88,10 @@ export async function parseJsonBody<T>(
   return result.data
 }
 
-export function successResponse<T>(data: T) {
+// Responses default to no-store; pass an explicit policy only for public,
+// non-personal GET data that is identical for every visitor.
+export function successResponse<T>(data: T, cacheControl: string = NO_STORE) {
   const body: ApiSuccessResponse<T> = { data }
 
-  return Response.json(body, { headers: responseHeaders })
+  return Response.json(body, { headers: { 'Cache-Control': cacheControl } })
 }

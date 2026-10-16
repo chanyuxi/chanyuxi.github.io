@@ -1,13 +1,16 @@
 import type { ChatMessage } from '../type'
 
 import LoaderCircle from '~icons/lucide/loader-circle'
+import { memo } from 'react'
 
 type ChatBubbleProps = {
   message: ChatMessage
   streaming: boolean
 }
 
-export function ChatBubble({ message, streaming }: ChatBubbleProps) {
+// Memoized so a stream flush only re-renders the bubble whose message
+// object changed; completed messages keep a stable reference.
+export const ChatBubble = memo(function ChatBubble({ message, streaming }: ChatBubbleProps) {
   return (
     <div
       className={`flex animate-in duration-300 fade-in slide-in-from-bottom-2 motion-reduce:animate-none ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -48,4 +51,4 @@ export function ChatBubble({ message, streaming }: ChatBubbleProps) {
       </div>
     </div>
   )
-}
+})
