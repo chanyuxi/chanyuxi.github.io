@@ -3,9 +3,10 @@ type ExternalLinkGroup = Record<string, ExternalLink>
 
 export const EXTERNAL_LINKS = {
   projects: {
-    eslintWaltz: 'https://www.npmjs.com/package/@chanyuxi/eslint-waltz',
-    form: 'https://github.com/chanyuxi/form',
-    postsop: 'https://github.com/chanyuxi/postsop',
+    'chanyuxi.github.io': 'https://github.com/chanyuxi/chanyuxi.github.io',
+    'eslintWaltz': 'https://www.npmjs.com/package/@chanyuxi/eslint-waltz',
+    'form': 'https://github.com/chanyuxi/form',
+    'postsop': 'https://github.com/chanyuxi/postsop',
   },
   qrCodes: {
     qq: 'https://qm.qq.com/q/2xC4peRuYY',

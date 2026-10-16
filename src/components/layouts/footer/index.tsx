@@ -78,6 +78,10 @@ const footerGroups: FooterGroup[] = [
         label: 'Posts',
       },
       {
+        label: 'About this project',
+        link: EXTERNAL_LINKS.projects['chanyuxi.github.io'],
+      },
+      {
         label: 'Changelog',
         link: '/changelog',
       },
