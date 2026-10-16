@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router'
 import { Button } from '@/components/ui/button'
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -116,22 +115,21 @@ export function SetupForm({ returnTo }: SetupFormProps) {
 
         <FieldGroup>
           <Field data-invalid={Boolean(errors.bio)}>
-            <FieldLabel htmlFor="setup-bio">Bio</FieldLabel>
+            <FieldLabel className="text-center" htmlFor="setup-bio">Bio</FieldLabel>
             <Textarea
               {...register('bio')}
-              aria-describedby={errors.bio ? 'setup-bio-error' : 'setup-bio-hint'}
+              aria-describedby={errors.bio ? 'setup-bio-error' : undefined}
               aria-invalid={Boolean(errors.bio)}
               disabled={mutation.isPending}
               id="setup-bio"
               maxLength={MAX_PROFILE_BIO_LENGTH}
               placeholder="Introduce yourself in a few sentences…"
-              rows={4}
             />
-            <FieldDescription id="setup-bio-hint">
-              Share a few sentences about yourself. You can update this later
-              from your profile.
-            </FieldDescription>
-            <FieldError errors={[errors.bio]} id="setup-bio-error" />
+            <FieldError
+              className="text-center"
+              errors={[errors.bio]}
+              id="setup-bio-error"
+            />
           </Field>
         </FieldGroup>
 

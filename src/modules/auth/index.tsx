@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useState } from 'react'
 
-import { Card, CardContent } from '@/components/ui/card'
+import RainBackground from '@/components/common/rain-background'
 
 import { CredentialsForm } from './components/credentials-form'
 import { type AuthMode } from './schema'
@@ -11,45 +11,37 @@ const titles: Record<AuthMode, string> = {
   'sign-up': 'Create account',
 }
 
-const descriptions: Record<AuthMode, string> = {
-  'sign-in': 'Use your email and password to continue.',
-  'sign-up': 'Use your name, email, and password to continue.',
-}
-
 export default function AuthPage() {
   const [mode, setMode] = useState<AuthMode>('sign-in')
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <section className="flex min-h-page items-center section-spacing">
-      <div className="base-container">
-        <Card className="mx-auto w-full max-w-md gap-0 py-0" variant="glass">
-          <CardContent className="p-6 sm:p-8">
-            <AnimatePresence initial={false} mode="popLayout">
-              <motion.div
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -4 }}
-                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 4 }}
-                key={mode}
-                transition={{
-                  duration: shouldReduceMotion ? 0 : 0.25,
-                  ease: 'easeOut',
-                }}
-              >
-                <h1 className="display-heading text-center">
-                  {titles[mode]}
-                </h1>
-                <p className="mx-auto mt-3 max-w-sm text-center text-sm leading-6 text-muted-foreground dark:text-stone-300">
-                  {descriptions[mode]}
-                </p>
-              </motion.div>
-            </AnimatePresence>
+    <section className="relative isolate flex min-h-page items-center overflow-hidden section-spacing">
+      <RainBackground density={1.06} scale={0.92} speed={1.1} />
 
-            <div className="mt-8">
-              <CredentialsForm mode={mode} onModeChange={setMode} />
-            </div>
-          </CardContent>
-        </Card>
+      <div className="relative z-10 base-container">
+        <div className="mx-auto w-full max-w-md">
+          <AnimatePresence initial={false} mode="popLayout">
+            <motion.div
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -4 }}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 4 }}
+              key={mode}
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.25,
+                ease: 'easeOut',
+              }}
+            >
+              <h1 className="display-heading">
+                {titles[mode]}
+              </h1>
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="mt-8">
+            <CredentialsForm mode={mode} onModeChange={setMode} />
+          </div>
+        </div>
       </div>
     </section>
   )

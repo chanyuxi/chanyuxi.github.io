@@ -4,8 +4,7 @@ import { MAX_CHAT_MESSAGE_LENGTH } from '@shared/constants/chat'
 import ArrowUp from '~icons/lucide/arrow-up'
 
 import { Button } from '@/components/ui/button'
-
-import { useAutoResizeTextarea } from '../hooks/use-auto-resize-textarea'
+import { useAutoResizeTextarea } from '@/hooks/use-auto-resize-textarea'
 
 type ChatInputProps = {
   input: string

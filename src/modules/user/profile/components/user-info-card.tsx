@@ -1,7 +1,6 @@
 import type { Me } from '@shared/contracts/auth'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 
 interface UserInfoCardProps {
@@ -28,14 +27,9 @@ export function UserInfoCard({ user }: UserInfoCardProps) {
         </Avatar>
 
         <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
-            <h1 className="truncate text-2xl font-medium text-ink sm:text-3xl dark:text-stone-100">
-              {displayName}
-            </h1>
-            <Badge className="capitalize" variant="secondary">
-              {user.profile.role}
-            </Badge>
-          </div>
+          <h1 className="truncate text-2xl font-medium text-ink sm:text-3xl dark:text-stone-100">
+            {displayName}
+          </h1>
           <p className="mt-1 truncate text-sm text-muted-foreground">
             {user.email}
           </p>

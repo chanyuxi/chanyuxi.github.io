@@ -1,7 +1,6 @@
 import LoaderCircle from '~icons/lucide/loader-circle'
 import { Navigate, useLocation } from 'react-router'
 
-import { Card, CardContent } from '@/components/ui/card'
 import { getReturnTo } from '@/libs/return-location'
 import { useMeQuery } from '@/services/auth/queries'
 
@@ -33,20 +32,10 @@ export default function ProfileSetupPage() {
   return (
     <section className="flex min-h-page items-center section-spacing">
       <div className="base-container">
-        <Card className="mx-auto w-full max-w-md gap-0 py-0" variant="glass">
-          <CardContent className="p-4 sm:p-8">
-            <h1 className="display-heading text-center">
-              Set up your profile
-            </h1>
-            <p className="mx-auto mt-3 max-w-sm text-center text-sm leading-6 text-muted-foreground dark:text-stone-300">
-              Choose how you appear across the site. This only takes a moment.
-            </p>
-
-            <div className="mt-8">
-              <SetupForm returnTo={resolveReturnTo(location.state)} />
-            </div>
-          </CardContent>
-        </Card>
+        <div className="mx-auto w-full max-w-md">
+          <h1 className="sr-only">Set up your profile</h1>
+          <SetupForm returnTo={resolveReturnTo(location.state)} />
+        </div>
       </div>
     </section>
   )

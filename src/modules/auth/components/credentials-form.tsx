@@ -21,6 +21,8 @@ import {
   signUpFormSchema,
 } from '../schema'
 
+import { SocialLogins } from './social-logins'
+
 interface CredentialsFormProps {
   mode: AuthMode
   onModeChange: (mode: AuthMode) => void
@@ -155,7 +157,7 @@ export function CredentialsForm({ mode, onModeChange }: CredentialsFormProps) {
       )}
 
       <FieldError
-        className="mt-4 text-center leading-5"
+        className="mt-4 leading-5"
         errors={[errors.root?.server]}
       />
 
@@ -163,7 +165,9 @@ export function CredentialsForm({ mode, onModeChange }: CredentialsFormProps) {
         {mode === 'sign-up' ? 'Create account' : 'Sign in'}
       </Button>
 
-      <p className="mt-5 text-center text-sm leading-6 text-muted-foreground">
+      <SocialLogins />
+
+      <p className="mt-6 text-sm leading-6 text-muted-foreground">
         {`${mode === 'sign-up' ? 'Already have an account?' : 'New here?'} `}
         <Button
           disabled={isSubmitting}

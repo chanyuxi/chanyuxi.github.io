@@ -34,7 +34,7 @@ export default function Header() {
           <div className="ml-auto flex items-center gap-2">
             <Menu items={items} />
             <ThemeToggle />
-            <AuthenticatedAvatarControl />
+            <AccountControl />
           </div>
         </div>
       </div>
@@ -42,14 +42,27 @@ export default function Header() {
   )
 }
 
-function AuthenticatedAvatarControl() {
+// The account slot: a quiet sign-in entry for anonymous visitors that swaps
+// in the avatar popover once authenticated.
+function AccountControl() {
   const { status } = useAuth()
 
-  if (status !== 'authenticated') return null
+  // The deferred session check renders nothing to avoid a sign-in flicker.
+  if (status === 'loading') {
+    return null
+  }
+
+  if (status === 'authenticated') {
+    return (
+      <Suspense fallback={null}>
+        <AvatarControl />
+      </Suspense>
+    )
+  }
 
   return (
-    <Suspense fallback={null}>
-      <AvatarControl />
-    </Suspense>
+    <Button render={<Link to="/auth" />} variant="outline">
+      Sign in
+    </Button>
   )
 }
