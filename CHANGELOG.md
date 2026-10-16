@@ -1,88 +1,100 @@
 # Changelog
 
+## 0.9.0 - 2026-10-16
+
+### Added
+
+- New profile setup. Crop your avatar, write a bio.
+- The auth page got rain, and real login buttons.
+
+### Changed
+
+- Tidier profile and auth pages.
+- Snappier AI chat. Faster page loads.
+
 ## 0.8.0 - 2026-10-15
 
 ### Added
 
-- Introduced the user profile page.
+- Meet your profile page.
 
 ### Changed
 
-- Simplified the header avatar menu.
-- The AI chat now explains failures more clearly.
+- Leaner avatar menu.
+- AI chat explains failures better.
 
 ## 0.7.0 - 2026-10-14
 
 ### Added
 
-- We can now register and log in.
+- Sign up. Log in. Done.
 
 ## 0.6.0 - 2026-10-13
 
-### Changed
-
-- Open external links in new tabs.
-
 ### Added
 
-- Introduced the first version of the AI ​​conversation feature.
+- Say hi to the AI chat.
+
+### Changed
+
+- External links open in new tabs.
 
 ## 0.5.0 - 2026-09-24
 
-### Changed
-
-- Add toasts and centralize error feedback.
-- Improve accessibility, assets, and build checks.
-
 ### Added
 
-- No more static web page.
+- The site's alive now, no more static page.
+
+### Changed
+
+- Toasts everywhere, one place for errors.
+- Better accessibility, assets, and build checks.
 
 ## 0.4.2 - 2026-09-23
 
 ### Added
 
-- More poems introduced, now being perfected.
+- More poems. Still cooking.
 
 ## 0.4.1 - 2026-09-22
 
-### Changed
-
-- Significantly improve the loading speed.
-
 ### Added
 
-- Introduced friendly tips page.
+- A friendly tips page.
+
+### Changed
+
+- Way faster loading.
 
 ## 0.4.0 - 2026-09-21
 
 ### Changed
 
-- Adopt shared ESLint rules.
+- Shared ESLint rules.
 
 ## 0.3.0 - 2026-05-21
 
 ### Added
 
-- Launch the poetry section.
-- Add the footer and expanded navigation.
-- Add Vercel deployment and analytics.
+- Poetry section opens.
+- Footer plus a bigger nav.
+- Vercel deployment and analytics.
 
 ### Fixed
 
-- Fix poetry Markdown formatting.
+- Cleaner poetry Markdown.
 
 ## 0.2.0 - 2026-02-05
 
 ### Changed
 
-- Migrate styling to Tailwind CSS.
-- Refresh the site structure and homepage.
+- Tailwind CSS takes over.
+- Fresh site structure and homepage.
 
 ## 0.1.0 - 2025-08-03
 
 ### Added
 
-- Set up React routing and core components.
-- Add responsive navigation.
-- Add GitHub workflows and code standards.
+- React routing and core components.
+- Navigation that adapts.
+- GitHub workflows and code standards.
