@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.1 - 2026-10-16
+
+### Added
+
+- Update footer.
+
 ## 0.9.0 - 2026-10-16
 
 ### Added
