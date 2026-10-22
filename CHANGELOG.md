@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.0 - 2026-10-22
+
+### Added
+
+- Posts: Write first, panic later. Drafts included.
+
 ## 0.9.1 - 2026-10-16
 
 ### Added
