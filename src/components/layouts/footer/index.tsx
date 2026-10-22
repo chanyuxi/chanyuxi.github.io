@@ -76,6 +76,7 @@ const footerGroups: FooterGroup[] = [
       },
       {
         label: 'Posts',
+        link: '/post',
       },
       {
         label: 'About this project',

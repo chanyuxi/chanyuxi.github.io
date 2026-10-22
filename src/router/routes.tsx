@@ -81,7 +81,39 @@ export const routes = [
             path: 'product',
           },
           {
-            element: <Navigate replace to="/under-development" />,
+            children: [
+              {
+                handle: routeMetadata.posts,
+                index: true,
+                lazy: lazyRoute(() => import('@/modules/post/entrance')),
+              },
+              {
+                children: [
+                  {
+                    handle: routeMetadata.myPosts,
+                    lazy: lazyRoute(() => import('@/modules/post/mine')),
+                    path: 'mine',
+                  },
+                  {
+                    handle: routeMetadata.postEditor,
+                    lazy: lazyRoute(() => import('@/modules/post/editor')),
+                    path: 'editor/:id?',
+                  },
+                ],
+                Component: RequireAuth,
+              },
+              {
+                handle: routeMetadata.posts,
+                lazy: lazyRoute(() => import('@/modules/post/detail')),
+                path: ':slug',
+              },
+            ],
+            handle: routeMetadata.posts,
+            lazy: lazyRoute(() => import('@/modules/post')),
+            path: 'post',
+          },
+          {
+            element: <Navigate replace to="/post" />,
             path: 'post/entrance',
           },
           {

@@ -3,6 +3,8 @@ import { useMatches } from 'react-router'
 
 export interface PageMetadata {
   description: string
+  /** Hides the site footer for this route and every nested child route. */
+  hideFooter?: boolean
   title: string
 }
 
@@ -29,6 +31,15 @@ export function RouteMetadata() {
   }, [metadata])
 
   return null
+}
+
+/** True when the active route chain declares `hideFooter` on any route handle. */
+export function useIsFooterHidden() {
+  return useMatches().some((match) => {
+    const handle = match.handle
+
+    return isPageMetadata(handle) && handle.hideFooter === true
+  })
 }
 
 function isPageMetadata(value: unknown): value is PageMetadata {

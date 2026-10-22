@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
+@import 'highlight.js/styles/github-dark-dimmed.css';
 @import './styles/index.css';
 
-@source '../build/plugins/markdown-matter.ts';
+@plugin '@tailwindcss/typography';
+
+@source '../shared/markdown/**/*.ts';

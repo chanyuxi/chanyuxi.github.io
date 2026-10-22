@@ -13,7 +13,7 @@ export default function Header() {
   const items = [
     { name: 'Introduction', path: '/introduction' },
     { name: 'product', path: '/product' },
-    { name: 'Post', path: '/post/entrance' },
+    { name: 'Post', path: '/post' },
     { name: 'AI', path: '/ai' },
     { name: 'life', path: '/life' },
   ]

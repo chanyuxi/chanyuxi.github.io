@@ -15,6 +15,13 @@
       "when": 1792055742470,
       "tag": "0001_volatile_kinsey_walden",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792376605280,
+      "tag": "0002_medical_morgan_stark",
+      "breakpoints": true
     }
   ]
 }

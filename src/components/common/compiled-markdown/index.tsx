@@ -1,14 +1,9 @@
+import type { CompiledMarkdownNode } from '@shared/markdown/compile'
 import type { ReactNode } from 'react'
 
 import { createElement } from 'react'
 
-export interface CompiledMarkdownElement {
-  children: CompiledMarkdownNode[]
-  properties: Record<string, boolean | number | string>
-  tag: string
-}
-
-export type CompiledMarkdownNode = CompiledMarkdownElement | string
+export type { CompiledMarkdownNode }
 
 interface CompiledMarkdownProps {
   content: CompiledMarkdownNode[]

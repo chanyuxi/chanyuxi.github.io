@@ -19,6 +19,7 @@
     "eslint.config.ts",
     "commitlint.config.ts",
     "build/**/*.ts",
-    "scripts/**/*.ts"
+    "scripts/**/*.ts",
+    "shared/markdown/**/*.ts"
   ]
 }

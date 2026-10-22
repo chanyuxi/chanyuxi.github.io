@@ -21,6 +21,11 @@ export const routeMetadata = {
     description: 'Meet Yongzheng Chen and explore his frontend experience, skills, and work.',
     title: 'Introduction | CHANYUXI',
   },
+  myPosts: {
+    description: 'Manage your drafts and published posts on CHANYUXI.',
+    hideFooter: true,
+    title: 'My Posts | CHANYUXI',
+  },
   notFound: {
     description: 'The requested CHANYUXI page could not be found.',
     title: 'Page Not Found | CHANYUXI',
@@ -29,8 +34,18 @@ export const routeMetadata = {
     description: 'Read original Chinese poetry collected by theme on CHANYUXI.',
     title: 'Poetries | CHANYUXI',
   },
+  postEditor: {
+    description: 'Write, preview, and publish a post on CHANYUXI.',
+    title: 'Post Editor | CHANYUXI',
+  },
+  posts: {
+    description: 'Read notes, essays, and stories published on CHANYUXI.',
+    hideFooter: true,
+    title: 'Posts | CHANYUXI',
+  },
   profile: {
     description: 'View your CHANYUXI account profile and activity.',
+    hideFooter: true,
     title: 'Profile | CHANYUXI',
   },
   profileSetup: {

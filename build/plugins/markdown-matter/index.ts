@@ -5,7 +5,8 @@ import { basename } from 'node:path'
 
 import matter from 'gray-matter'
 
-import { compileMarkdown } from './compile'
+import { compileMarkdown } from '../../../shared/markdown/compile.js'
+
 import { normalizeMarkdownData } from './normalize-data'
 
 export function markdownMatterPlugin(): Plugin {
@@ -33,7 +34,7 @@ export function markdownMatterPlugin(): Plugin {
       }
 
       const content = await compileMarkdown(markdown, {
-        changelog: basename(filepath) === 'CHANGELOG.md',
+        mode: basename(filepath) === 'CHANGELOG.md' ? 'changelog' : 'poetry',
       })
 
       if (contentOnly) {
