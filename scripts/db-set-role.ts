@@ -11,10 +11,10 @@ const variableName = target === 'master'
 const [rawUserId, rawRole] = process.argv.slice(target === 'master' ? 3 : 2)
 
 try {
-  process.loadEnvFile('.env.local')
+  process.loadEnvFile('.env')
 }
 catch {
-  // .env.local is optional; Vercel and CI provide real environment variables.
+  // .env is optional; Vercel and CI provide real environment variables.
 }
 
 if (

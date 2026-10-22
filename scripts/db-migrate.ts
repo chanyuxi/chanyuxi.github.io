@@ -8,10 +8,10 @@ const variableName = target === 'master'
   : 'NEON_DATABASE_URL'
 
 try {
-  process.loadEnvFile('.env.local')
+  process.loadEnvFile('.env')
 }
 catch {
-  // .env.local is optional; Vercel and CI provide real environment variables.
+  // .env is optional; Vercel and CI provide real environment variables.
 }
 
 const databaseUrl = process.env[variableName]

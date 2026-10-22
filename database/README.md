@@ -9,7 +9,7 @@ kept for reference only.
 - Generate migrations: `pnpm db:generate`
 - Apply to the dev branch: `pnpm db:migrate`
 - Apply to the master branch: `pnpm db:migrate:master` (requires
-  `NEON_DATABASE_URL_MASTER` in `.env.local`)
+  `NEON_DATABASE_URL_MASTER` in `.env`)
 - Promote a user: `pnpm db:set-role [master] <user-id> <role>`
 
 ## Release checklist
