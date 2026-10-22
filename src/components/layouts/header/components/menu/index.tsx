@@ -14,7 +14,7 @@ export default function Menu({ items }: MenuProps) {
   const [mobileMenuRequested, setMobileMenuRequested] = useState(false)
 
   return (
-    <nav className="relative">
+    <nav className="relative mr-0 lg:mr-4">
       <div className="flex items-center gap-3">
         <div className="hidden items-center gap-6 lg:flex">
           {items.map(item => (

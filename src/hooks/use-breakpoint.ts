@@ -1,45 +1,51 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useSyncExternalStore } from 'react'
 
-export type Breakpoint = '2xl' | 'base' | 'lg' | 'md' | 'sm' | 'xl'
+export type Breakpoint = '2xl' | 'lg' | 'md' | 'sm' | 'xl'
 
-const BREAKPOINTS: { min: number, name: Breakpoint }[] = [
-  {
-    min: 1536,
-    name: '2xl',
-  },
-  {
-    min: 1280,
-    name: 'xl',
-  },
-  {
-    min: 1024,
-    name: 'lg',
-  },
-  {
-    min: 768,
-    name: 'md',
-  },
-  {
-    min: 640,
-    name: 'sm',
-  },
-]
-
-export function useBreakpoint(): Breakpoint {
-  const [breakpoint, setBreakpoint] = useState<Breakpoint>(() =>
-    typeof window === 'undefined' ? 'base' : getBreakpoint(),
-  )
-
-  useEffect(() => {
-    const onChange = () => setBreakpoint(getBreakpoint())
-    window.addEventListener('resize', onChange)
-    return () => window.removeEventListener('resize', onChange)
-  }, [])
-
-  return breakpoint
+const BREAKPOINTS: Record<Breakpoint, string> = {
+  '2xl': '96rem',
+  'lg': '64rem',
+  'md': '48rem',
+  'sm': '40rem',
+  'xl': '80rem',
 }
 
-function getBreakpoint(): Breakpoint {
-  const width = window.innerWidth
-  return BREAKPOINTS.find(bp => width >= bp.min)?.name ?? 'base'
+/** Matches widths at or above the minimum and below the maximum breakpoint. */
+export function useBreakpointRange(
+  minBreakpoint: Breakpoint,
+  maxBreakpoint: Breakpoint,
+): boolean {
+  return useMediaQuery(
+    `(min-width: ${BREAKPOINTS[minBreakpoint]}) and (width < ${BREAKPOINTS[maxBreakpoint]})`,
+  )
+}
+
+/** Matches widths below the breakpoint. */
+export function useMaxBreakpoint(breakpoint: Breakpoint): boolean {
+  return useMediaQuery(`(width < ${BREAKPOINTS[breakpoint]})`)
+}
+
+/** Matches widths at or above the breakpoint. */
+export function useMinBreakpoint(breakpoint: Breakpoint): boolean {
+  return useMediaQuery(`(min-width: ${BREAKPOINTS[breakpoint]})`)
+}
+
+function getServerSnapshot() {
+  return false
+}
+
+function useMediaQuery(query: string): boolean {
+  const subscribe = useCallback((onChange: () => void) => {
+    const mediaQuery = window.matchMedia(query)
+
+    mediaQuery.addEventListener('change', onChange)
+    return () => mediaQuery.removeEventListener('change', onChange)
+  }, [query])
+
+  const getSnapshot = useCallback(
+    () => window.matchMedia(query).matches,
+    [query],
+  )
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }

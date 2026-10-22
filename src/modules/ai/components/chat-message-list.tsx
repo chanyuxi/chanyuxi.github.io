@@ -3,6 +3,8 @@ import type { ChatMessage } from '../type'
 import MessageCircleMore from '~icons/lucide/message-circle-more'
 import { memo } from 'react'
 
+import { Alert } from '@/components/ui/alert'
+
 import { ChatBubble } from './chat-bubble'
 
 type ChatMessageListProps = {
@@ -32,7 +34,6 @@ export const ChatMessageList = memo(function ChatMessageList(
             aria-hidden="true"
             className="size-20 text-muted-soft dark:text-stone-600"
           />
-          <p className="sr-only">Your conversation will appear here.</p>
         </div>
       )}
 
@@ -45,9 +46,7 @@ export const ChatMessageList = memo(function ChatMessageList(
       ))}
 
       {error && (
-        <p className="rounded-lg border border-destructive/20 bg-destructive/5 p-4 text-sm leading-6 text-destructive" role="alert">
-          {error}
-        </p>
+        <Alert>{error}</Alert>
       )}
     </div>
   )

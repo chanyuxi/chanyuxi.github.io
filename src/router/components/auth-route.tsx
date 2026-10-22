@@ -12,7 +12,6 @@ export function AuthRouteLoading() {
       role="status"
     >
       <LoaderCircle aria-hidden="true" className="size-5 text-muted-foreground motion-safe:animate-spin" />
-      <span className="sr-only">Checking your session…</span>
     </section>
   )
 }

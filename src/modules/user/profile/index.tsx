@@ -16,7 +16,7 @@ export default function UserProfile() {
     return (
       <ErrorState
         isFetching={isFetching}
-        onRetry={() => void refetch()}
+        onRetry={() => refetch()}
       />
     )
   }

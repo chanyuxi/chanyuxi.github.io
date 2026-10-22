@@ -12,7 +12,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useBreakpoint } from '@/hooks/use-breakpoint'
+import { useMinBreakpoint } from '@/hooks/use-breakpoint'
 
 interface Skill {
   details: (SkillDetail | string)[]
@@ -100,18 +100,15 @@ const skills: Skill[] = [
 ]
 
 export function SkillsSection() {
-  const bp = useBreakpoint()
+  const isTwoColumn = useMinBreakpoint('md')
 
   const [actives, setActives] = useState<number[]>([])
 
   const handleOpenChange = (index: number) => {
-    let indexGroup = []
-    if (bp === 'base') {
-      indexGroup = [index]
-    }
-    else {
-      indexGroup = index % 2 === 0 ? [index, index + 1] : [index - 1, index]
-    }
+    const indexGroup = isTwoColumn
+      ? index % 2 === 0 ? [index, index + 1] : [index - 1, index]
+      : [index]
+
     setActives(actives.includes(index) ? [] : indexGroup)
   }
 

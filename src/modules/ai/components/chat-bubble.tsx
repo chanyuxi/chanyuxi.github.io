@@ -32,7 +32,6 @@ export const ChatBubble = memo(function ChatBubble({ message, streaming }: ChatB
         >
           <path d="M0 0H16C16 12 21 20 32 24C16 24 4 18 0 8Z" />
         </svg>
-        <span className="sr-only">{message.role === 'user' ? 'You' : 'AI'}</span>
         {message.content
           ? (
               <p className="text-base leading-6 wrap-anywhere whitespace-pre-wrap">

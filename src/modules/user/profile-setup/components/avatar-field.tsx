@@ -103,7 +103,7 @@ export function AvatarField({
       <input
         accept={AVATAR_SOURCE_MIME_TYPES.join(',')}
         aria-label="Upload a profile photo"
-        className="sr-only"
+        className="hidden"
         id="avatar-source"
         onChange={handleFileChange}
         ref={inputRef}

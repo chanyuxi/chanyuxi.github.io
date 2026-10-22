@@ -23,7 +23,6 @@ export default function PoetryEntrance() {
       variants={pageVariants}
     >
       <div className="base-container">
-        <h1 className="sr-only">Poetries</h1>
         <div className="flex flex-col gap-4 md:gap-6">
           {poetryCategories.map((catalog, index) => {
             return (

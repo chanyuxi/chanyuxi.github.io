@@ -76,13 +76,10 @@ export function SiteLikeButton() {
       >
         {isLoading
           ? (
-              <>
-                <LoaderCircle
-                  aria-hidden="true"
-                  className="size-3.5 animate-spin motion-reduce:animate-none"
-                />
-                <span className="sr-only">Loading likes</span>
-              </>
+              <LoaderCircle
+                aria-hidden="true"
+                className="size-3.5 animate-spin motion-reduce:animate-none"
+              />
             )
           : <span className="translate-y-px sm:translate-y-0">{formattedCount}</span>}
       </span>

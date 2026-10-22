@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
-  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
 
@@ -31,11 +30,7 @@ export default function QrCodeDialogContent({ label, value }: QrCodeDialogProps)
         showCloseButton={false}
         variant="image"
       >
-        <DialogTitle className="sr-only">
-          {`${label} QR code`}
-        </DialogTitle>
-
-        <Suspense fallback={<QrCodeLoading label={label} />}>
+        <Suspense fallback={<QrCodeLoading />}>
           <QrCode value={value} />
         </Suspense>
       </DialogContent>
@@ -43,7 +38,7 @@ export default function QrCodeDialogContent({ label, value }: QrCodeDialogProps)
   )
 }
 
-function QrCodeLoading({ label }: { label: string }) {
+function QrCodeLoading() {
   return (
     <div
       aria-live="polite"
@@ -54,9 +49,6 @@ function QrCodeLoading({ label }: { label: string }) {
         aria-hidden="true"
         className="size-5 text-muted-foreground motion-safe:animate-spin"
       />
-      <span className="sr-only">
-        {`Loading ${label} QR code`}
-      </span>
     </div>
   )
 }

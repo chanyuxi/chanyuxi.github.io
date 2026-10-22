@@ -9,7 +9,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Popover,
   PopoverContent,
-  PopoverTitle,
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { useAuth } from '@/contexts/auth'
@@ -60,8 +59,6 @@ export default function AvatarControl() {
         sideOffset={6}
         variant="glass"
       >
-        <PopoverTitle className="sr-only">Account</PopoverTitle>
-
         <div className="flex flex-col gap-1 p-1.5 sm:flex-row">
           <MenuItem
             aria-label="Profile"

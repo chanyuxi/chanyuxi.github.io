@@ -76,7 +76,6 @@ export function ExperienceSection() {
                       </p>
                     </div>
                   </div>
-                  <span className="sr-only">Toggle key contributions</span>
                 </CollapsibleTrigger>
 
                 <CollapsibleContent>

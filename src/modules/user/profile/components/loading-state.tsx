@@ -31,7 +31,6 @@ export function LoadingState() {
           </div>
         </section>
       </div>
-      <span className="sr-only">Loading profile…</span>
     </section>
   )
 }

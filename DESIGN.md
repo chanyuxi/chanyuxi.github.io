@@ -52,7 +52,7 @@ Do not use these gradients as button fills, text colors, or status colors.
 
 ### Roles
 
-- Display headlines: use a light editorial serif at approximately `300` weight, falling back to `Georgia` or `Times New Roman` when no licensed display font is available.
+- Display headlines: use the local Marcellus family through the `font-serif` role, falling back to `Georgia` or `Times New Roman`.
 - General UI and body: use the local Google Sans family through the `font-sans` role; keep body weight at `400` or `500` for readability.
 - Monospace content: use the system monospace stack through the `font-mono` role.
 - Poetry: retain `font-mashanzheng` for poetry titles and long-form poetry content.

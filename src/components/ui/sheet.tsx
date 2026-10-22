@@ -43,6 +43,7 @@ function SheetContent({
             data-slot="sheet-close"
             render={(
               <Button
+                aria-label="Close"
                 className="absolute top-3 right-3"
                 size="icon-sm"
                 variant="muted"
@@ -50,7 +51,6 @@ function SheetContent({
             )}
           >
             <XIcon />
-            <span className="sr-only">Close</span>
           </SheetPrimitive.Close>
         )}
       </SheetPrimitive.Popup>

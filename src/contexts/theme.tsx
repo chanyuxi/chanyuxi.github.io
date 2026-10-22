@@ -66,6 +66,7 @@ function getInitialTheme(): Theme {
   if (isTheme(saved)) {
     return saved
   }
+
   return window.matchMedia('(prefers-color-scheme: dark)').matches
     ? 'dark'
     : 'light'

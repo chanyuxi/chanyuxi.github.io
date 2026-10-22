@@ -18,7 +18,6 @@ export default function ProfileSetupPage() {
         role="status"
       >
         <LoaderCircle aria-hidden="true" className="size-5 text-muted-foreground motion-safe:animate-spin" />
-        <span className="sr-only">Loading your profile…</span>
       </section>
     )
   }
@@ -33,7 +32,6 @@ export default function ProfileSetupPage() {
     <section className="flex min-h-page items-center section-spacing">
       <div className="base-container">
         <div className="mx-auto w-full max-w-md">
-          <h1 className="sr-only">Set up your profile</h1>
           <SetupForm returnTo={resolveReturnTo(location.state)} />
         </div>
       </div>
